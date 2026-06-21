@@ -12,9 +12,33 @@
   const siteHeader = document.querySelector('.site-header');
   const navToggle = document.querySelector('.site-nav__toggle');
   const navLinks = document.querySelector('.site-nav__links');
+  const navAnchors = document.querySelectorAll('.site-nav__link[href^="#"]');
 
   let progressTarget = 0;
   let progressCurrent = 0;
+
+  /* --- Page load polish -------------------------------------------------- */
+  function initPageReady() {
+    document.body.classList.remove('is-loading');
+    document.body.classList.add('is-ready');
+
+    const heroPhoto = document.querySelector('.photo-scrap--hero');
+    const heroCallout = document.querySelector('.hero__callout');
+    const stickyNote = document.querySelector('.sticky-note--hero');
+
+    [heroPhoto, heroCallout, stickyNote].forEach(function (el, i) {
+      if (!el) return;
+      el.style.transition = 'opacity 0.7s var(--ease-smooth, ease)';
+      el.style.transitionDelay = (0.35 + i * 0.12) + 's';
+      el.style.opacity = '1';
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPageReady);
+  } else {
+    initPageReady();
+  }
 
   /* --- Mobile navigation ------------------------------------------------- */
   if (navToggle && navLinks) {
@@ -32,6 +56,26 @@
     });
   }
 
+  /* --- Active nav section highlight -------------------------------------- */
+  const sections = ['hero', 'about', 'projects', 'experience', 'skills', 'contact']
+    .map(function (id) { return document.getElementById(id); })
+    .filter(Boolean);
+
+  function updateActiveNav() {
+    if (!navAnchors.length) return;
+    const offset = 120;
+    let current = 'hero';
+    for (let i = 0; i < sections.length; i++) {
+      const section = sections[i];
+      const top = section.getBoundingClientRect().top;
+      if (top - offset <= 0) current = section.id;
+    }
+    navAnchors.forEach(function (link) {
+      const href = link.getAttribute('href');
+      link.classList.toggle('is-active', href === '#' + current);
+    });
+  }
+
   /* --- Scroll progress bar (smoothed) ------------------------------------ */
   function updateScrollProgressTarget() {
     if (!prog) return;
@@ -40,6 +84,7 @@
     if (siteHeader) {
       siteHeader.classList.toggle('is-scrolled', scroller.scrollTop > 24);
     }
+    updateActiveNav();
   }
 
   function tickProgress() {
@@ -92,7 +137,6 @@
     if (!sheet) return;
     const r = card.getBoundingClientRect();
     const py = Math.max(0, Math.min(1, (clientY - r.top) / r.height));
-    /* Bottom of card lifts more — pivots from tape at top */
     const liftY = -(10 + py * 18);
     const liftX = -(5 + py * 11);
     const liftZ = 12 + py * 28;
@@ -122,13 +166,24 @@
     });
   }
 
+  /* --- Smooth anchor scroll ---------------------------------------------- */
+  document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+    anchor.addEventListener('click', function (e) {
+      const id = anchor.getAttribute('href');
+      if (!id || id === '#') return;
+      const target = document.querySelector(id);
+      if (!target) return;
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
   /* --- Main animation loop ----------------------------------------------- */
   function frame() {
     const vh = scroller.clientHeight;
 
     tickProgress();
 
-    /* Scroll reveal */
     const revs = scroller.querySelectorAll('[data-reveal]');
     for (let i = 0; i < revs.length; i++) {
       const el = revs[i];
@@ -143,7 +198,6 @@
       }
     }
 
-    /* Timeline items */
     const timelineItems = scroller.querySelectorAll('.timeline__item[data-reveal]');
     for (let i = 0; i < timelineItems.length; i++) {
       const el = timelineItems[i];
@@ -158,7 +212,6 @@
       }
     }
 
-    /* Scroll parallax */
     const pxs = scroller.querySelectorAll('[data-parallax]');
     for (let i = 0; i < pxs.length; i++) {
       const el = pxs[i];
@@ -170,7 +223,6 @@
       el.style.transform = 'translate3d(0,' + el.__cur.toFixed(2) + 'px,0)';
     }
 
-    /* Pointer parallax on hero elements */
     pmx += (tpx - pmx) * 0.06;
     pmy += (tpy - pmy) * 0.06;
     const mEls = scroller.querySelectorAll('[data-mouse]');
