@@ -781,12 +781,22 @@ body.is-ready .hero__doodle--flower {
   padding: 12px 12px 10px;
 }
 
+.photo-scrap--hero .photo-scrap__frame {
+  width: min(300px, 100%);
+  margin-inline: auto;
+}
+
+.photo-scrap__media {
+  position: relative;
+  overflow: hidden;
+  line-height: 0;
+  background: #e8dfd0;
+  box-shadow: inset 0 0 0 1px rgba(60, 40, 20, 0.1);
+}
+
 .photo-scrap__paper {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 2.25rem;
+  inset: 0;
   z-index: 0;
   background: #f7efdd;
   background-image:
@@ -804,28 +814,26 @@ body.is-ready .hero__doodle--flower {
   position: relative;
   z-index: 1;
   width: 100%;
-  min-height: 220px;
   aspect-ratio: 4 / 5;
   overflow: hidden;
   background: #e8dfd0;
   box-shadow: inset 0 0 0 1px rgba(60, 40, 20, 0.1);
 }
 
-.photo-scrap--hero .photo-scrap__img-wrap {
+/* Hero portrait — adapts to your image aspect ratio */
+.photo-scrap--hero .photo-scrap__media {
   width: 100%;
-  max-width: 220px;
-  margin-inline: auto;
-  display: block;
 }
 
-.photo-scrap__img {
+.photo-scrap--hero .photo-scrap__img {
   position: relative;
+  z-index: 1;
   width: 100%;
-  height: 100%;
+  height: auto;
+  display: block;
   object-fit: cover;
   object-position: center 22%;
-  display: block;
-  filter: sepia(0.14) saturate(1.05) brightness(1.03);
+  filter: sepia(0.12) saturate(1.05) brightness(1.03);
 }
 
 .photo-scrap__caption {
@@ -849,7 +857,7 @@ body.is-ready .hero__doodle--flower {
   background: var(--color-tape);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
   filter: url(#torn-b);
-  z-index: 4;
+  z-index: 12;
 }
 
 .sticky-note--hero {
@@ -1134,10 +1142,11 @@ body.is-ready .hero__doodle--flower {
   }
 }
 
-/* Card shell — tape stays pinned, sheet lifts from the top */
+/* Card shell — tape pinned, only the sheet lifts from the hinge */
 .project-card {
   position: relative;
-  padding-top: 10px;
+  padding-top: 14px;
+  transform-style: preserve-3d;
   opacity: 0;
   transform: translateY(28px);
   transition: opacity 0.8s var(--ease-smooth), transform 0.8s var(--ease-smooth);
@@ -1156,28 +1165,22 @@ body.is-ready .hero__doodle--flower {
   position: absolute;
   top: 0;
   left: 50%;
-  transform: translateX(-50%) rotate(-5deg);
+  transform: translateX(-50%) rotate(-5deg) translateZ(28px);
   width: 88px;
   height: 24px;
   background: linear-gradient(180deg, rgba(222, 198, 150, 0.72), rgba(205, 178, 128, 0.58));
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
-  z-index: 3;
+  z-index: 20;
   pointer-events: none;
-  transition: transform 0.45s var(--ease-spring);
 }
 
-.project-card.is-lifted .project-card__tape {
-  transform: translateX(-50%) rotate(-3deg) translateY(-2px);
-}
-
-.project-card__tape--tilt-right { transform: translateX(-50%) rotate(6deg); }
-.project-card.is-lifted .project-card__tape--tilt-right { transform: translateX(-50%) rotate(4deg) translateY(-2px); }
-
-.project-card__tape--tilt-left { transform: translateX(-50%) rotate(4deg); }
-.project-card.is-lifted .project-card__tape--tilt-left { transform: translateX(-50%) rotate(2deg) translateY(-2px); }
+.project-card__tape--tilt-right { transform: translateX(-50%) rotate(6deg) translateZ(28px); }
+.project-card__tape--tilt-left { transform: translateX(-50%) rotate(4deg) translateZ(28px); }
 
 .project-card__sheet {
   position: relative;
+  z-index: 1;
+  margin-top: 10px;
   background: var(--color-paper-warm);
   border: 1.5px solid var(--color-border-card);
   box-shadow: var(--shadow-card);
@@ -1189,15 +1192,12 @@ body.is-ready .hero__doodle--flower {
     box-shadow 0.55s var(--ease-smooth);
   --card-rotate: -1.5deg;
   --lift-x: 0deg;
-  --lift-y: 0px;
-  --lift-z: 0px;
   transform:
     rotate(var(--card-rotate))
-    rotateX(var(--lift-x))
-    translateY(var(--lift-y))
-    translateZ(var(--lift-z));
+    rotateX(var(--lift-x));
 }
 
+.project-card[data-tilt="-1.5"] .project-card__sheet { --card-rotate: -1.5deg; }
 .project-card[data-tilt="1.2"] .project-card__sheet { --card-rotate: 1.2deg; }
 .project-card[data-tilt="-1"] .project-card__sheet { --card-rotate: -1deg; }
 
