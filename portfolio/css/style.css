@@ -1078,11 +1078,15 @@ body.is-ready .hero__doodle--flower {
   vertical-align: middle;
 }
 
+.about__copy {
+  max-width: 36rem;
+}
+
 .about__text {
   font-size: clamp(1rem, 2vw, 1.125rem);
-  line-height: 1.65;
+  line-height: 1.7;
   color: var(--color-ink-muted);
-  max-width: 32.5rem;
+  max-width: 34rem;
   margin: 0.875rem 0;
 }
 
@@ -1134,16 +1138,18 @@ body.is-ready .hero__doodle--flower {
 }
 
 .projects__header {
-  margin-bottom: 0.875rem;
+  margin-bottom: 1.25rem;
+  max-width: 42rem;
 }
 
 .project-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
-  gap: clamp(2rem, 4vw, 2.75rem) clamp(1.25rem, 3vw, 2rem);
-  margin-top: 3.125rem;
-  perspective: 1400px;
-  perspective-origin: center 20%;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  gap: clamp(2.25rem, 4vw, 3rem) clamp(1.5rem, 3vw, 2rem);
+  margin-top: 2.75rem;
+  align-items: start;
+  perspective: 1200px;
+  perspective-origin: center top;
 }
 
 @media (min-width: 1024px) {
@@ -1152,11 +1158,9 @@ body.is-ready .hero__doodle--flower {
   }
 }
 
-/* Card shell — tape pinned, only the sheet lifts from the hinge */
+/* Card shell — tape bridges card top to section background */
 .project-card {
   position: relative;
-  padding-top: 14px;
-  transform-style: preserve-3d;
   opacity: 0;
   transform: translateY(18px);
   transition: opacity 0.65s var(--ease-smooth), transform 0.65s var(--ease-smooth);
@@ -1171,35 +1175,48 @@ body.is-ready .hero__doodle--flower {
   z-index: 8;
 }
 
+.project-card__mount {
+  position: relative;
+  padding-top: 12px;
+  perspective: 900px;
+  transform-style: preserve-3d;
+}
+
 .project-card__tape {
   position: absolute;
   top: 0;
   left: 50%;
-  transform: translateX(-50%) rotate(-5deg) translateZ(28px);
-  width: 88px;
-  height: 24px;
-  background: linear-gradient(180deg, rgba(222, 198, 150, 0.72), rgba(205, 178, 128, 0.58));
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
-  z-index: 20;
+  transform: translateX(-50%) rotate(-4deg);
+  width: 92px;
+  height: 26px;
+  background: linear-gradient(
+    180deg,
+    rgba(228, 206, 158, 0.88) 0%,
+    rgba(214, 188, 138, 0.78) 55%,
+    rgba(198, 172, 122, 0.72) 100%
+  );
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.35) inset,
+    0 2px 5px rgba(60, 40, 20, 0.14);
+  z-index: 3;
   pointer-events: none;
 }
 
-.project-card__tape--tilt-right { transform: translateX(-50%) rotate(6deg) translateZ(28px); }
-.project-card__tape--tilt-left { transform: translateX(-50%) rotate(4deg) translateZ(28px); }
+.project-card__tape--tilt-right { transform: translateX(-50%) rotate(5deg); }
+.project-card__tape--tilt-left { transform: translateX(-50%) rotate(3deg); }
 
 .project-card__sheet {
   position: relative;
   z-index: 1;
-  margin-top: 10px;
   background: var(--color-paper-warm);
   border: 1.5px solid var(--color-border-card);
+  border-radius: 2px;
   box-shadow: var(--shadow-card);
-  transform-origin: top center;
+  transform-origin: 50% 0;
   transform-style: preserve-3d;
-  will-change: transform, box-shadow;
   transition:
-    transform 0.45s var(--ease-smooth),
-    box-shadow 0.45s var(--ease-smooth);
+    transform 0.5s var(--ease-smooth),
+    box-shadow 0.5s var(--ease-smooth);
   --card-rotate: -1.5deg;
   --lift-x: 0deg;
   transform:
@@ -1211,14 +1228,27 @@ body.is-ready .hero__doodle--flower {
 .project-card[data-tilt="1.2"] .project-card__sheet { --card-rotate: 1.2deg; }
 .project-card[data-tilt="-1"] .project-card__sheet { --card-rotate: -1deg; }
 
-.project-card.is-lifted .project-card__sheet {
+.project-card.is-lifted .project-card__sheet,
+.project-card:focus-within .project-card__sheet {
+  --lift-x: 3deg;
   box-shadow:
-    0 4px 8px rgba(60, 40, 20, 0.08),
-    0 28px 52px rgba(60, 40, 20, 0.28);
+    0 3px 6px rgba(60, 40, 20, 0.06),
+    0 14px 28px rgba(60, 40, 20, 0.16);
 }
 
 .project-card__body {
-  padding: 1.125rem 1.125rem 1.25rem;
+  padding: 1.25rem 1.25rem 1.375rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.project-card__desc {
+  flex: 1;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--color-ink-muted);
+  margin: 0 0 1rem;
 }
 
 .project-card__img {
@@ -1263,14 +1293,7 @@ body.is-ready .hero__doodle--flower {
   text-transform: uppercase;
   color: var(--color-accent);
   font-weight: 700;
-  margin: 0.25rem 0 0.5625rem;
-}
-
-.project-card__desc {
-  font-size: 0.8125rem;
-  line-height: 1.5;
-  color: var(--color-ink-muted);
-  margin: 0 0 0.8125rem;
+  margin: 0.375rem 0 0.5rem;
 }
 
 .tag-list {
@@ -1487,10 +1510,23 @@ body.is-ready .hero__doodle--flower {
 }
 
 .contact__subtitle {
-  font-family: var(--font-hand);
-  font-size: clamp(1.375rem, 3vw, 1.875rem);
-  margin: 1.125rem 0 2.125rem;
-  color: #fff;
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 2vw, 1.125rem);
+  line-height: 1.6;
+  margin: 1rem 0 2rem;
+  color: rgba(255, 255, 255, 0.88);
+  max-width: 28rem;
+  margin-inline: auto;
+}
+
+.skills__header,
+.contact__header {
+  max-width: 36rem;
+  margin-inline: auto;
+}
+
+.contact__header {
+  text-align: center;
 }
 
 .contact__actions {
@@ -1554,6 +1590,32 @@ body.is-ready .hero__doodle--flower {
   font-size: 0.75rem;
   letter-spacing: 0.1em;
   color: #8a8678;
+}
+
+/* --- Staggered text reveal on scroll ------------------------------------- */
+.text-fade-in {
+  opacity: 0;
+  transform: translateY(1.1rem);
+  filter: blur(4px);
+  transition:
+    opacity 0.8s var(--ease-smooth),
+    transform 0.8s var(--ease-smooth),
+    filter 0.8s var(--ease-smooth);
+  transition-delay: calc(var(--d, 0) * 90ms + 80ms);
+}
+
+.is-visible .text-fade-in,
+.text-fade-in.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+[data-reveal].is-visible .text-fade-in,
+.timeline__item.is-visible .text-fade-in {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
 }
 
 /* --- Scroll reveal utility ----------------------------------------------- */
@@ -1713,5 +1775,12 @@ body.is-ready .hero__doodle--flower {
   .hero__callout {
     opacity: 1;
     animation: none;
+  }
+
+  .text-fade-in {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
   }
 }

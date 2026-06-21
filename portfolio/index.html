@@ -7,7 +7,7 @@
   <meta name="description" content="Lisa Ochieng is a Princeton University Class of 2029 Computer Science student building software across full-stack, AI, and robotics. View projects, experience, and contact.">
   <meta name="author" content="Lisa Ochieng">
   <meta property="og:title" content="Lisa Ochieng — Software Engineering Portfolio">
-  <meta property="og:description" content="Princeton CS '29. Projects in fintech, edtech, AI, and robotics — open to software engineering internships.">
+  <meta property="og:description" content="Princeton CS '29. Projects in fintech, edtech, AI, and robotics. Open to software engineering internships.">
   <meta property="og:type" content="website">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -213,12 +213,12 @@
               <span class="about__sparkle" aria-hidden="true">✦</span>
             </div>
 
-            <div data-reveal data-delay="120">
-              <p class="section-label">// about me</p>
-              <h2 id="about-heading" class="about__heading">hi, I'm Lisa <span class="about__emoji" aria-hidden="true">^_^</span></h2>
-              <p class="about__text">I'm a <strong>computer science</strong> student at <strong>Princeton University</strong> (Class of 2029) who loves turning messy ideas into software people actually use. I care about clean code, thoughtful UX, and shipping — not just shipping perfectly.</p>
-              <p class="about__text">From study tools and blockchain voting to local agentic RAG systems, I build across the stack. When I'm not coding, I'm mentoring teammates, exploring Princeton's CS community, or redesigning my dev setup for the hundredth time.</p>
-              <div class="about__stats">
+            <div data-reveal data-delay="120" class="about__copy">
+              <p class="section-label text-fade-in" style="--d:0">// about me</p>
+              <h2 id="about-heading" class="about__heading text-fade-in" style="--d:1">hi, I'm Lisa <span class="about__emoji" aria-hidden="true">^_^</span></h2>
+              <p class="about__text text-fade-in" style="--d:2">I'm a <strong>computer science</strong> student at <strong>Princeton University</strong> (Class of 2029) who loves turning messy ideas into software people actually use. I care about clean code, thoughtful UX, and shipping, not just shipping perfectly.</p>
+              <p class="about__text text-fade-in" style="--d:3">From study tools and blockchain voting to local agentic RAG systems, I build across the stack. When I'm not coding, I'm mentoring teammates, exploring Princeton's CS community, or redesigning my dev setup for the hundredth time.</p>
+              <div class="about__stats text-fade-in" style="--d:4">
                 <div class="stat">
                   <div class="stat__number">1+</div>
                   <div class="stat__label">year academic CS</div>
@@ -241,71 +241,77 @@
       <section id="projects" class="projects" aria-labelledby="projects-heading">
         <div class="container container--projects">
           <header class="projects__header" data-reveal>
-            <p class="section-label">// selected work</p>
-            <h2 id="projects-heading" class="section-title">things I've <span class="accent-italic">built</span></h2>
-            <p class="section-subtitle">lock in · e-vote · agentic rag — shipped and on github ↓</p>
+            <p class="section-label text-fade-in" style="--d:0">// selected work</p>
+            <h2 id="projects-heading" class="section-title text-fade-in" style="--d:1">things I've <span class="accent-italic">built</span></h2>
+            <p class="section-subtitle text-fade-in" style="--d:2">Full-stack work across productivity, blockchain, and AI</p>
           </header>
 
           <div class="project-grid">
             <article class="project-card" data-reveal data-delay="0" data-tilt="-1.5">
-              <div class="project-card__tape" aria-hidden="true"></div>
-              <div class="project-card__sheet">
-                <div class="project-card__body">
-                  <img class="project-card__img" src="assets/images/project-lock-in.png" alt="lock in study session app" width="640" height="360" loading="lazy">
-                  <div class="project-card__meta">
-                    <h3 class="project-card__title">lock in</h3>
-                    <span class="project-card__year">2025</span>
+              <div class="project-card__mount">
+                <div class="project-card__tape" aria-hidden="true"></div>
+                <div class="project-card__sheet">
+                  <div class="project-card__body">
+                    <img class="project-card__img" src="assets/images/project-lock-in.png" alt="lock in study session app" width="640" height="360" loading="lazy">
+                    <div class="project-card__meta">
+                      <h3 class="project-card__title">lock in</h3>
+                      <span class="project-card__year">2025</span>
+                    </div>
+                    <p class="project-card__tagline">Focus and productivity web application</p>
+                    <p class="project-card__desc">Built a full-stack study platform with React, Vite, and Supabase where students run Pomodoro sessions, manage tasks, track streaks, and join shared study rooms with ambient audio. Implemented Google sign-in and persistent session state so layout preferences and progress carry across visits.</p>
+                    <div class="tag-list">
+                      <span class="tag">React</span>
+                      <span class="tag">Vite</span>
+                      <span class="tag">Supabase</span>
+                    </div>
+                    <a href="https://github.com/lisaochieng/lock-in" class="link-arrow" target="_blank" rel="noopener noreferrer">View on GitHub →</a>
                   </div>
-                  <p class="project-card__tagline">calming study-session web app</p>
-                  <p class="project-card__desc">Pick a peaceful study space, run Pomodoro focus/break cycles, track tasks and streaks, invite friends to a shared room, and play YouTube ambience. Layout, goals, and progress persist in the browser — sign in with Google via Supabase.</p>
-                  <div class="tag-list">
-                    <span class="tag">React</span>
-                    <span class="tag">Vite</span>
-                    <span class="tag">Supabase</span>
-                  </div>
-                  <a href="https://github.com/lisaochieng/lock-in" class="link-arrow" target="_blank" rel="noopener noreferrer">github →</a>
                 </div>
               </div>
             </article>
 
             <article class="project-card" data-reveal data-delay="100" data-tilt="1.2">
-              <div class="project-card__tape project-card__tape--tilt-right" aria-hidden="true"></div>
-              <div class="project-card__sheet">
-                <div class="project-card__body">
-                  <img class="project-card__img" src="assets/images/project-evote.png" alt="E-vote blockchain voting platform landing page" width="640" height="360" loading="lazy">
-                  <div class="project-card__meta">
-                    <h3 class="project-card__title">E-vote</h3>
-                    <span class="project-card__year">2025</span>
+              <div class="project-card__mount">
+                <div class="project-card__tape project-card__tape--tilt-right" aria-hidden="true"></div>
+                <div class="project-card__sheet">
+                  <div class="project-card__body">
+                    <img class="project-card__img" src="assets/images/project-evote.png" alt="E-vote blockchain voting platform landing page" width="640" height="360" loading="lazy">
+                    <div class="project-card__meta">
+                      <h3 class="project-card__title">E-vote</h3>
+                      <span class="project-card__year">2025</span>
+                    </div>
+                    <p class="project-card__tagline">Blockchain voting on Ethereum</p>
+                    <p class="project-card__desc">Developed a decentralized election platform with Solidity smart contracts on Hardhat, enforcing one vote per wallet and storing immutable results on-chain. Integrated MetaMask authentication, MongoDB for user accounts, and a Chart.js dashboard with an admin panel for live election monitoring.</p>
+                    <div class="tag-list">
+                      <span class="tag">Solidity</span>
+                      <span class="tag">Hardhat</span>
+                      <span class="tag">Ethers.js</span>
+                    </div>
+                    <a href="https://github.com/lisaochieng/evote-blockchain" class="link-arrow" target="_blank" rel="noopener noreferrer">View on GitHub →</a>
                   </div>
-                  <p class="project-card__tagline">blockchain voting on ethereum</p>
-                  <p class="project-card__desc">Decentralized elections with Solidity smart contracts on Hardhat — immutable on-chain votes, one-vote-per-wallet enforcement, MetaMask auth, MongoDB user accounts, and live Chart.js result dashboards with an admin panel.</p>
-                  <div class="tag-list">
-                    <span class="tag">Solidity</span>
-                    <span class="tag">Hardhat</span>
-                    <span class="tag">Ethers.js</span>
-                  </div>
-                  <a href="https://github.com/lisaochieng/evote-blockchain" class="link-arrow" target="_blank" rel="noopener noreferrer">github →</a>
                 </div>
               </div>
             </article>
 
             <article class="project-card" data-reveal data-delay="200" data-tilt="-1">
-              <div class="project-card__tape project-card__tape--tilt-left" aria-hidden="true"></div>
-              <div class="project-card__sheet">
-                <div class="project-card__body">
-                  <img class="project-card__img" src="assets/images/project-rag.png" alt="Agentic RAG document explorer Gradio UI" width="640" height="360" loading="lazy">
-                  <div class="project-card__meta">
-                    <h3 class="project-card__title">Agentic RAG</h3>
-                    <span class="project-card__year">2026</span>
+              <div class="project-card__mount">
+                <div class="project-card__tape project-card__tape--tilt-left" aria-hidden="true"></div>
+                <div class="project-card__sheet">
+                  <div class="project-card__body">
+                    <img class="project-card__img" src="assets/images/project-rag.png" alt="Agentic RAG document explorer Gradio UI" width="640" height="360" loading="lazy">
+                    <div class="project-card__meta">
+                      <h3 class="project-card__title">Agentic RAG</h3>
+                      <span class="project-card__year">2026</span>
+                    </div>
+                    <p class="project-card__tagline">Local agentic document explorer</p>
+                    <p class="project-card__desc">Designed a LangGraph assistant that indexes local PDFs into Qdrant, retrieves relevant context with BGE embeddings, and generates grounded answers through Ollama (Llama 3.2). Shipped a Gradio interface for private, offline document Q&amp;A with strict context boundaries.</p>
+                    <div class="tag-list">
+                      <span class="tag">LangGraph</span>
+                      <span class="tag">Qdrant</span>
+                      <span class="tag">Gradio</span>
+                    </div>
+                    <a href="https://github.com/lisaochieng/agentic-rag" class="link-arrow" target="_blank" rel="noopener noreferrer">View on GitHub →</a>
                   </div>
-                  <p class="project-card__tagline">local agentic document explorer</p>
-                  <p class="project-card__desc">LangGraph StateGraph assistant that indexes local PDFs into Qdrant, retrieves with BGE embeddings, and answers via Ollama (Llama 3.2) with strict context boundaries — Gradio UI for chat over your docs.</p>
-                  <div class="tag-list">
-                    <span class="tag">LangGraph</span>
-                    <span class="tag">Qdrant</span>
-                    <span class="tag">Gradio</span>
-                  </div>
-                  <a href="https://github.com/lisaochieng/agentic-rag" class="link-arrow" target="_blank" rel="noopener noreferrer">github →</a>
                 </div>
               </div>
             </article>
@@ -320,9 +326,9 @@
       <!-- ========== SKILLS ========== -->
       <section id="skills" class="skills" aria-labelledby="skills-heading">
         <div class="container container--medium">
-          <header data-reveal>
-            <p class="section-label section-label--light">// the toolbox</p>
-            <h2 id="skills-heading" class="section-title">skills &amp; <span class="accent-italic">stack</span></h2>
+          <header data-reveal class="skills__header">
+            <p class="section-label section-label--light text-fade-in" style="--d:0">// the toolbox</p>
+            <h2 id="skills-heading" class="section-title text-fade-in" style="--d:1">skills &amp; <span class="accent-italic">stack</span></h2>
           </header>
 
           <div class="skill-grid">
@@ -372,8 +378,8 @@
       <section id="experience" class="experience" aria-labelledby="experience-heading">
         <div class="container container--narrow">
           <header class="experience__header" data-reveal>
-            <p class="section-label">// the journey so far</p>
-            <h2 id="experience-heading" class="section-title">my <span class="accent-italic">path</span></h2>
+            <p class="section-label text-fade-in" style="--d:0">// the journey so far</p>
+            <h2 id="experience-heading" class="section-title text-fade-in" style="--d:1">my <span class="accent-italic">path</span></h2>
           </header>
 
           <div class="timeline">
@@ -382,7 +388,7 @@
               <p class="timeline__date">SUMMER 2025</p>
               <h3 class="timeline__title">Software Engineering Intern</h3>
               <p class="timeline__org">@ Equity Bank</p>
-              <p class="timeline__desc">Built internal tools and customer-facing features for digital banking. Improved API response times and collaborated with cross-functional teams on secure fintech workflows.</p>
+              <p class="timeline__desc text-fade-in" style="--d:1">Built internal tools and customer-facing features for digital banking. Improved API response times and collaborated with cross-functional teams on secure fintech workflows.</p>
             </article>
 
             <article class="timeline__item" data-reveal data-delay="80" data-axis="x">
@@ -390,7 +396,7 @@
               <p class="timeline__date">2025 — NOW</p>
               <h3 class="timeline__title">Princeton Activities</h3>
               <p class="timeline__org">CS community &amp; campus tech</p>
-              <p class="timeline__desc">Active in Princeton's computer science ecosystem — hackathons, peer collaboration, and building projects that serve the campus community. Exploring systems, algorithms, and HCI.</p>
+              <p class="timeline__desc text-fade-in" style="--d:1">Active in Princeton's computer science ecosystem through hackathons, peer collaboration, and campus-facing projects. Exploring systems, algorithms, and human-computer interaction.</p>
             </article>
 
             <article class="timeline__item" data-reveal data-delay="160" data-axis="x">
@@ -416,21 +422,21 @@
       <section id="contact" class="contact" aria-labelledby="contact-heading">
         <span class="contact__sparkle" aria-hidden="true">✦</span>
         <div class="contact__inner container">
-          <header data-reveal>
-            <p class="section-label section-label--light">// let's talk</p>
-            <h2 id="contact-heading" class="section-title">let's build<br>something.</h2>
-            <p class="contact__subtitle">internships, collabs, or just to say hi — my inbox is open ♡</p>
+          <header data-reveal class="contact__header">
+            <p class="section-label section-label--light text-fade-in" style="--d:0">// let's talk</p>
+            <h2 id="contact-heading" class="section-title text-fade-in" style="--d:1">let's build<br>something.</h2>
+            <p class="contact__subtitle text-fade-in" style="--d:2">Open to internships, collaborations, and conversations about building useful software.</p>
           </header>
 
           <div class="contact__actions" data-reveal data-delay="120">
-            <a href="mailto:hello@lisaochieng.dev" class="btn btn--light">hello@lisaochieng.dev</a>
+            <a href="mailto:lizzieochieng@gmail.com" class="btn btn--light">lizzieochieng@gmail.com</a>
             <a href="assets/resume/lisa-ochieng-resume.pdf" class="btn btn--dark" download>↓ download résumé</a>
           </div>
 
           <nav class="contact__social" data-reveal data-delay="220" aria-label="Social links">
             <a href="https://github.com/lisaochieng" class="contact__social-link" target="_blank" rel="noopener noreferrer">GitHub</a>
             <a href="https://linkedin.com/in/lisaochieng" class="contact__social-link" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-            <a href="mailto:hello@lisaochieng.dev" class="contact__social-link">Email</a>
+            <a href="mailto:lizzieochieng@gmail.com" class="contact__social-link">Email</a>
           </nav>
         </div>
       </section>

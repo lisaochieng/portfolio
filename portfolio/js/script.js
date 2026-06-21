@@ -102,6 +102,9 @@
       revealEls.forEach(function (el) {
         el.classList.add('is-visible');
       });
+      scroller.querySelectorAll('.text-fade-in').forEach(function (el) {
+        el.classList.add('is-visible');
+      });
       return;
     }
 
@@ -116,11 +119,29 @@
           observer.unobserve(el);
         });
       },
-      { root: scroller, threshold: 0.12, rootMargin: '0px 0px -6% 0px' }
+      { root: scroller, threshold: 0.1, rootMargin: '0px 0px -4% 0px' }
     );
 
     revealEls.forEach(function (el) {
       observer.observe(el);
+    });
+
+    const textEls = scroller.querySelectorAll('.text-fade-in');
+    const textObserver = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('is-visible');
+          textObserver.unobserve(entry.target);
+        });
+      },
+      { root: scroller, threshold: 0.15, rootMargin: '0px 0px -5% 0px' }
+    );
+
+    textEls.forEach(function (el) {
+      if (!el.closest('[data-reveal]') && !el.closest('.timeline__item')) {
+        textObserver.observe(el);
+      }
     });
   }
 
@@ -157,45 +178,22 @@
     });
   }
 
-  /* --- Project cards: taped-top lift toward viewer ----------------------- */
+  /* --- Project cards: subtle taped hinge lift ----------------------------- */
   const projects = document.getElementById('projects');
-  let activeCard = null;
-
-  function resetCardLift(card) {
-    const sheet = card.querySelector('.project-card__sheet');
-    if (!sheet) return;
-    card.classList.remove('is-lifted');
-    sheet.style.setProperty('--lift-x', '0deg');
-    if (activeCard === card) activeCard = null;
-  }
-
-  function applyCardLift(card, clientY) {
-    const sheet = card.querySelector('.project-card__sheet');
-    if (!sheet) return;
-    const r = card.getBoundingClientRect();
-    const py = Math.max(0, Math.min(1, (clientY - r.top) / r.height));
-    const liftX = 2 + py * 7;
-    card.classList.add('is-lifted');
-    sheet.style.setProperty('--lift-x', liftX.toFixed(2) + 'deg');
-    activeCard = card;
-  }
 
   if (projects && !prefersReducedMotion) {
     projects.querySelectorAll('.project-card').forEach(function (card) {
-      card.addEventListener('mouseenter', function (e) {
-        applyCardLift(card, e.clientY);
+      card.addEventListener('mouseenter', function () {
+        card.classList.add('is-lifted');
       });
-      card.addEventListener('mousemove', function (e) {
-        applyCardLift(card, e.clientY);
-      }, { passive: true });
       card.addEventListener('mouseleave', function () {
-        resetCardLift(card);
+        card.classList.remove('is-lifted');
       });
-      card.addEventListener('touchstart', function () {
-        applyCardLift(card, card.getBoundingClientRect().top + card.offsetHeight * 0.65);
-      }, { passive: true });
-      card.addEventListener('touchend', function () {
-        resetCardLift(card);
+      card.addEventListener('focusin', function () {
+        card.classList.add('is-lifted');
+      });
+      card.addEventListener('focusout', function () {
+        card.classList.remove('is-lifted');
       });
     });
   }
