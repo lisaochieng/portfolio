@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<template id="__bundler_thumbnail">
+<svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+  <rect width="600" height="600" fill="#E7DBC3"></rect>
+  <rect x="180" y="180" width="240" height="240" rx="6" fill="#FBF7EE" stroke="#A8392D" stroke-width="3"></rect>
+  <text x="300" y="340" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="150" fill="#A8392D">LO</text>
+</svg>
+</template>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;family=Caveat:wght@500;600;700&amp;family=Pinyon+Script&amp;family=Archivo:wght@600;700;800;900&amp;family=Hanken+Grotesk:wght@400;500;600;700;800&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.cdnfonts.com/css/birds-of-paradise-personal-use" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;}
+  html,body{margin:0;height:100%;background:#F2EBDF;}
+  ::selection{background:#A8392D;color:#fff;}
+  @keyframes floaty{0%,100%{transform:translateY(0);}50%{transform:translateY(-12px);}}
+  @keyframes wiggle{0%,100%{transform:rotate(-5deg);}50%{transform:rotate(5deg);}}
+  @keyframes spinslow{from{transform:rotate(0);}to{transform:rotate(360deg);}}
+  @keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+  @keyframes blink{0%,100%{opacity:1;}50%{opacity:.25;}}
+  @keyframes bobarrow{0%,100%{transform:translateY(0);}50%{transform:translateY(8px);}}
+  @keyframes heroRise{from{transform:translateY(20px);}to{transform:translateY(0);}}
+  @keyframes heroFade{from{transform:translateY(12px);}to{transform:translateY(0);}}
+</style>
+<script src="./image-slot.js"></script>
+</helmet>
+
+<div id="lisa-root" style="font-family:'Hanken Grotesk',sans-serif;color:#1a1a1a;background:#EDE5D6;height:100vh;overflow-y:auto;overflow-x:hidden;scroll-behavior:smooth;scroll-padding-top:96px;">
+
+  <!-- torn-paper edge filters -->
+  <svg aria-hidden="true" width="0" height="0" style="position:absolute;width:0;height:0;pointer-events:none;">
+    <defs>
+      <filter id="torn-a" x="-8%" y="-8%" width="116%" height="116%"><feTurbulence type="fractalNoise" baseFrequency="0.016 0.02" numOctaves="3" seed="7" result="n"></feTurbulence><feDisplacementMap in="SourceGraphic" in2="n" scale="13" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap></filter>
+      <filter id="torn-b" x="-8%" y="-8%" width="116%" height="116%"><feTurbulence type="fractalNoise" baseFrequency="0.018 0.023" numOctaves="3" seed="24" result="n"></feTurbulence><feDisplacementMap in="SourceGraphic" in2="n" scale="12" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap></filter>
+      <filter id="torn-c" x="-8%" y="-8%" width="116%" height="116%"><feTurbulence type="fractalNoise" baseFrequency="0.014 0.018" numOctaves="3" seed="41" result="n"></feTurbulence><feDisplacementMap in="SourceGraphic" in2="n" scale="14" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap></filter>
+      <filter id="torn-d" x="-8%" y="-8%" width="116%" height="116%"><feTurbulence type="fractalNoise" baseFrequency="0.02 0.017" numOctaves="3" seed="58" result="n"></feTurbulence><feDisplacementMap in="SourceGraphic" in2="n" scale="13" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap></filter>
+      <filter id="torn-e" x="-8%" y="-8%" width="116%" height="116%"><feTurbulence type="fractalNoise" baseFrequency="0.015 0.022" numOctaves="3" seed="11" result="n"></feTurbulence><feDisplacementMap in="SourceGraphic" in2="n" scale="13" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap></filter>
+      <filter id="torn-f" x="-8%" y="-8%" width="116%" height="116%"><feTurbulence type="fractalNoise" baseFrequency="0.017 0.019" numOctaves="3" seed="88" result="n"></feTurbulence><feDisplacementMap in="SourceGraphic" in2="n" scale="14" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap></filter>
+      <filter id="torn-crumple" x="-12%" y="-20%" width="124%" height="150%"><feTurbulence type="fractalNoise" baseFrequency="0.012 0.03" numOctaves="4" seed="33" result="n"></feTurbulence><feDisplacementMap in="SourceGraphic" in2="n" scale="26" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap></filter>
+      <filter id="pencil" x="-25%" y="-25%" width="150%" height="150%"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="9" result="n"></feTurbulence><feDisplacementMap in="SourceGraphic" in2="n" scale="1.7" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap></filter>
+    </defs>
+  </svg>
+
+  <!-- scroll progress -->
+  <div id="scroll-prog" style="position:fixed;top:0;left:0;height:4px;width:0%;background:#A8392D;z-index:120;"></div>
+
+  <!-- ============ NAV ============ -->
+  <nav style="position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:15px 34px;background:rgba(243,236,224,.8);backdrop-filter:blur(10px);border-bottom:1.5px solid rgba(26,26,26,.85);">
+    <a href="#top" style="font-family:'Birds of Paradise  Personal use','Cormorant Garamond',serif;font-style:italic;font-weight:500;font-size:34px;color:#1a1a1a;text-decoration:none;line-height:1;">Lisa.</a>
+    <div style="display:flex;align-items:center;gap:4px;">
+      <a href="#about" style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#1a1a1a;text-decoration:none;padding:7px 13px;border-radius:5px;transition:background .2s ease,transform .2s ease;" style-hover="background:rgba(197,138,130,.24);transform:rotate(-1.5deg);">about</a>
+      <a href="#work" style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#1a1a1a;text-decoration:none;padding:7px 13px;border-radius:5px;transition:background .2s ease,transform .2s ease;" style-hover="background:rgba(197,138,130,.24);transform:rotate(1.5deg);">work</a>
+      <a href="#skills" style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#1a1a1a;text-decoration:none;padding:7px 13px;border-radius:5px;transition:background .2s ease,transform .2s ease;" style-hover="background:rgba(197,138,130,.24);transform:rotate(-1.5deg);">skills</a>
+      <a href="#path" style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#1a1a1a;text-decoration:none;padding:7px 13px;border-radius:5px;transition:background .2s ease,transform .2s ease;" style-hover="background:rgba(197,138,130,.24);transform:rotate(1.5deg);">path</a>
+      <a href="#contact" style="font-family: 'Space Mono',monospace; font-weight: 700; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: #fff; text-decoration: none; padding: 9px 17px; border-radius: 999px; margin-left: 6px; transition: transform .2s ease,background .2s ease; background-color: #a8392d" style-hover="transform:rotate(-2deg) translateY(-1px);background:#6E2823;">[ résumé ]</a>
+    </div>
+  </nav>
+
+  <!-- ============ HERO ============ -->
+  <header id="top" data-screen-label="Hero" style="position:relative;z-index:60;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:112px 28px 84px;background-color:#E7DBC3;background-image:radial-gradient(rgba(120,90,45,.06) 1px,transparent 1px);background-size:22px 22px;overflow:visible;">
+
+    <!-- desk doodles behind the page (parallax) -->
+    <div data-parallax="0.08" aria-hidden="true" style="position:absolute;top:17%;left:6%;font-size:26px;color:#C0432E;opacity:.5;">✶</div>
+    <div data-parallax="0.05" aria-hidden="true" style="position:absolute;bottom:16%;right:7%;font-size:34px;color:#A8392D;opacity:.5;">✿</div>
+
+    <!-- THE SCRAPBOOK PAGE -->
+    <div style="position:relative;width:100%;max-width:1140px;">
+
+      <!-- actual paper clips holding the page into the book -->
+      <div aria-hidden="true" style="position:absolute;top:-15px;left:62px;z-index:11;transform:rotate(-9deg);filter:drop-shadow(0 3px 3px rgba(60,40,20,.32));"><svg width="28" height="58" viewBox="0 0 28 58" fill="none"><path d="M9 51 L9 13 C9 6 19.5 6 19.5 13 L19.5 41 C19.5 47.5 11.5 47.5 11.5 41 L11.5 19 C11.5 14.5 16 14.5 16 19 L16 37" stroke="#9EA0A4" stroke-width="3.4" stroke-linecap="round" style="width: 29px; height: 61px"></path><path d="M10 49 L10 13.5 C10 8 18.5 8 18.5 13.5" stroke="#E8E8EA" stroke-width="1" stroke-linecap="round" opacity=".7"></path></svg></div>
+      <div aria-hidden="true" style="position:absolute;top:-15px;right:70px;z-index:11;transform:rotate(8deg);filter:drop-shadow(0 3px 3px rgba(60,40,20,.32));"><svg width="28" height="58" viewBox="0 0 28 58" fill="none"><path d="M9 51 L9 13 C9 6 19.5 6 19.5 13 L19.5 41 C19.5 47.5 11.5 47.5 11.5 41 L11.5 19 C11.5 14.5 16 14.5 16 19 L16 37" stroke="#9EA0A4" stroke-width="3.4" stroke-linecap="round"></path><path d="M10 49 L10 13.5 C10 8 18.5 8 18.5 13.5" stroke="#E8E8EA" stroke-width="1" stroke-linecap="round" opacity=".7"></path></svg></div>
+
+      <!-- spiral binder rings -->
+      <div aria-hidden="true" style="position:absolute;top:-15px;left:50%;transform:translateX(-50%);display:flex;gap:40px;z-index:9;">
+        <span style="width:12px;height:34px;border-radius:7px;background:linear-gradient(90deg,#d2ccbe,#9b9587 58%,#c3bdae);box-shadow:0 2px 3px rgba(0,0,0,.3),inset 0 0 0 1px rgba(255,255,255,.22);"></span>
+        <span style="width:12px;height:34px;border-radius:7px;background:linear-gradient(90deg,#d2ccbe,#9b9587 58%,#c3bdae);box-shadow:0 2px 3px rgba(0,0,0,.3),inset 0 0 0 1px rgba(255,255,255,.22);"></span>
+        <span style="width:12px;height:34px;border-radius:7px;background:linear-gradient(90deg,#d2ccbe,#9b9587 58%,#c3bdae);box-shadow:0 2px 3px rgba(0,0,0,.3),inset 0 0 0 1px rgba(255,255,255,.22);"></span>
+        <span style="width:12px;height:34px;border-radius:7px;background:linear-gradient(90deg,#d2ccbe,#9b9587 58%,#c3bdae);box-shadow:0 2px 3px rgba(0,0,0,.3),inset 0 0 0 1px rgba(255,255,255,.22);"></span>
+        <span style="width:12px;height:34px;border-radius:7px;background:linear-gradient(90deg,#d2ccbe,#9b9587 58%,#c3bdae);box-shadow:0 2px 3px rgba(0,0,0,.3),inset 0 0 0 1px rgba(255,255,255,.22);"></span>
+        <span style="width:12px;height:34px;border-radius:7px;background:linear-gradient(90deg,#d2ccbe,#9b9587 58%,#c3bdae);box-shadow:0 2px 3px rgba(0,0,0,.3),inset 0 0 0 1px rgba(255,255,255,.22);"></span>
+        <span style="width:12px;height:34px;border-radius:7px;background:linear-gradient(90deg,#d2ccbe,#9b9587 58%,#c3bdae);box-shadow:0 2px 3px rgba(0,0,0,.3),inset 0 0 0 1px rgba(255,255,255,.22);"></span>
+        <span style="width:12px;height:34px;border-radius:7px;background:linear-gradient(90deg,#d2ccbe,#9b9587 58%,#c3bdae);box-shadow:0 2px 3px rgba(0,0,0,.3),inset 0 0 0 1px rgba(255,255,255,.22);"></span>
+        <span style="width:12px;height:34px;border-radius:7px;background:linear-gradient(90deg,#d2ccbe,#9b9587 58%,#c3bdae);box-shadow:0 2px 3px rgba(0,0,0,.3),inset 0 0 0 1px rgba(255,255,255,.22);"></span>
+      </div>
+
+      <!-- page sheet -->
+      <div style="position:relative;background-color:#FBF7EE;background-image:linear-gradient(rgba(60,45,15,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(60,45,15,.05) 1px,transparent 1px);background-size:30px 30px;border:1.5px solid #E4D7BD;border-radius:4px;box-shadow:0 34px 64px -22px rgba(60,40,20,.45),0 8px 20px rgba(60,40,20,.16);padding:50px 56px 54px;overflow:hidden;">
+
+        <!-- binding shadow strip -->
+        <div aria-hidden="true" style="position:absolute;top:0;left:0;right:0;height:28px;background:linear-gradient(180deg,rgba(60,40,20,.11),rgba(60,40,20,0));"></div>
+
+        <div style="position:relative;display:grid;grid-template-columns:1.06fr .94fr;gap:46px;align-items:center;">
+
+          <!-- LEFT: identity -->
+          <div style="position:relative;">
+            <!-- hand-drawn star sketch -->
+            <svg aria-hidden="true" width="36" height="36" viewBox="0 0 36 36" fill="none" style="position:absolute;top:-6px;right:-4px;transform:rotate(-12deg);filter:url(#pencil);opacity:.92;"><path d="M18 3 L21.5 13.5 L32.5 13.8 L23.7 20.4 L27 31 L18 24.3 L9 31 L12.3 20.4 L3.5 13.8 L14.5 13.5 Z" stroke="#5e5852" stroke-width="1.4" stroke-linejoin="round"></path></svg>
+            <!-- hand-drawn smiley sketch -->
+            <svg aria-hidden="true" width="40" height="40" viewBox="0 0 40 40" fill="none" style="position:absolute;bottom:-8px;right:6px;transform:rotate(7deg);filter:url(#pencil);opacity:.92;"><circle cx="20" cy="20" r="16" stroke="#5e5852" stroke-width="1.4"></circle><circle cx="14.5" cy="16.5" r="1.5" fill="#5e5852"></circle><circle cx="25.5" cy="16.5" r="1.5" fill="#5e5852"></circle><path d="M12.5 24 C 16 29.5, 24 29.5, 27.5 24" stroke="#5e5852" stroke-width="1.4" stroke-linecap="round"></path></svg>
+            <div style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.26em;text-transform:uppercase;color:#3a382f;margin-bottom:16px;">portfolio // <span style="position:relative;display:inline-block;color:#1a1a1a;">2026<svg width="74" height="40" viewBox="0 0 74 40" fill="none" aria-hidden="true" style="position:absolute;left:-13px;top:-9px;pointer-events:none;filter:url(#pencil);"><path d="M16 9 C 4 14, 5 31, 30 34 C 58 37, 72 27, 67 15 C 62 5, 36 3, 18 7" stroke="#a8392d" stroke-width="1.6" stroke-linecap="round"></path></svg></span></div>
+
+            <h1 style="margin:0;line-height:.9;animation:heroRise .9s cubic-bezier(.2,.7,.2,1) both;">
+              <span style="display:block;font-family:'Birds of Paradise  Personal use','Cormorant Garamond',serif;font-style:italic;font-weight:500;font-size:94px;color:#1a1a1a;">Lisa</span>
+              <span style="display: block; font-family: 'Birds of Paradise  Personal use','Cormorant Garamond',serif;font-style:italic;font-weight:500; font-size: 94px; color: #A8392D; margin-left: 40px; margin-top: -2px">Ochieng</span>
+            </h1>
+
+            <p style="font-family:'Caveat',cursive;font-size:28px;line-height:1.16;color:#1a1a1a;margin:16px 0 0;max-width:430px;animation:heroRise .8s cubic-bezier(.2,.7,.2,1) both;animation-delay:.14s;">computer science @ Princeton — I build clean, playful, useful software.<svg aria-hidden="true" width="30" height="28" viewBox="0 0 30 28" fill="none" style="display:inline-block;vertical-align:-4px;margin-left:6px;filter:url(#pencil);opacity:.92;"><path d="M15 25 C 3 17, 2 8, 8 6 C 12.5 4.3, 15 7.5, 15 10.5 C 15 7.5, 17.5 4.3, 22 6 C 28 8, 27 17, 15 25 Z" stroke="#5e5852" stroke-width="1.6" stroke-linejoin="round"></path></svg></p>
+
+            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:24px;animation:heroRise .8s cubic-bezier(.2,.7,.2,1) both;animation-delay:.24s;">
+              <span style="font-family:'Space Mono',monospace;font-weight:700;font-size:11.5px;letter-spacing:.1em;background:#F5E6E2;color:#6E2823;padding:9px 15px;border-radius:999px;border:1.5px dashed #A8392D;transform:rotate(-1.5deg);">PRINCETON CS '29</span>
+              <span style="font-family:'Space Mono',monospace;font-weight:700;font-size:11.5px;letter-spacing:.1em;background:#1a1a1a;color:#fff;padding:9px 15px;border-radius:999px;transform:rotate(1.5deg);">OPEN TO SWE INTERNSHIPS</span>
+            </div>
+
+            <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:28px;animation:heroRise .8s cubic-bezier(.2,.7,.2,1) both;animation-delay:.34s;">
+              <a href="#work" style="font-family:'Space Mono',monospace;font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:#1a1a1a;text-decoration:none;padding:13px 22px;border-radius:999px;transition:transform .18s ease;" style-hover="transform:translateY(-3px) rotate(-1.5deg);">view my work →</a>
+              <a href="#contact" style="font-family:'Space Mono',monospace;font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#1a1a1a;background:transparent;border:1.5px solid #1a1a1a;text-decoration:none;padding:12px 20px;border-radius:999px;transition:transform .18s ease,background .18s ease;" style-hover="transform:translateY(-3px) rotate(1.5deg);background:#fff;">say hello</a>
+            </div>
+          </div>
+
+          <!-- RIGHT: taped photo + sticky-note index -->
+          <div style="position:relative;display:flex;flex-direction:column;align-items:center;gap:22px;">
+
+            <!-- me :) doodle — centered above the photo, arrow dropping onto it -->
+            
+
+            <!-- photo scrap -->
+            <div data-mouse="15" data-base="rotate(4deg)" style="position:relative;transform:rotate(4deg);filter:drop-shadow(0 16px 20px rgba(60,40,20,.26));will-change:transform;">
+              <div style="position:relative;padding:14px 14px 40px;">
+                <div style="position:absolute;inset:0;background:#f7efdd;background-image:repeating-linear-gradient(0deg,rgba(150,120,70,.05) 0 1px,transparent 1px 7px),radial-gradient(120% 80% at 25% 10%,rgba(255,255,255,.45),rgba(255,255,255,0) 55%);filter:url(#torn-a);"></div>
+                <image-slot id="lisa-hero-photo" src="https://picsum.photos/seed/lisaportrait/480/580" style="position:relative;width:204px;height:244px;display:block;filter:sepia(.16) saturate(1.06) brightness(1.02);box-shadow:0 2px 8px rgba(0,0,0,.16);" shape="rect" placeholder="drop your photo here ♡"></image-slot>
+                <div style="position:relative;font-family:'Caveat',cursive;font-size:20px;text-align:center;margin-top:8px;color:#1a1a1a;">me, probably debugging</div>
+              </div>
+              <!-- torn masking tape -->
+              <div aria-hidden="true" style="position:absolute;top:-13px;left:50%;transform:translateX(-50%) rotate(-4deg);width:124px;height:32px;background:rgba(214,190,150,.52);box-shadow:0 1px 4px rgba(0,0,0,.1);filter:url(#torn-b);"></div>
+              <!-- real paper clip on the photo -->
+              <div aria-hidden="true" style="position:absolute;top:-16px;right:24px;z-index:7;transform:rotate(13deg);filter:drop-shadow(0 3px 3px rgba(60,40,20,.34));"><svg width="24" height="50" viewBox="0 0 28 58" fill="none"><path d="M10 49 L10 13.5 C10 8 18.5 8 18.5 13.5" stroke="#E8E8EA" stroke-width="1" stroke-linecap="round" opacity=".7"></path></svg></div>
+            </div>
+
+            <!-- sticky-note index -->
+            <div data-mouse="26" data-base="rotate(2.5deg)" style="position:relative;align-self:flex-end;width:188px;transform:rotate(2.5deg);background:#F5EDD8;box-shadow:0 12px 22px rgba(60,40,20,.2);padding:18px 20px 16px;will-change:transform;">
+              <div aria-hidden="true" style="position:absolute;top:-12px;left:50%;transform:translateX(-50%) rotate(-3deg);width:96px;height:26px;background:rgba(214,190,150,.5);box-shadow:0 1px 4px rgba(0,0,0,.1);filter:url(#torn-c);"></div>
+              <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#6E2823;font-weight:700;margin-bottom:8px;">index</div>
+              <a href="#about" style="display:block;font-family:'Cormorant Garamond',serif;font-size:23px;font-weight:600;color:#1a1a1a;text-decoration:none;line-height:1.5;transition:color .15s,transform .15s;" style-hover="color:#A8392D;transform:translateX(3px);">01 — about</a>
+              <a href="#work" style="display:block;font-family:'Cormorant Garamond',serif;font-size:23px;font-weight:600;color:#1a1a1a;text-decoration:none;line-height:1.5;transition:color .15s,transform .15s;" style-hover="color:#A8392D;transform:translateX(3px);">02 — projects</a>
+              <a href="#contact" style="display:block;font-family:'Cormorant Garamond',serif;font-size:23px;font-weight:600;color:#1a1a1a;text-decoration:none;line-height:1.5;transition:color .15s,transform .15s;" style-hover="color:#A8392D;transform:translateX(3px);">03 — contact</a>
+            </div>
+          </div>
+
+        </div>
+      <div aria-hidden="true" style="position: absolute; top: 22px; left: 633px; z-index: 6; white-space: nowrap; font-family: 'Caveat',cursive; font-size: 32px; line-height: 1; color: #a8392d; transform: translateX(-58%) rotate(-7deg); width: 165px; height: 40px">that's me :)<svg width="50" height="54" viewBox="0 0 50 54" fill="none" style="position:absolute;right:-8px;top:24px;filter:url(#pencil);"><path d="M6 4 C 34 6, 44 22, 30 48" stroke="#a8392d" stroke-width="2.2" stroke-linecap="round"></path><path d="M21 41 L30 50 L39 43" stroke="#a8392d" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div></div>
+    </div>
+
+    <!-- scroll cue -->
+    <div style="position:absolute;bottom:24px;left:50%;transform:translateX(-50%);text-align:center;z-index:7;">
+      <div style="font-family:'Caveat',cursive;font-size:19px;color:#5a4a30;">scroll, it gets better</div>
+      <div style="font-size:20px;color:#5a4a30;animation:bobarrow 1.6s ease-in-out infinite;">↓</div>
+    </div>
+  </header>
+
+  <!-- marquee -->
+  <div style="overflow:hidden;background:#1a1a1a;padding:13px 0;transform:rotate(-1deg);margin:0;width:108%;margin-left:-4%;position:relative;z-index:62;">
+    <div style="display:flex;gap:36px;white-space:nowrap;width:max-content;animation:marquee 24s linear infinite;font-family:'Space Mono',monospace;font-weight:700;font-size:14px;letter-spacing:.18em;color:#F2EBDF;text-transform:uppercase;">
+      <span>SOFTWARE ENGINEER ✦ FULL-STACK ✦ OPEN SOURCE ✦ PRINCETON CS '29 ✦ PROBLEM SOLVER ✦ SHIP FAST ✦ SOFTWARE ENGINEER ✦ FULL-STACK ✦ OPEN SOURCE ✦ PRINCETON CS '29 ✦ PROBLEM SOLVER ✦ SHIP FAST ✦</span>
+    </div>
+  </div>
+
+  <!-- ============ ABOUT ============ -->
+  <section id="about" data-screen-label="About" style="position:relative;z-index:50;padding:124px 40px 130px;background:#F0E8DB;overflow:visible;">
+    <div style="max-width:1080px;margin:0 auto;display:grid;grid-template-columns:.85fr 1.15fr;gap:60px;align-items:center;">
+      <!-- left: stacked torn-paper photos -->
+      <div data-reveal="" style="position:relative;height:430px;opacity:0;transform:translateY(30px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1);">
+        <div style="position:absolute;top:18px;left:6px;transform:rotate(-5deg);filter:drop-shadow(0 10px 14px rgba(60,40,20,.24));">
+          <div style="position:relative;padding:14px 14px 16px;">
+            <div style="position:absolute;inset:0;background:#f4ecd9;background-image:repeating-linear-gradient(0deg,rgba(150,120,70,.05) 0 1px,transparent 1px 7px),radial-gradient(120% 80% at 25% 10%,rgba(255,255,255,.45),rgba(255,255,255,0) 55%);filter:url(#torn-b);"></div>
+            <image-slot id="lisa-about-1" src="https://picsum.photos/seed/candidlisa/440/520" style="position:relative;width:200px;height:230px;display:block;filter:sepia(.16) saturate(1.06) brightness(1.02);box-shadow:0 2px 8px rgba(0,0,0,.16);" shape="rect" placeholder="a candid pic"></image-slot>
+          </div>
+          <div style="position:absolute;top:-9px;left:20px;width:74px;height:24px;transform:rotate(-8deg);background:linear-gradient(180deg,rgba(222,198,150,.6),rgba(205,178,128,.5));box-shadow:0 1px 3px rgba(0,0,0,.14);"></div>
+        </div>
+        <div style="position:absolute;top:96px;left:158px;transform:rotate(5deg);filter:drop-shadow(0 10px 14px rgba(60,40,20,.24));">
+          <div style="position:relative;padding:14px 14px 36px;">
+            <div style="position:absolute;inset:0;background:#f4ecd9;background-image:repeating-linear-gradient(0deg,rgba(150,120,70,.05) 0 1px,transparent 1px 7px),radial-gradient(120% 80% at 75% 15%,rgba(255,255,255,.45),rgba(255,255,255,0) 55%);filter:url(#torn-c);"></div>
+            <image-slot id="lisa-about-2" src="https://picsum.photos/seed/workspace7/420/500" style="position:relative;width:180px;height:210px;display:block;filter:sepia(.16) saturate(1.06) brightness(1.02);box-shadow:0 2px 8px rgba(0,0,0,.16);" shape="rect" placeholder="workspace / setup"></image-slot>
+            <div style="position:relative;font-family:'Caveat',cursive;font-size:18px;text-align:center;margin-top:6px;">my happy place</div>
+          </div>
+          <div style="position:absolute;top:-8px;right:18px;width:70px;height:24px;transform:rotate(7deg);background:linear-gradient(180deg,rgba(222,198,150,.6),rgba(205,178,128,.5));box-shadow:0 1px 3px rgba(0,0,0,.14);"></div>
+        </div>
+        <div style="position:absolute;bottom:-6px;left:30px;font-size:30px;color:#A8392D;animation:wiggle 4s ease-in-out infinite;z-index:3;">✦</div>
+      </div>
+      <!-- right: bio -->
+      <div data-reveal="" data-delay="120" style="opacity:0;transform:translateY(30px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1);">
+        <div style="font-family:'Space Mono',monospace;font-size:13px;letter-spacing:.24em;text-transform:uppercase;color:#A8392D;font-weight:700;margin-bottom:10px;">// about me</div>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:76px;line-height:1.0;letter-spacing:-.01em;margin:0 0 8px;">hi, I'm Lisa <span style="color:#A8392D;font-family:'Hanken Grotesk',sans-serif;font-size:28px;vertical-align:middle;">^_^</span></h2>
+        <p style="font-size:18px;line-height:1.65;color:#3a382f;max-width:520px;margin:14px 0;">I'm a <strong>computer science</strong> student at <strong>Princeton University</strong> (Class of '29) who loves turning messy ideas into things people actually use. I care about clean code, tiny delightful details, and shipping — not just shipping perfectly.</p>
+        <p style="font-size:18px;line-height:1.65;color:#3a382f;max-width:520px;margin:14px 0 24px;">When I'm not building, I'm probably reading docs at 2am, contributing to open source, or redesigning my terminal for the hundredth time.</p>
+        <div style="display:flex;gap:30px;flex-wrap:wrap;">
+          <div><div style="font-family:'Archivo',sans-serif;font-weight:900;font-size:40px;color:#A8392D;">15+</div><div style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#3a382f;">projects shipped</div></div>
+          <div><div style="font-family:'Archivo',sans-serif;font-weight:900;font-size:40px;color:#A8392D;">4</div><div style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#3a382f;">languages, fluently</div></div>
+          <div><div style="font-family:'Archivo',sans-serif;font-weight:900;font-size:40px;color:#A8392D;">∞</div><div style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#3a382f;">cups of coffee</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROJECTS ============ -->
+  <section id="work" data-screen-label="Projects" style="padding:118px 40px 130px;background:#ECE4D6;position:relative;z-index:44;overflow:visible;">
+    <div style="max-width:1240px;margin:0 auto;">
+      <div data-reveal="" style="margin-bottom:14px;opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease;">
+        <div style="font-family:'Space Mono',monospace;font-size:13px;letter-spacing:.24em;text-transform:uppercase;color:#A8392D;font-weight:700;">// selected work</div>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:90px;line-height:.98;letter-spacing:-.012em;margin:6px 0 0;">things I've <span style="font-style:italic;color:#6E2823;">built</span></h2>
+        <p style="font-family:'Caveat',cursive;font-size:26px;color:#3a382f;margin:6px 0 0;">a few favourites — drag screenshots onto the scraps ↓</p>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:36px 26px;margin-top:50px;perspective:1100px;">
+        <article data-reveal="" data-delay="0" data-rest="rotate(-1.5deg)" style="position:relative;transform:rotate(-1.5deg) translateY(22px);opacity:0;transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s ease,opacity .7s ease;background:#F9F3EB;border:1.5px solid #E9DDCB;box-shadow:0 8px 16px rgba(60,40,20,.16);">
+          <div style="position:absolute;top:-9px;left:50%;transform:translateX(-50%) rotate(-5deg);width:80px;height:22px;background:linear-gradient(180deg,rgba(222,198,150,.62),rgba(205,178,128,.52));box-shadow:0 1px 3px rgba(0,0,0,.14);z-index:2;"></div>
+          <div style="padding:15px 15px 17px;">
+            <image-slot id="proj-routewise" src="https://picsum.photos/seed/routewise/640/360" style="width:100%;height:126px;display:block;filter:sepia(.16) saturate(1.06) brightness(1.02);box-shadow:0 2px 6px rgba(0,0,0,.16);" shape="rect" placeholder="Routewise screenshot"></image-slot>
+            <div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-top:13px;">
+              <h3 style="font-family:'Archivo',sans-serif;font-weight:900;font-size:20px;margin:0;letter-spacing:-.01em;">Routewise</h3>
+              <span style="font-family:'Space Mono',monospace;font-size:10px;color:#9b9583;">2025</span>
+            </div>
+            <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:#A8392D;font-weight:700;margin:4px 0 9px;">live campus shuttle tracking</div>
+            <p style="font-size:13px;line-height:1.5;color:#3a382f;margin:0 0 13px;">Real-time bus locations for 8,000 students over WebSockets.</p>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:13px;"><span style="font-family:'Space Mono',monospace;font-size:10px;background:#F5E6E2;color:#6E2823;padding:4px 8px;border-radius:5px;">Next.js</span><span style="font-family:'Space Mono',monospace;font-size:10px;background:#F5E6E2;color:#6E2823;padding:4px 8px;border-radius:5px;">WebSockets</span><span style="font-family:'Space Mono',monospace;font-size:10px;background:#F5E6E2;color:#6E2823;padding:4px 8px;border-radius:5px;">Mapbox</span></div>
+            <a href="#" style="font-family:'Space Mono',monospace;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:#1a1a1a;text-decoration:none;border-bottom:2px solid #A8392D;padding-bottom:2px;">view →</a>
+          </div>
+        </article>
+        <article data-reveal="" data-delay="80" data-rest="rotate(1.2deg)" style="position:relative;transform:rotate(1.2deg) translateY(22px);opacity:0;transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s ease,opacity .7s ease;background:#F9F3EB;border:1.5px solid #E9DDCB;box-shadow:0 8px 16px rgba(60,40,20,.16);">
+          <div style="position:absolute;top:-9px;left:50%;transform:translateX(-50%) rotate(6deg);width:80px;height:22px;background:linear-gradient(180deg,rgba(222,198,150,.62),rgba(205,178,128,.52));box-shadow:0 1px 3px rgba(0,0,0,.14);z-index:2;"></div>
+          <div style="padding:15px 15px 17px;">
+            <image-slot id="proj-pocketledger" src="https://picsum.photos/seed/pocketledger/640/360" style="width:100%;height:126px;display:block;filter:sepia(.16) saturate(1.06) brightness(1.02);box-shadow:0 2px 6px rgba(0,0,0,.16);" shape="rect" placeholder="Pocket Ledger"></image-slot>
+            <div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-top:13px;">
+              <h3 style="font-family:'Archivo',sans-serif;font-weight:900;font-size:20px;margin:0;letter-spacing:-.01em;">Pocket Ledger</h3>
+              <span style="font-family:'Space Mono',monospace;font-size:10px;color:#9b9583;">2024</span>
+            </div>
+            <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:#A8392D;font-weight:700;margin:4px 0 9px;">personal finance, made friendly</div>
+            <p style="font-size:13px;line-height:1.5;color:#3a382f;margin:0 0 13px;">Auto-categorises spending and nudges you before payday.</p>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:13px;"><span style="font-family:'Space Mono',monospace;font-size:10px;background:#F5E6E2;color:#6E2823;padding:4px 8px;border-radius:5px;">React Native</span><span style="font-family:'Space Mono',monospace;font-size:10px;background:#F5E6E2;color:#6E2823;padding:4px 8px;border-radius:5px;">Firebase</span><span style="font-family:'Space Mono',monospace;font-size:10px;background:#F5E6E2;color:#6E2823;padding:4px 8px;border-radius:5px;">Plaid</span></div>
+            <a href="#" style="font-family:'Space Mono',monospace;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:#1a1a1a;text-decoration:none;border-bottom:2px solid #A8392D;padding-bottom:2px;">view →</a>
+          </div>
+        </article>
+        <article data-reveal="" data-delay="160" data-rest="rotate(-1deg)" style="position:relative;transform:rotate(-1deg) translateY(22px);opacity:0;transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s ease,opacity .7s ease;background:#F9F3EB;border:1.5px solid #E9DDCB;box-shadow:0 8px 16px rgba(60,40,20,.16);">
+          <div style="position:absolute;top:-9px;left:50%;transform:translateX(-50%) rotate(4deg);width:80px;height:22px;background:linear-gradient(180deg,rgba(222,198,150,.62),rgba(205,178,128,.52));box-shadow:0 1px 3px rgba(0,0,0,.14);z-index:2;"></div>
+          <div style="padding:15px 15px 17px;">
+            <image-slot id="proj-devduck" src="https://picsum.photos/seed/devduck/640/360" style="width:100%;height:126px;display:block;filter:sepia(.16) saturate(1.06) brightness(1.02);box-shadow:0 2px 6px rgba(0,0,0,.16);" shape="rect" placeholder="DevDuck terminal"></image-slot>
+            <div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-top:13px;">
+              <h3 style="font-family:'Archivo',sans-serif;font-weight:900;font-size:20px;margin:0;letter-spacing:-.01em;">DevDuck</h3>
+              <span style="font-family:'Space Mono',monospace;font-size:10px;color:#9b9583;">2025</span>
+            </div>
+            <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:#A8392D;font-weight:700;margin:4px 0 9px;">an AI rubber duck in your CLI</div>
+            <p style="font-size:13px;line-height:1.5;color:#3a382f;margin:0 0 13px;">Pipe an error, get a calm fix suggestion. 1.2k★ on GitHub.</p>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:13px;"><span style="font-family:'Space Mono',monospace;font-size:10px;background:#F5E6E2;color:#6E2823;padding:4px 8px;border-radius:5px;">Python</span><span style="font-family:'Space Mono',monospace;font-size:10px;background:#F5E6E2;color:#6E2823;padding:4px 8px;border-radius:5px;">OpenAI</span><span style="font-family:'Space Mono',monospace;font-size:10px;background:#F5E6E2;color:#6E2823;padding:4px 8px;border-radius:5px;">Typer</span></div>
+            <a href="#" style="font-family:'Space Mono',monospace;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:#1a1a1a;text-decoration:none;border-bottom:2px solid #A8392D;padding-bottom:2px;">view →</a>
+          </div>
+        </article>
+        <article data-reveal="" data-delay="240" data-rest="rotate(1.5deg)" style="position:relative;transform:rotate(1.5deg) translateY(22px);opacity:0;transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s ease,opacity .7s ease;background:#F9F3EB;border:1.5px solid #E9DDCB;box-shadow:0 8px 16px rgba(60,40,20,.16);">
+          <div style="position:absolute;top:-9px;left:50%;transform:translateX(-50%) rotate(-6deg);width:80px;height:22px;background:linear-gradient(180deg,rgba(222,198,150,.62),rgba(205,178,128,.52));box-shadow:0 1px 3px rgba(0,0,0,.14);z-index:2;"></div>
+          <div style="padding:15px 15px 17px;">
+            <image-slot id="proj-cadence" src="https://picsum.photos/seed/cadence/640/360" style="width:100%;height:126px;display:block;filter:sepia(.16) saturate(1.06) brightness(1.02);box-shadow:0 2px 6px rgba(0,0,0,.16);" shape="rect" placeholder="Cadence dashboard"></image-slot>
+            <div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-top:13px;">
+              <h3 style="font-family:'Archivo',sans-serif;font-weight:900;font-size:20px;margin:0;letter-spacing:-.01em;">Cadence</h3>
+              <span style="font-family:'Space Mono',monospace;font-size:10px;color:#9b9583;">2024</span>
+            </div>
+            <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:#A8392D;font-weight:700;margin:4px 0 9px;">habit tracking + data viz</div>
+            <p style="font-size:13px;line-height:1.5;color:#3a382f;margin:0 0 13px;">Build streaks and see patterns with interactive D3 charts.</p>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:13px;"><span style="font-family:'Space Mono',monospace;font-size:10px;background:#F5E6E2;color:#6E2823;padding:4px 8px;border-radius:5px;">React</span><span style="font-family:'Space Mono',monospace;font-size:10px;background:#F5E6E2;color:#6E2823;padding:4px 8px;border-radius:5px;">D3.js</span><span style="font-family:'Space Mono',monospace;font-size:10px;background:#F5E6E2;color:#6E2823;padding:4px 8px;border-radius:5px;">FastAPI</span></div>
+            <a href="#" style="font-family:'Space Mono',monospace;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:#1a1a1a;text-decoration:none;border-bottom:2px solid #A8392D;padding-bottom:2px;">view →</a>
+          </div>
+        </article>
+        <article data-reveal="" data-delay="0" data-rest="rotate(1deg)" style="position:relative;transform:rotate(1deg) translateY(22px);opacity:0;transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s ease,opacity .7s ease;background:#F9F3EB;border:1.5px solid #E9DDCB;box-shadow:0 8px 16px rgba(60,40,20,.16);">
+          <div style="position:absolute;top:-9px;left:50%;transform:translateX(-50%) rotate(-5deg);width:80px;height:22px;background:linear-gradient(180deg,rgba(222,198,150,.62),rgba(205,178,128,.52));box-shadow:0 1px 3px rgba(0,0,0,.14);z-index:2;"></div>
+          <div style="padding:15px 15px 17px;">
+            <image-slot id="proj-quillit" src="https://picsum.photos/seed/quillit/640/360" style="width:100%;height:126px;display:block;filter:sepia(.16) saturate(1.06) brightness(1.02);box-shadow:0 2px 6px rgba(0,0,0,.16);" shape="rect" placeholder="Quillit screenshot"></image-slot>
+            <div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-top:13px;">
+              <h3 style="font-family:'Archivo',sans-serif;font-weight:900;font-size:20px;margin:0;letter-spacing:-.01em;">Quillit</h3>
+              <span style="font-family:'Space Mono',monospace;font-size:10px;color:#9b9583;">2025</span>
+            </div>
+            <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:#A8392D;font-weight:700;margin:4px 0 9px;">a tiny markdown blog engine</div>
+            <p style="font-size:13px;line-height:1.5;color:#3a382f;margin:0 0 13px;">Write in markdown, deploy in one command. Themeable + fast.</p>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:13px;"><span style="font-family:'Space Mono',monospace;font-size:10px;background:#F5E6E2;color:#6E2823;padding:4px 8px;border-radius:5px;">Go</span><span style="font-family:'Space Mono',monospace;font-size:10px;background:#F5E6E2;color:#6E2823;padding:4px 8px;border-radius:5px;">SQLite</span><span style="font-family:'Space Mono',monospace;font-size:10px;background:#F5E6E2;color:#6E2823;padding:4px 8px;border-radius:5px;">HTMX</span></div>
+            <a href="#" style="font-family:'Space Mono',monospace;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:#1a1a1a;text-decoration:none;border-bottom:2px solid #A8392D;padding-bottom:2px;">view →</a>
+          </div>
+        </article>
+        <article data-reveal="" data-delay="80" data-rest="rotate(-1.5deg)" style="position:relative;transform:rotate(-1.5deg) translateY(22px);opacity:0;transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s ease,opacity .7s ease;background:#F9F3EB;border:1.5px solid #E9DDCB;box-shadow:0 8px 16px rgba(60,40,20,.16);">
+          <div style="position:absolute;top:-9px;left:50%;transform:translateX(-50%) rotate(6deg);width:80px;height:22px;background:linear-gradient(180deg,rgba(222,198,150,.62),rgba(205,178,128,.52));box-shadow:0 1px 3px rgba(0,0,0,.14);z-index:2;"></div>
+          <div style="padding:15px 15px 17px;">
+            <image-slot id="proj-nimbus" src="https://picsum.photos/seed/nimbus/640/360" style="width:100%;height:126px;display:block;filter:sepia(.16) saturate(1.06) brightness(1.02);box-shadow:0 2px 6px rgba(0,0,0,.16);" shape="rect" placeholder="Nimbus screens"></image-slot>
+            <div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-top:13px;">
+              <h3 style="font-family:'Archivo',sans-serif;font-weight:900;font-size:20px;margin:0;letter-spacing:-.01em;">Nimbus</h3>
+              <span style="font-family:'Space Mono',monospace;font-size:10px;color:#9b9583;">2024</span>
+            </div>
+            <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:#A8392D;font-weight:700;margin:4px 0 9px;">a weather app that feels calm</div>
+            <p style="font-size:13px;line-height:1.5;color:#3a382f;margin:0 0 13px;">Hyper-local forecasts as a soft, glanceable little PWA.</p>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:13px;"><span style="font-family:'Space Mono',monospace;font-size:10px;background:#F5E6E2;color:#6E2823;padding:4px 8px;border-radius:5px;">React</span><span style="font-family:'Space Mono',monospace;font-size:10px;background:#F5E6E2;color:#6E2823;padding:4px 8px;border-radius:5px;">PWA</span><span style="font-family:'Space Mono',monospace;font-size:10px;background:#F5E6E2;color:#6E2823;padding:4px 8px;border-radius:5px;">Open-Meteo</span></div>
+            <a href="#" style="font-family:'Space Mono',monospace;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:#1a1a1a;text-decoration:none;border-bottom:2px solid #A8392D;padding-bottom:2px;">view →</a>
+          </div>
+        </article>
+        <article data-reveal="" data-delay="160" data-rest="rotate(1.3deg)" style="position:relative;transform:rotate(1.3deg) translateY(22px);opacity:0;transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s ease,opacity .7s ease;background:#F9F3EB;border:1.5px solid #E9DDCB;box-shadow:0 8px 16px rgba(60,40,20,.16);">
+          <div style="position:absolute;top:-9px;left:50%;transform:translateX(-50%) rotate(4deg);width:80px;height:22px;background:linear-gradient(180deg,rgba(222,198,150,.62),rgba(205,178,128,.52));box-shadow:0 1px 3px rgba(0,0,0,.14);z-index:2;"></div>
+          <div style="padding:15px 15px 17px;">
+            <image-slot id="proj-soundcheck" src="https://picsum.photos/seed/soundcheck/640/360" style="width:100%;height:126px;display:block;filter:sepia(.16) saturate(1.06) brightness(1.02);box-shadow:0 2px 6px rgba(0,0,0,.16);" shape="rect" placeholder="Soundcheck visuals"></image-slot>
+            <div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-top:13px;">
+              <h3 style="font-family:'Archivo',sans-serif;font-weight:900;font-size:20px;margin:0;letter-spacing:-.01em;">Soundcheck</h3>
+              <span style="font-family:'Space Mono',monospace;font-size:10px;color:#9b9583;">2025</span>
+            </div>
+            <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:#A8392D;font-weight:700;margin:4px 0 9px;">your listening, visualised</div>
+            <p style="font-size:13px;line-height:1.5;color:#3a382f;margin:0 0 13px;">Turns your Spotify history into audio-reactive generative art.</p>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:13px;"><span style="font-family:'Space Mono',monospace;font-size:10px;background:#F5E6E2;color:#6E2823;padding:4px 8px;border-radius:5px;">TypeScript</span><span style="font-family:'Space Mono',monospace;font-size:10px;background:#F5E6E2;color:#6E2823;padding:4px 8px;border-radius:5px;">WebGL</span><span style="font-family:'Space Mono',monospace;font-size:10px;background:#F5E6E2;color:#6E2823;padding:4px 8px;border-radius:5px;">Spotify</span></div>
+            <a href="#" style="font-family:'Space Mono',monospace;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:#1a1a1a;text-decoration:none;border-bottom:2px solid #A8392D;padding-bottom:2px;">view →</a>
+          </div>
+        </article>
+        <article data-reveal="" data-delay="240" data-rest="rotate(-1deg)" style="position:relative;transform:rotate(-1deg) translateY(22px);opacity:0;transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s ease,opacity .7s ease;background:#F9F3EB;border:1.5px solid #E9DDCB;box-shadow:0 8px 16px rgba(60,40,20,.16);">
+          <div style="position:absolute;top:-9px;left:50%;transform:translateX(-50%) rotate(-6deg);width:80px;height:22px;background:linear-gradient(180deg,rgba(222,198,150,.62),rgba(205,178,128,.52));box-shadow:0 1px 3px rgba(0,0,0,.14);z-index:2;"></div>
+          <div style="padding:15px 15px 17px;">
+            <image-slot id="proj-inkwell" src="https://picsum.photos/seed/inkwell/640/360" style="width:100%;height:126px;display:block;filter:sepia(.16) saturate(1.06) brightness(1.02);box-shadow:0 2px 6px rgba(0,0,0,.16);" shape="rect" placeholder="Inkwell editor"></image-slot>
+            <div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-top:13px;">
+              <h3 style="font-family:'Archivo',sans-serif;font-weight:900;font-size:20px;margin:0;letter-spacing:-.01em;">Inkwell</h3>
+              <span style="font-family:'Space Mono',monospace;font-size:10px;color:#9b9583;">2026</span>
+            </div>
+            <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:#A8392D;font-weight:700;margin:4px 0 9px;">collaborative story writing</div>
+            <p style="font-size:13px;line-height:1.5;color:#3a382f;margin:0 0 13px;">Real-time shared docs with branching plot timelines.</p>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:13px;"><span style="font-family:'Space Mono',monospace;font-size:10px;background:#F5E6E2;color:#6E2823;padding:4px 8px;border-radius:5px;">Next.js</span><span style="font-family:'Space Mono',monospace;font-size:10px;background:#F5E6E2;color:#6E2823;padding:4px 8px;border-radius:5px;">Yjs</span><span style="font-family:'Space Mono',monospace;font-size:10px;background:#F5E6E2;color:#6E2823;padding:4px 8px;border-radius:5px;">Postgres</span></div>
+            <a href="#" style="font-family:'Space Mono',monospace;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:#1a1a1a;text-decoration:none;border-bottom:2px solid #A8392D;padding-bottom:2px;">view →</a>
+          </div>
+        </article>
+      </div>
+
+      <div data-reveal="" style="text-align:center;margin-top:54px;opacity:0;transition:opacity .7s ease;">
+        <a href="#" style="font-family:'Space Mono',monospace;font-weight:700;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:#1a1a1a;text-decoration:none;padding:14px 26px;border-radius:999px;display:inline-block;transition:transform .15s;" style-hover="transform:rotate(-1.5deg) scale(1.04);">see everything on github →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SKILLS (dark) ============ -->
+  <section id="skills" data-screen-label="Skills" style="padding:122px 40px 132px;background:#161616;color:#F2EBDF;position:relative;z-index:38;overflow:visible;background-image:radial-gradient(rgba(255,255,255,.05) 1px,transparent 1px);background-size:26px 26px;">
+    <div style="max-width:1040px;margin:0 auto;">
+      <div data-reveal="" style="opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease;">
+        <div style="font-family: 'Space Mono',monospace; font-size: 13px; letter-spacing: .24em; text-transform: uppercase; color: #f3ece0; font-weight: 700">// the toolbox</div>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:90px;line-height:.98;letter-spacing:-.012em;margin:6px 0 0;color:#fff;">skills &amp; <span style="font-style: italic; color: #f3ece0">stack</span></h2>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:30px 50px;margin-top:50px;">
+        <div data-reveal="" style="opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease;">
+          <div style="font-family: 'Space Mono',monospace; font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: #f3ece0; margin-bottom: 14px">⌘ languages</div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <span style="font-family:'Space Mono',monospace;font-size:13px;background:#222;border:1.5px solid #3a3a3a;color:#F2EBDF;padding:9px 15px;border-radius:8px;transition:all .18s;" style-hover="background:#A8392D;border-color:#A8392D;color:#fff;transform:translateY(-3px);">Python</span>
+            <span style="font-family:'Space Mono',monospace;font-size:13px;background:#222;border:1.5px solid #3a3a3a;color:#F2EBDF;padding:9px 15px;border-radius:8px;transition:all .18s;" style-hover="background:#A8392D;border-color:#A8392D;color:#fff;transform:translateY(-3px);">TypeScript</span>
+            <span style="font-family:'Space Mono',monospace;font-size:13px;background:#222;border:1.5px solid #3a3a3a;color:#F2EBDF;padding:9px 15px;border-radius:8px;transition:all .18s;" style-hover="background:#A8392D;border-color:#A8392D;color:#fff;transform:translateY(-3px);">Go</span>
+            <span style="font-family:'Space Mono',monospace;font-size:13px;background:#222;border:1.5px solid #3a3a3a;color:#F2EBDF;padding:9px 15px;border-radius:8px;transition:all .18s;" style-hover="background:#A8392D;border-color:#A8392D;color:#fff;transform:translateY(-3px);">Java</span>
+            <span style="font-family:'Space Mono',monospace;font-size:13px;background:#222;border:1.5px solid #3a3a3a;color:#F2EBDF;padding:9px 15px;border-radius:8px;transition:all .18s;" style-hover="background:#A8392D;border-color:#A8392D;color:#fff;transform:translateY(-3px);">C++</span>
+            <span style="font-family:'Space Mono',monospace;font-size:13px;background:#222;border:1.5px solid #3a3a3a;color:#F2EBDF;padding:9px 15px;border-radius:8px;transition:all .18s;" style-hover="background:#A8392D;border-color:#A8392D;color:#fff;transform:translateY(-3px);">SQL</span>
+          </div>
+        </div>
+        <div data-reveal="" data-delay="100" style="opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease;">
+          <div style="font-family: 'Space Mono',monospace; font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: #f3ece0; margin-bottom: 14px">◇ frontend</div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <span style="font-family:'Space Mono',monospace;font-size:13px;background:#222;border:1.5px solid #3a3a3a;color:#F2EBDF;padding:9px 15px;border-radius:8px;transition:all .18s;" style-hover="background:#A8392D;border-color:#A8392D;color:#fff;transform:translateY(-3px);">React</span>
+            <span style="font-family:'Space Mono',monospace;font-size:13px;background:#222;border:1.5px solid #3a3a3a;color:#F2EBDF;padding:9px 15px;border-radius:8px;transition:all .18s;" style-hover="background:#A8392D;border-color:#A8392D;color:#fff;transform:translateY(-3px);">Next.js</span>
+            <span style="font-family:'Space Mono',monospace;font-size:13px;background:#222;border:1.5px solid #3a3a3a;color:#F2EBDF;padding:9px 15px;border-radius:8px;transition:all .18s;" style-hover="background:#A8392D;border-color:#A8392D;color:#fff;transform:translateY(-3px);">Tailwind</span>
+            <span style="font-family:'Space Mono',monospace;font-size:13px;background:#222;border:1.5px solid #3a3a3a;color:#F2EBDF;padding:9px 15px;border-radius:8px;transition:all .18s;" style-hover="background:#A8392D;border-color:#A8392D;color:#fff;transform:translateY(-3px);">SwiftUI</span>
+          </div>
+        </div>
+        <div data-reveal="" style="opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease;">
+          <div style="font-family: 'Space Mono',monospace; font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: #f3ece0; margin-bottom: 14px">⚙ backend</div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <span style="font-family:'Space Mono',monospace;font-size:13px;background:#222;border:1.5px solid #3a3a3a;color:#F2EBDF;padding:9px 15px;border-radius:8px;transition:all .18s;" style-hover="background:#A8392D;border-color:#A8392D;color:#fff;transform:translateY(-3px);">Node.js</span>
+            <span style="font-family:'Space Mono',monospace;font-size:13px;background:#222;border:1.5px solid #3a3a3a;color:#F2EBDF;padding:9px 15px;border-radius:8px;transition:all .18s;" style-hover="background:#A8392D;border-color:#A8392D;color:#fff;transform:translateY(-3px);">FastAPI</span>
+            <span style="font-family:'Space Mono',monospace;font-size:13px;background:#222;border:1.5px solid #3a3a3a;color:#F2EBDF;padding:9px 15px;border-radius:8px;transition:all .18s;" style-hover="background:#A8392D;border-color:#A8392D;color:#fff;transform:translateY(-3px);">PostgreSQL</span>
+            <span style="font-family:'Space Mono',monospace;font-size:13px;background:#222;border:1.5px solid #3a3a3a;color:#F2EBDF;padding:9px 15px;border-radius:8px;transition:all .18s;" style-hover="background:#A8392D;border-color:#A8392D;color:#fff;transform:translateY(-3px);">Firebase</span>
+          </div>
+        </div>
+        <div data-reveal="" data-delay="100" style="opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease;">
+          <div style="font-family: 'Space Mono',monospace; font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: #f3ece0; margin-bottom: 14px">✦ tools</div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <span style="font-family:'Space Mono',monospace;font-size:13px;background:#222;border:1.5px solid #3a3a3a;color:#F2EBDF;padding:9px 15px;border-radius:8px;transition:all .18s;" style-hover="background:#A8392D;border-color:#A8392D;color:#fff;transform:translateY(-3px);">Git</span>
+            <span style="font-family:'Space Mono',monospace;font-size:13px;background:#222;border:1.5px solid #3a3a3a;color:#F2EBDF;padding:9px 15px;border-radius:8px;transition:all .18s;" style-hover="background:#A8392D;border-color:#A8392D;color:#fff;transform:translateY(-3px);">Docker</span>
+            <span style="font-family:'Space Mono',monospace;font-size:13px;background:#222;border:1.5px solid #3a3a3a;color:#F2EBDF;padding:9px 15px;border-radius:8px;transition:all .18s;" style-hover="background:#A8392D;border-color:#A8392D;color:#fff;transform:translateY(-3px);">Figma</span>
+            <span style="font-family:'Space Mono',monospace;font-size:13px;background:#222;border:1.5px solid #3a3a3a;color:#F2EBDF;padding:9px 15px;border-radius:8px;transition:all .18s;" style-hover="background:#A8392D;border-color:#A8392D;color:#fff;transform:translateY(-3px);">Linux</span>
+            <span style="font-family:'Space Mono',monospace;font-size:13px;background:#222;border:1.5px solid #3a3a3a;color:#F2EBDF;padding:9px 15px;border-radius:8px;transition:all .18s;" style-hover="background:#A8392D;border-color:#A8392D;color:#fff;transform:translateY(-3px);">AWS</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ EXPERIENCE / PATH ============ -->
+  <section id="path" data-screen-label="Experience" style="position:relative;z-index:32;padding:124px 40px 130px;background:#F1E9DD;overflow:visible;">
+    <div style="max-width:880px;margin:0 auto;">
+      <div data-reveal="" style="margin-bottom:46px;opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease;">
+        <div style="font-family:'Space Mono',monospace;font-size:13px;letter-spacing:.24em;text-transform:uppercase;color:#A8392D;font-weight:700;">// the journey so far</div>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:90px;line-height:.98;letter-spacing:-.012em;margin:6px 0 0;">my <span style="font-style:italic;color:#6E2823;">path</span></h2>
+      </div>
+
+      <div style="position:relative;padding-left:36px;border-left:2.5px dashed #1a1a1a;">
+        <div data-reveal="" style="position:relative;margin-bottom:40px;opacity:0;transform:translateX(20px);transition:opacity .7s ease,transform .7s ease;">
+          <span style="position:absolute;left:-46px;top:4px;width:18px;height:18px;background:#A8392D;border:2.5px solid #1a1a1a;border-radius:50%;"></span>
+          <div style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.1em;color:#6E2823;font-weight:700;">SUMMER 2026</div>
+          <h3 style="font-family:'Archivo',sans-serif;font-weight:900;font-size:24px;margin:4px 0 2px;">Software Engineer Intern</h3>
+          <div style="font-family:'Caveat',cursive;font-size:22px;color:#3a382f;">@ a fintech startup</div>
+          <p style="font-size:15px;line-height:1.55;color:#3a382f;max-width:560px;margin:8px 0 0;">Shipped 3 features to production used by 50k+ users. Cut API latency 40% by rewriting a hot path in Go.</p>
+        </div>
+        <div data-reveal="" data-delay="80" style="position:relative;margin-bottom:40px;opacity:0;transform:translateX(20px);transition:opacity .7s ease,transform .7s ease;">
+          <span style="position:absolute;left:-46px;top:4px;width:18px;height:18px;background:#fff;border:2.5px solid #1a1a1a;border-radius:50%;"></span>
+          <div style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.1em;color:#6E2823;font-weight:700;">2025 — NOW</div>
+          <h3 style="font-family:'Archivo',sans-serif;font-weight:900;font-size:24px;margin:4px 0 2px;">Open Source Contributor</h3>
+          <div style="font-family:'Caveat',cursive;font-size:22px;color:#3a382f;">developer tools &amp; libraries</div>
+          <p style="font-size:15px;line-height:1.55;color:#3a382f;max-width:560px;margin:8px 0 0;">Merged PRs into projects I use daily. Maintainer of DevDuck (1.2k★). I learn the most by reading other people's code.</p>
+        </div>
+        <div data-reveal="" data-delay="160" style="position:relative;margin-bottom:40px;opacity:0;transform:translateX(20px);transition:opacity .7s ease,transform .7s ease;">
+          <span style="position:absolute;left:-46px;top:4px;width:18px;height:18px;background:#fff;border:2.5px solid #1a1a1a;border-radius:50%;"></span>
+          <div style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.1em;color:#6E2823;font-weight:700;">2026</div>
+          <h3 style="font-family:'Archivo',sans-serif;font-weight:900;font-size:24px;margin:4px 0 2px;">Undergrad Course Assistant — COS 226</h3>
+          <div style="font-family:'Caveat',cursive;font-size:22px;color:#3a382f;">helping classmates not fear recursion</div>
+          <p style="font-size:15px;line-height:1.55;color:#3a382f;max-width:560px;margin:8px 0 0;">Ran weekly labs and office hours. Turns out explaining pointers is the best way to actually understand them.</p>
+        </div>
+        <div data-reveal="" data-delay="240" style="position:relative;opacity:0;transform:translateX(20px);transition:opacity .7s ease,transform .7s ease;">
+          <span style="position:absolute;left:-46px;top:4px;width:18px;height:18px;background:#A8392D;border:2.5px solid #1a1a1a;border-radius:50%;"></span>
+          <div style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.1em;color:#6E2823;font-weight:700;">2025 — 2029</div>
+          <h3 style="font-family:'Archivo',sans-serif;font-weight:900;font-size:24px;margin:4px 0 2px;">Princeton University</h3>
+          <div style="font-family:'Caveat',cursive;font-size:22px;color:#3a382f;">A.B. Computer Science · Class of 2029</div>
+          <p style="font-size:15px;line-height:1.55;color:#3a382f;max-width:560px;margin:8px 0 0;">Diving into systems, algorithms, and HCI on the Princeton CS track. Plus way too many electives in design.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT (pink) ============ -->
+  <section id="contact" data-screen-label="Contact" style="padding:128px 40px 90px;background:#6E2823;color:#fff;position:relative;z-index:26;overflow:visible;">
+    <div style="position:absolute;top:40px;right:60px;font-size:60px;color:rgba(255,255,255,.5);animation:spinslow 16s linear infinite;">✦</div>
+    <div style="max-width:900px;margin:0 auto;text-align:center;position:relative;">
+      <div data-reveal="" style="opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease;">
+        <div style="font-family:'Space Mono',monospace;font-size:13px;letter-spacing:.24em;text-transform:uppercase;color:#fff;font-weight:700;opacity:.85;">// let's talk</div>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-style:italic;font-size:106px;line-height:.95;letter-spacing:-.01em;margin:10px 0 0;color:#fff;">let's build<br>something.</h2>
+        <p style="font-family:'Caveat',cursive;font-size:30px;margin:18px 0 34px;color:#fff;">internships, collabs, or just to say hi — my inbox is open ♡</p>
+      </div>
+      <div data-reveal="" data-delay="120" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;opacity:0;transition:opacity .7s ease;">
+        <a href="mailto:hello@lisaochieng.dev" style="font-family:'Space Mono',monospace;font-weight:700;font-size:14px;letter-spacing:.06em;background:#fff;color:#6E2823;text-decoration:none;padding:16px 26px;border-radius:999px;transition:transform .15s;" style-hover="transform:translateY(-4px) rotate(-1.5deg);">hello@lisaochieng.dev</a>
+        <a href="#" style="font-family:'Space Mono',monospace;font-weight:700;font-size:14px;letter-spacing:.06em;background:#1a1a1a;color:#fff;text-decoration:none;padding:16px 26px;border-radius:999px;transition:transform .15s;" style-hover="transform:translateY(-4px) rotate(1.5deg);">↓ download résumé</a>
+      </div>
+      <div data-reveal="" data-delay="220" style="display:flex;gap:24px;justify-content:center;margin-top:34px;opacity:0;transition:opacity .7s ease;">
+        <a href="#" style="font-family:'Space Mono',monospace;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:#fff;text-decoration:none;border-bottom:2px solid rgba(255,255,255,.6);padding-bottom:2px;">GitHub</a>
+        <a href="#" style="font-family:'Space Mono',monospace;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:#fff;text-decoration:none;border-bottom:2px solid rgba(255,255,255,.6);padding-bottom:2px;">LinkedIn</a>
+        <a href="#" style="font-family:'Space Mono',monospace;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:#fff;text-decoration:none;border-bottom:2px solid rgba(255,255,255,.6);padding-bottom:2px;">Twitter</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer style="position:relative;z-index:20;background:#161616;color:#F2EBDF;padding:46px 40px 30px;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;">
+    <span style="font-family:'Birds of Paradise  Personal use','Cormorant Garamond',serif;font-style:italic;font-weight:500;font-size:28px;color:#fff;">a wrap. ✦</span>
+    <span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.1em;color:#8a8678;">© 2026 LISA OCHIENG · MADE WITH TOO MUCH COFFEE</span>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  componentDidMount() {
+    const init = (tries) => {
+      const scroller = document.getElementById('lisa-root');
+      if (!scroller) { if (tries < 80) setTimeout(() => init(tries + 1), 40); return; }
+
+      const prog = document.getElementById('scroll-prog');
+
+      // Progress bar only — cheap, on scroll.
+      const scan = () => {
+        if (prog) {
+          const h = scroller.scrollHeight - scroller.clientHeight;
+          prog.style.width = (h > 0 ? Math.max(0, Math.min(100, scroller.scrollTop / h * 100)) : 0) + '%';
+        }
+      };
+
+      // Continuous rAF loop. We RE-QUERY the live DOM every frame: the DC runtime can
+      // REPLACE reveal/parallax nodes on a re-render (e.g. when image-slots finish their
+      // async load), so caching node references would leave us writing to stale detached
+      // nodes while the fresh in-document node keeps the template's opacity:0. Re-querying
+      // guarantees we always assert reveal state on whatever node is actually mounted.
+      // ---- pointer-driven hero depth parallax ----
+      let pmx = 0, pmy = 0, tpx = 0, tpy = 0;
+      const hero = document.getElementById('top');
+      if (hero) {
+        hero.addEventListener('mousemove', (e) => {
+          const r = hero.getBoundingClientRect();
+          tpx = ((e.clientX - r.left) / r.width - 0.5) * 2;
+          tpy = ((e.clientY - r.top) / r.height - 0.5) * 2;
+        }, { passive: true });
+        hero.addEventListener('mouseleave', () => { tpx = 0; tpy = 0; });
+      }
+
+      // ---- project-card 3D cursor tilt (delegated → survives re-renders) ----
+      const work = document.getElementById('work');
+      if (work) {
+        work.addEventListener('mousemove', (e) => {
+          const card = e.target.closest && e.target.closest('article');
+          if (!card) return;
+          card.__hover = true;
+          const r = card.getBoundingClientRect();
+          const px = (e.clientX - r.left) / r.width - 0.5;
+          const py = (e.clientY - r.top) / r.height - 0.5;
+          card.style.transition = 'transform .1s ease, box-shadow .3s ease';
+          card.style.transform = 'rotateY(' + (px * 7).toFixed(2) + 'deg) rotateX(' + (-py * 7).toFixed(2) + 'deg) translateY(-8px) scale(1.025)';
+          card.style.boxShadow = '0 26px 40px rgba(60,40,20,.30)';
+          card.style.zIndex = '6';
+        }, { passive: true });
+        work.addEventListener('mouseout', (e) => {
+          const card = e.target.closest && e.target.closest('article');
+          if (!card) return;
+          if (e.relatedTarget && card.contains(e.relatedTarget)) return;
+          card.__hover = false;
+          card.style.transition = 'transform .55s cubic-bezier(.2,.7,.2,1), box-shadow .35s ease';
+          card.style.transform = card.getAttribute('data-rest') || 'none';
+          card.style.boxShadow = '0 8px 16px rgba(60,40,20,.16)';
+          card.style.zIndex = '';
+        });
+      }
+
+      const frame = () => {
+        const vh = scroller.clientHeight;
+
+        // scroll reveal — opacity always asserted; transform reasserted unless the card is being tilted
+        const revs = scroller.querySelectorAll('[data-reveal]');
+        for (let i = 0; i < revs.length; i++) {
+          const el = revs[i];
+          const r = el.getBoundingClientRect();
+          if (r.top < vh * 0.9 && r.bottom > -40) {
+            if (!el.__shown) {
+              el.__shown = true;
+              el.style.transitionDelay = (parseInt(el.getAttribute('data-delay') || '0', 10)) + 'ms';
+            }
+            if (el.style.opacity !== '1') el.style.opacity = '1';
+            if (!el.__hover) {
+              const rest = el.getAttribute('data-rest') || 'none';
+              if (el.style.transform !== rest) el.style.transform = rest;
+            }
+          }
+        }
+
+        // scroll parallax (gentle vertical drift)
+        const pxs = scroller.querySelectorAll('[data-parallax]');
+        for (let i = 0; i < pxs.length; i++) {
+          const el = pxs[i];
+          if (el.__cur === undefined) el.__cur = 0;
+          const r = el.getBoundingClientRect();
+          const sp = parseFloat(el.getAttribute('data-parallax')) || 0.1;
+          const target = -(r.top + r.height / 2 - vh / 2) * sp;
+          el.__cur += (target - el.__cur) * 0.085;
+          el.style.transform = 'translate3d(0,' + el.__cur.toFixed(2) + 'px,0)';
+        }
+
+        // pointer parallax — hero layers drift toward the cursor (eased)
+        pmx += (tpx - pmx) * 0.06;
+        pmy += (tpy - pmy) * 0.06;
+        const mEls = scroller.querySelectorAll('[data-mouse]');
+        for (let i = 0; i < mEls.length; i++) {
+          const el = mEls[i];
+          const depth = parseFloat(el.getAttribute('data-mouse')) || 10;
+          const base = el.getAttribute('data-base') || '';
+          el.style.transform = base + ' translate3d(' + (pmx * depth).toFixed(2) + 'px,' + (pmy * depth).toFixed(2) + 'px,0)';
+        }
+
+        requestAnimationFrame(frame);
+      };
+
+      scroller.addEventListener('scroll', scan, { passive: true });
+      window.addEventListener('resize', scan);
+      scan();
+      requestAnimationFrame(frame);
+    };
+    init(0);
+  }
+}
+</script>
+</body>
+</html>

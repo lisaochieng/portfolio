@@ -1,0 +1,46 @@
+/* KT One — Color System
+   "Science in vein." Strictly monochromatic grayscale (Tailwind zinc) on a
+   custom deepest off-black canvas. A single violet accent appears in product
+   assets and is used extremely sparingly. */
+
+:root {
+  /* ── Canvas ─────────────────────────────────────────── */
+  --kt-black: #09090b;          /* deepest off-black — the infinite canvas */
+
+  /* ── Zinc scale (base palette) ──────────────────────── */
+  --zinc-50:  #fafafa;
+  --zinc-100: #f4f4f5;
+  --zinc-200: #e4e4e7;
+  --zinc-300: #d4d4d8;
+  --zinc-400: #a1a1aa;
+  --zinc-500: #71717a;
+  --zinc-600: #52525b;
+  --zinc-700: #3f3f46;
+  --zinc-800: #27272a;
+  --zinc-900: #18181b;
+  --zinc-950: #09090b;
+
+  /* ── Accent (use sparingly — links to docs, focus, rare emphasis) ── */
+  --kt-violet: #aa3bff;
+
+  /* ── Semantic aliases ───────────────────────────────── */
+  --bg-app:        var(--kt-black);     /* page canvas */
+  --bg-subtle:     #111114;             /* faint raised panel (zinc-900/~30%) */
+  --bg-inverse:    var(--zinc-50);      /* hover / inverted surfaces */
+
+  --text-primary:  var(--zinc-50);      /* headings, focus, critical emphasis */
+  --text-body:     var(--zinc-400);     /* long-form paragraphs */
+  --text-meta:     var(--zinc-500);     /* metadata, labels, datestamps */
+  --text-faint:    var(--zinc-600);     /* decorative icons, de-emphasis */
+  --text-inverse:  var(--zinc-950);     /* text on inverted surfaces */
+
+  --border:        var(--zinc-800);     /* the skeletal 1px framework */
+  --border-strong: var(--zinc-700);     /* button / interactive outlines */
+
+  --accent:        var(--kt-violet);
+
+  --selection-bg:  var(--zinc-800);
+  --selection-fg:  var(--zinc-50);
+}
+
+::selection { background: var(--selection-bg); color: var(--selection-fg); }

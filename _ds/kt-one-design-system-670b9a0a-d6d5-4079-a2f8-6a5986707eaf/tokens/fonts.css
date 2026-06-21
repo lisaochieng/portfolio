@@ -1,0 +1,7 @@
+/* KT One — Webfonts
+   The KT One landing page uses system sans + mono. For a portable, consistent
+   specimen we substitute the IBM Plex family (technical/scientific heritage,
+   open-licensed) which closely matches the intended "living whitepaper" voice.
+   ── SUBSTITUTION FLAGGED: swap these for licensed brand fonts if KT One adopts one. */
+
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');

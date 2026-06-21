@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Caveat+Brush&family=Permanent+Marker&family=Archivo:wght@600;700;800;900&family=Hanken+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;}
+  body{margin:0;}
+  @keyframes floaty{0%,100%{transform:translateY(0) rotate(var(--r,0deg));}50%{transform:translateY(-10px) rotate(var(--r,0deg));}}
+  @keyframes wiggle{0%,100%{transform:rotate(-4deg);}50%{transform:rotate(4deg);}}
+  @keyframes spinslow{from{transform:rotate(0);}to{transform:rotate(360deg);}}
+  @keyframes dash{to{stroke-dashoffset:0;}}
+  @keyframes pop{0%{transform:scale(.8);opacity:0;}100%{transform:scale(1);opacity:1;}}
+</style>
+</helmet>
+<x-import component-from-global-scope="image-slot" from="./image-slot.js" hint-size="0,0"></x-import>
+
+<div style="min-height:100vh;background:#a9a69d;background-image:radial-gradient(rgba(0,0,0,.06) 1px,transparent 1px);background-size:22px 22px;font-family:'Hanken Grotesk',sans-serif;padding:48px 40px 100px;">
+
+  <!-- Page header -->
+  <div style="max-width:1120px;margin:0 auto 44px;display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;">
+    <div>
+      <div style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:#2c2a25;">Lisa Ochieng // SWE Portfolio</div>
+      <div style="font-family:'Archivo',sans-serif;font-weight:900;font-size:34px;color:#fff;letter-spacing:-.02em;margin-top:6px;">Three hero directions</div>
+    </div>
+    <div style="font-family:'Caveat',cursive;font-size:22px;color:#fff;transform:rotate(-3deg);max-width:320px;text-align:right;">pick a vibe — then I build the whole scrolling site around it ✶</div>
+  </div>
+
+  <!-- ============ OPTION 01 — MARKER BLOWOUT ============ -->
+  <div style="max-width:1120px;margin:0 auto 56px;">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
+      <span style="font-family:'Space Mono',monospace;font-weight:700;font-size:13px;letter-spacing:.2em;color:#fff;background:#1a1a1a;padding:6px 12px;">OPTION 01</span>
+      <span style="font-family:'Archivo',sans-serif;font-weight:800;font-size:18px;color:#fff;">Marker blowout</span>
+      <span style="font-family:'Caveat',cursive;font-size:20px;color:#ffe3f1;">— closest to your reference</span>
+    </div>
+
+    <div style="position:relative;background:#EAE2D0;border-radius:18px;overflow:hidden;height:640px;box-shadow:0 24px 60px rgba(0,0,0,.22);">
+      <!-- corner annotations -->
+      <div style="position:absolute;top:34px;left:42px;font-family:'Caveat',cursive;font-size:34px;color:#1a1a1a;transform:rotate(-4deg);">Hi. since you're new here.</div>
+      <div style="position:absolute;top:64px;right:48px;font-family:'Caveat',cursive;font-size:26px;color:#1a1a1a;transform:rotate(3deg);text-align:right;line-height:1.1;">let me be your<br>tour guide →</div>
+
+      <!-- this is -->
+      <div style="position:absolute;top:150px;left:50%;transform:translateX(-86px) rotate(-5deg);font-family:'Caveat',cursive;font-size:30px;color:#1a1a1a;z-index:4;">this is</div>
+
+      <!-- name lines -->
+      <div style="position:absolute;top:120px;left:0;right:0;text-align:center;font-family:'Caveat Brush',cursive;color:#FF4FA3;font-size:150px;line-height:.82;letter-spacing:.01em;z-index:1;text-shadow:3px 4px 0 rgba(255,79,163,.18);">LISA</div>
+      <div style="position:absolute;top:330px;left:0;right:0;text-align:center;font-family:'Caveat Brush',cursive;color:#FF4FA3;font-size:150px;line-height:.82;z-index:3;text-shadow:3px 4px 0 rgba(255,79,163,.18);">OCHIENG</div>
+
+      <!-- portrait -->
+      <image-slot id="hero1-portrait" style="position:absolute;top:175px;left:50%;transform:translateX(-50%);width:268px;height:392px;z-index:2;" shape="rounded" radius="134" placeholder="drop your cut-out photo"></image-slot>
+
+      <!-- footer labels -->
+      <div style="position:absolute;bottom:30px;left:44px;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#3a382f;">Computer Science / Software Engineer</div>
+      <div style="position:absolute;bottom:30px;right:44px;font-family:'Caveat',cursive;font-size:22px;color:#1a1a1a;">by Lisa Ochieng</div>
+
+      <!-- doodle sparkles -->
+      <div style="position:absolute;top:300px;left:90px;--r:-8deg;animation:floaty 4s ease-in-out infinite;">✦</div>
+      <div style="position:absolute;top:430px;right:120px;--r:10deg;animation:floaty 5s ease-in-out infinite;font-size:22px;color:#FF4FA3;">✦</div>
+    </div>
+  </div>
+
+  <!-- ============ OPTION 02 — EDITORIAL SPLIT ============ -->
+  <div style="max-width:1120px;margin:0 auto 56px;">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
+      <span style="font-family:'Space Mono',monospace;font-weight:700;font-size:13px;letter-spacing:.2em;color:#fff;background:#1a1a1a;padding:6px 12px;">OPTION 02</span>
+      <span style="font-family:'Archivo',sans-serif;font-weight:800;font-size:18px;color:#fff;">Editorial split</span>
+      <span style="font-family:'Caveat',cursive;font-size:20px;color:#ffe3f1;">— more structured & confident</span>
+    </div>
+
+    <div style="position:relative;background:#EAE2D0;border-radius:18px;overflow:hidden;height:640px;box-shadow:0 24px 60px rgba(0,0,0,.22);display:grid;grid-template-columns:1.15fr .85fr;">
+      <!-- left -->
+      <div style="padding:64px 56px;display:flex;flex-direction:column;justify-content:center;position:relative;">
+        <div style="font-family:'Space Mono',monospace;font-size:13px;letter-spacing:.24em;text-transform:uppercase;color:#FF4FA3;font-weight:700;">SWE · Portfolio 2026</div>
+        <div style="font-family:'Archivo',sans-serif;font-weight:900;font-size:90px;line-height:.92;letter-spacing:-.03em;color:#1a1a1a;margin:18px 0 4px;">LISA<br>OCHIENG</div>
+        <div style="font-family:'Caveat',cursive;font-size:32px;line-height:1.05;color:#FF4FA3;transform:rotate(-2deg);margin:6px 0 26px;">i build things that actually ship.</div>
+        <p style="font-family:'Hanken Grotesk',sans-serif;font-size:17px;line-height:1.6;color:#3a382f;max-width:420px;margin:0 0 30px;">Computer science student & software engineer. I like clean code, tiny details, and shipping products people actually want to use.</p>
+        <div style="display:flex;gap:14px;flex-wrap:wrap;">
+          <span style="font-family:'Space Mono',monospace;font-weight:700;font-size:13px;letter-spacing:.12em;background:#FF4FA3;color:#fff;padding:13px 22px;border-radius:999px;">[ VIEW WORK ]</span>
+          <span style="font-family:'Space Mono',monospace;font-weight:700;font-size:13px;letter-spacing:.12em;background:transparent;color:#1a1a1a;padding:13px 22px;border-radius:999px;border:1.5px solid #1a1a1a;">[ RÉSUMÉ ]</span>
+        </div>
+      </div>
+      <!-- right photo -->
+      <div style="position:relative;background:#FF4FA3;display:flex;align-items:center;justify-content:center;">
+        <div style="position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.18) 1px,transparent 1px);background-size:18px 18px;"></div>
+        <image-slot id="hero2-portrait" style="position:relative;width:300px;height:420px;z-index:2;box-shadow:0 18px 40px rgba(0,0,0,.25);" shape="rounded" radius="10" placeholder="drop your photo"></image-slot>
+        <div style="position:absolute;bottom:34px;right:30px;font-family:'Caveat',cursive;font-size:24px;color:#fff;transform:rotate(4deg);z-index:3;">hi, that's me →</div>
+        <div style="position:absolute;top:30px;left:30px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.2em;color:#fff;z-index:3;">EST. NAIROBI</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ OPTION 03 — STICKER COLLAGE ============ -->
+  <div style="max-width:1120px;margin:0 auto;">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
+      <span style="font-family:'Space Mono',monospace;font-weight:700;font-size:13px;letter-spacing:.2em;color:#fff;background:#1a1a1a;padding:6px 12px;">OPTION 03</span>
+      <span style="font-family:'Archivo',sans-serif;font-weight:800;font-size:18px;color:#fff;">Sticker collage</span>
+      <span style="font-family:'Caveat',cursive;font-size:20px;color:#ffe3f1;">— maximal, scrapbook, the most fun</span>
+    </div>
+
+    <div style="position:relative;background:#EAE2D0;border-radius:18px;overflow:hidden;height:640px;box-shadow:0 24px 60px rgba(0,0,0,.22);background-image:linear-gradient(rgba(0,0,0,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,.04) 1px,transparent 1px);background-size:30px 30px;">
+      <!-- washi tape -->
+      <div style="position:absolute;top:50px;left:120px;width:150px;height:34px;background:repeating-linear-gradient(45deg,#FF4FA3,#FF4FA3 8px,#ff7ab8 8px,#ff7ab8 16px);opacity:.85;transform:rotate(-6deg);"></div>
+
+      <!-- sticker name -->
+      <div style="position:absolute;top:80px;left:80px;font-family:'Permanent Marker',cursive;font-size:96px;color:#1a1a1a;line-height:.9;transform:rotate(-4deg);">Lisa</div>
+      <div style="position:absolute;top:175px;left:150px;font-family:'Permanent Marker',cursive;font-size:96px;color:#FF4FA3;line-height:.9;transform:rotate(2deg);">Ochieng</div>
+
+      <!-- polaroid -->
+      <div style="position:absolute;top:70px;right:90px;background:#fff;padding:14px 14px 46px;box-shadow:0 14px 34px rgba(0,0,0,.22);transform:rotate(6deg);z-index:3;">
+        <image-slot id="hero3-portrait" style="width:230px;height:280px;display:block;" shape="rect" placeholder="drop your photo"></image-slot>
+        <div style="font-family:'Caveat',cursive;font-size:22px;color:#1a1a1a;text-align:center;margin-top:8px;">me, probably debugging :)</div>
+      </div>
+
+      <!-- badges -->
+      <div style="position:absolute;top:330px;left:90px;font-family:'Space Mono',monospace;font-weight:700;font-size:12px;letter-spacing:.1em;background:#1a1a1a;color:#fff;padding:9px 16px;border-radius:999px;transform:rotate(-3deg);">OPEN TO SWE INTERNSHIPS</div>
+      <div style="position:absolute;top:330px;left:330px;font-family:'Space Mono',monospace;font-weight:700;font-size:12px;letter-spacing:.1em;background:#FFD9EC;color:#FF1f86;padding:9px 16px;border-radius:999px;border:1.5px dashed #FF4FA3;transform:rotate(2deg);">CS '26 · FULL-STACK</div>
+
+      <!-- handwritten tagline -->
+      <div style="position:absolute;bottom:120px;left:90px;font-family:'Caveat',cursive;font-size:40px;color:#1a1a1a;transform:rotate(-2deg);max-width:520px;line-height:1.05;">code, coffee &amp; way too many side projects.</div>
+
+      <!-- chips row -->
+      <div style="position:absolute;bottom:42px;left:90px;display:flex;gap:10px;flex-wrap:wrap;">
+        <span style="font-family:'Space Mono',monospace;font-size:11px;background:#fff;border:1.5px solid #1a1a1a;padding:7px 13px;border-radius:6px;transform:rotate(-2deg);">Python</span>
+        <span style="font-family:'Space Mono',monospace;font-size:11px;background:#fff;border:1.5px solid #1a1a1a;padding:7px 13px;border-radius:6px;transform:rotate(1deg);">React</span>
+        <span style="font-family:'Space Mono',monospace;font-size:11px;background:#fff;border:1.5px solid #1a1a1a;padding:7px 13px;border-radius:6px;transform:rotate(-1deg);">TypeScript</span>
+        <span style="font-family:'Space Mono',monospace;font-size:11px;background:#fff;border:1.5px solid #1a1a1a;padding:7px 13px;border-radius:6px;transform:rotate(2deg);">Go</span>
+      </div>
+
+      <!-- doodle star -->
+      <div style="position:absolute;bottom:150px;right:140px;font-size:40px;color:#FF4FA3;animation:wiggle 3s ease-in-out infinite;">✦</div>
+      <div style="position:absolute;top:430px;right:200px;font-size:24px;animation:floaty 4s ease-in-out infinite;">✿</div>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>
