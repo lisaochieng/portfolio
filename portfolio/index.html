@@ -129,7 +129,7 @@
 
                 <div class="hero__badges">
                   <span class="badge badge--dashed">Princeton CS '29</span>
-                  <span class="badge badge--solid">open to summer 2027 opportunities</span>
+                  <span class="badge badge--solid">Open To Summer 2027 Opportunities</span>
                 </div>
 
                 <div class="hero__actions">
@@ -166,9 +166,11 @@
 
       <!-- Marquee band -->
       <div class="marquee-band" aria-hidden="true">
-        <div class="marquee-band__track">
-          <span class="marquee-band__text">LOCK IN ✦ E-VOTE ✦ AGENTIC RAG ✦ PRINCETON CS '29 ✦ FULL-STACK ✦ SHIP FAST ✦&nbsp;</span>
-          <span class="marquee-band__text" aria-hidden="true">LOCK IN ✦ E-VOTE ✦ AGENTIC RAG ✦ PRINCETON CS '29 ✦ FULL-STACK ✦ SHIP FAST ✦&nbsp;</span>
+        <div class="marquee-band__inner">
+          <div class="marquee-band__track">
+            <span class="marquee-band__text">COLLABORATION ✦ PROBLEM SOLVING ✦ ATTENTION TO DETAIL ✦ TEAM LEADERSHIP ✦ COMMUNICATION ✦ ADAPTABILITY ✦ SHIP FAST ✦ PRINCETON CS '29 ✦</span>
+            <span class="marquee-band__text" aria-hidden="true">COLLABORATION ✦ PROBLEM SOLVING ✦ ATTENTION TO DETAIL ✦ TEAM LEADERSHIP ✦ COMMUNICATION ✦ ADAPTABILITY ✦ SHIP FAST ✦ PRINCETON CS '29 ✦</span>
+          </div>
         </div>
       </div>
 
@@ -176,7 +178,7 @@
       <section id="about" class="about" aria-labelledby="about-heading">
         <div class="container">
           <div class="about__grid">
-            <div class="about__photos" data-reveal>
+            <div class="about__photos" data-reveal data-axis="y-up">
               <figure class="about__photo-stack about__photo-stack--one">
                 <div class="photo-scrap__frame">
                   <div class="photo-scrap__paper photo-scrap__paper--torn-b" aria-hidden="true"></div>
@@ -195,11 +197,11 @@
               <span class="about__sparkle" aria-hidden="true">✦</span>
             </div>
 
-            <div data-reveal data-delay="120" class="about__copy">
+            <div data-reveal data-delay="120" data-axis="y-up" class="about__copy">
               <p class="section-label text-fade-in" style="--d:0">// about me</p>
               <h2 id="about-heading" class="about__heading text-fade-in" style="--d:1">hi, I'm Lisa <span class="about__emoji" aria-hidden="true">^_^</span></h2>
-              <p class="about__text text-fade-in" style="--d:2">I'm a <strong>computer science</strong> student at <strong>Princeton University</strong> (Class of 2029) who loves turning messy ideas into software people actually use. I care about clean code, thoughtful UX, and shipping, not just shipping perfectly.</p>
-              <p class="about__text text-fade-in" style="--d:3">From study tools and blockchain voting to local agentic RAG systems, I build across the stack. When I'm not coding, I'm mentoring teammates, exploring Princeton's CS community, or redesigning my dev setup for the hundredth time.</p>
+              <p class="about__text text-fade-in" style="--d:2">I'm a <strong>computer science</strong> student at <strong>Princeton University</strong> (Class of 2029) who loves turning messy ideas into software people actually use. I care about clean code, thoughtful UX, and shipping — not just shipping perfectly.</p>
+              <p class="about__text text-fade-in" style="--d:3">From hackathon full-stack builds and blockchain voting to robotics firmware and campus web work, I build across the stack. When I'm not coding, I'm mentoring teammates on Princeton Robotics, documenting events, or redesigning my dev setup for the hundredth time.</p>
               <div class="about__stats text-fade-in" style="--d:4">
                 <div class="stat">
                   <div class="stat__number">1+</div>
@@ -222,7 +224,7 @@
       <!-- ========== PROJECTS ========== -->
       <section id="projects" class="projects" aria-labelledby="projects-heading">
         <div class="container container--projects">
-          <header class="projects__header" data-reveal>
+          <header class="projects__header" data-reveal data-axis="y-up">
             <p class="section-label text-fade-in" style="--d:0">// selected work</p>
             <h2 id="projects-heading" class="section-title text-fade-in" style="--d:1">things I've <span class="accent-italic">built</span></h2>
             <p class="section-subtitle text-fade-in" style="--d:2">Full-stack work across productivity, blockchain, and AI</p>
@@ -308,7 +310,7 @@
       <!-- ========== SKILLS ========== -->
       <section id="skills" class="skills" aria-labelledby="skills-heading">
         <div class="container container--wide">
-          <header data-reveal class="skills__header">
+          <header data-reveal data-axis="y-up" class="skills__header">
             <p class="section-label section-label--light text-fade-in" style="--d:0">// the toolbox</p>
             <h2 id="skills-heading" class="section-title text-fade-in" style="--d:1">skills &amp; <span class="accent-italic">stack</span></h2>
           </header>
@@ -318,10 +320,10 @@
               <h3 class="skill-group__label">⌘ languages</h3>
               <div class="skill-chips">
                 <span class="skill-chip">Python</span>
-                <span class="skill-chip">TypeScript</span>
-                <span class="skill-chip">JavaScript</span>
                 <span class="skill-chip">Java</span>
+                <span class="skill-chip">JavaScript</span>
                 <span class="skill-chip">C++</span>
+                <span class="skill-chip">TypeScript</span>
                 <span class="skill-chip">SQL</span>
                 <span class="skill-chip">Solidity</span>
               </div>
@@ -330,34 +332,33 @@
               <h3 class="skill-group__label">◇ frontend</h3>
               <div class="skill-chips">
                 <span class="skill-chip">React</span>
+                <span class="skill-chip">HTML/CSS</span>
                 <span class="skill-chip">Vite</span>
                 <span class="skill-chip">Next.js</span>
-                <span class="skill-chip">HTML/CSS</span>
-                <span class="skill-chip">Tailwind</span>
               </div>
             </div>
             <div data-reveal>
-              <h3 class="skill-group__label">⚙ backend</h3>
+              <h3 class="skill-group__label">⚙ backend &amp; data</h3>
               <div class="skill-chips">
                 <span class="skill-chip">Node.js</span>
                 <span class="skill-chip">FastAPI</span>
-                <span class="skill-chip">PostgreSQL</span>
                 <span class="skill-chip">MongoDB</span>
+                <span class="skill-chip">PostgreSQL</span>
                 <span class="skill-chip">Supabase</span>
-                <span class="skill-chip">Ethers.js</span>
+                <span class="skill-chip">Web3.js</span>
+                <span class="skill-chip">ICP</span>
               </div>
             </div>
             <div data-reveal data-delay="100">
-              <h3 class="skill-group__label">✦ AI &amp; tools</h3>
+              <h3 class="skill-group__label">✦ embedded &amp; tools</h3>
               <div class="skill-chips">
-                <span class="skill-chip">LangGraph</span>
-                <span class="skill-chip">Qdrant</span>
-                <span class="skill-chip">Gradio</span>
-                <span class="skill-chip">Hardhat</span>
+                <span class="skill-chip">Arduino IDE</span>
                 <span class="skill-chip">Git</span>
+                <span class="skill-chip">GitHub</span>
+                <span class="skill-chip">Hardhat</span>
+                <span class="skill-chip">LangGraph</span>
                 <span class="skill-chip">Docker</span>
                 <span class="skill-chip">Figma</span>
-                <span class="skill-chip">Linux</span>
               </div>
             </div>
           </div>
@@ -367,7 +368,7 @@
       <!-- ========== EXPERIENCE ========== -->
       <section id="experience" class="experience" aria-labelledby="experience-heading">
         <div class="container container--narrow">
-          <header class="experience__header" data-reveal>
+          <header class="experience__header" data-reveal data-axis="y-up">
             <p class="section-label text-fade-in" style="--d:0">// the journey so far</p>
             <h2 id="experience-heading" class="section-title text-fade-in" style="--d:1">my <span class="accent-italic">path</span></h2>
           </header>
@@ -375,34 +376,42 @@
           <div class="timeline">
             <article class="timeline__item" data-reveal data-axis="x">
               <span class="timeline__dot timeline__dot--accent" aria-hidden="true"></span>
-              <p class="timeline__date">SUMMER 2025</p>
-              <h3 class="timeline__title">Software Engineering Intern</h3>
-              <p class="timeline__org">@ Equity Bank</p>
-              <p class="timeline__desc text-fade-in" style="--d:1">Built internal tools and customer-facing features for digital banking. Improved API response times and collaborated with cross-functional teams on secure fintech workflows.</p>
+              <p class="timeline__date">NOV 2025 — PRESENT</p>
+              <h3 class="timeline__title">Student Office Assistant</h3>
+              <p class="timeline__org">@ Africa World Institute, Princeton University</p>
+              <p class="timeline__desc text-fade-in" style="--d:1">Update the institute website with upcoming events, build online HTML forms, and apply CSS styling for visual consistency. Manage social media presence and document events through photography while handling front desk operations.</p>
             </article>
 
             <article class="timeline__item" data-reveal data-delay="80" data-axis="x">
               <span class="timeline__dot" aria-hidden="true"></span>
-              <p class="timeline__date">2025 — NOW</p>
-              <h3 class="timeline__title">Princeton Activities</h3>
-              <p class="timeline__org">CS community &amp; campus tech</p>
-              <p class="timeline__desc text-fade-in" style="--d:1">Active in Princeton's computer science ecosystem through hackathons, peer collaboration, and campus-facing projects. Exploring systems, algorithms, and human-computer interaction.</p>
+              <p class="timeline__date">ONGOING</p>
+              <h3 class="timeline__title">Drone VTOL &amp; Tinker Subteams</h3>
+              <p class="timeline__org">@ Princeton University Robotics Club</p>
+              <p class="timeline__desc text-fade-in" style="--d:1">Develop real-time flight control firmware on Teensy Arduino in C++, processing PWM signals into yaw, thrust, and roll. Collaborate on hardware assembly, troubleshooting, and electrical systems for club projects.</p>
             </article>
 
             <article class="timeline__item" data-reveal data-delay="160" data-axis="x">
               <span class="timeline__dot" aria-hidden="true"></span>
-              <p class="timeline__date">2023 — PRESENT</p>
-              <h3 class="timeline__title">Leadership Experience</h3>
-              <p class="timeline__org">FIRST Global Robotics &amp; team lead roles</p>
-              <p class="timeline__desc">Led software subteams for international robotics competitions. Mentored junior developers, coordinated sprint planning, and represented Kenya on the global FIRST stage.</p>
+              <p class="timeline__date">FEB — AUG 2023</p>
+              <h3 class="timeline__title">Rotational Intern</h3>
+              <p class="timeline__org">@ Equity Bank Limited, Nairobi</p>
+              <p class="timeline__desc text-fade-in" style="--d:1">Processed 40+ account applications daily with data verification and compliance checks. Resolved 30+ daily customer inquiries on account management and mobile banking, marketing Equitel products to drive a 30% increase in net sales.</p>
             </article>
 
             <article class="timeline__item" data-reveal data-delay="240" data-axis="x">
+              <span class="timeline__dot" aria-hidden="true"></span>
+              <p class="timeline__date">MAY — DEC 2023</p>
+              <h3 class="timeline__title">Assistant Team Captain</h3>
+              <p class="timeline__org">@ FIRST Global Robotics Challenge</p>
+              <p class="timeline__desc text-fade-in" style="--d:1">Co-led a 10-person team programming a competitive robot in Java with Arduino sensor integration. Represented Kenya on the global stage, presenting system architecture and debugging hardware-software integration with international teams.</p>
+            </article>
+
+            <article class="timeline__item" data-reveal data-delay="320" data-axis="x">
               <span class="timeline__dot timeline__dot--accent" aria-hidden="true"></span>
               <p class="timeline__date">2025 — 2029</p>
               <h3 class="timeline__title">Princeton University</h3>
               <p class="timeline__org">A.B. Computer Science · Class of 2029</p>
-              <p class="timeline__desc">Pursuing a rigorous CS curriculum with focus on software engineering, AI, and systems. Balancing technical depth with design-minded electives.</p>
+              <p class="timeline__desc text-fade-in" style="--d:1">Pursuing a rigorous CS curriculum with focus on software engineering, AI, and systems. Built a medical emergency app at HackPrinceton and a blockchain voting platform placing 3rd at the NRF Hackathon in Nairobi.</p>
             </article>
           </div>
         </div>
@@ -412,7 +421,7 @@
       <section id="contact" class="contact" aria-labelledby="contact-heading">
         <span class="contact__sparkle" aria-hidden="true">✦</span>
         <div class="contact__inner container">
-          <header data-reveal class="contact__header">
+          <header data-reveal data-axis="y-up" class="contact__header">
             <p class="section-label section-label--light text-fade-in" style="--d:0">// let's talk</p>
             <h2 id="contact-heading" class="section-title text-fade-in" style="--d:1">let's build<br>something.</h2>
             <p class="contact__subtitle text-fade-in" style="--d:2">Open to internships, collaborations, and conversations about building useful software.</p>

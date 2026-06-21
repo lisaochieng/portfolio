@@ -159,9 +159,27 @@ a {
   to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes navShimmer {
-  0% { background-position: 0% 50%; }
-  100% { background-position: 200% 50%; }
+@keyframes scrollCueBob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+
+@keyframes scrollCueHover {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(5px); }
+}
+
+@keyframes revealPop {
+  from {
+    opacity: 0;
+    transform: translateY(1.25rem) scale(0.98);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
 }
 
 /* --- Layout shell -------------------------------------------------------- */
@@ -484,14 +502,14 @@ body.is-ready .hero__doodle--flower {
 .hero__grid {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(280px, 400px) 1.05fr;
+  grid-template-columns: 1.05fr minmax(280px, 400px);
   gap: clamp(2rem, 5vw, 3.5rem);
   align-items: center;
 }
 
 .hero__identity {
   position: relative;
-  order: 2;
+  order: 1;
 }
 
 .hero__sketch {
@@ -701,7 +719,7 @@ body.is-ready .hero__doodle--flower {
 /* Hero portrait column */
 .hero__aside {
   position: relative;
-  order: 1;
+  order: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -751,11 +769,11 @@ body.is-ready .hero__doodle--flower {
   border-radius: inherit;
   background: linear-gradient(
     165deg,
-    rgba(255, 248, 238, 0.32) 0%,
-    rgba(242, 235, 223, 0.1) 42%,
-    rgba(231, 219, 195, 0.22) 100%
+    rgba(255, 248, 238, 0.12) 0%,
+    rgba(242, 235, 223, 0.04) 42%,
+    rgba(231, 219, 195, 0.08) 100%
   );
-  box-shadow: inset 0 0 48px rgba(255, 250, 242, 0.4);
+  box-shadow: inset 0 0 24px rgba(255, 250, 242, 0.15);
   pointer-events: none;
   z-index: 1;
 }
@@ -765,9 +783,9 @@ body.is-ready .hero__doodle--flower {
   height: 100%;
   display: block;
   object-fit: cover;
-  object-position: center 8%;
+  object-position: center 6%;
   image-orientation: from-image;
-  filter: brightness(1.08) saturate(0.9) contrast(0.95) sepia(0.07);
+  filter: brightness(1.02) saturate(0.97) contrast(1);
 }
 
 .hero__callout {
@@ -924,34 +942,59 @@ body.is-ready .hero__doodle--flower {
   transform: translateX(-50%);
   text-align: center;
   z-index: 7;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  cursor: default;
+  transition: opacity var(--transition-base);
+}
+
+.hero__scroll-cue:hover .hero__scroll-text,
+.hero__scroll-cue:hover .hero__scroll-arrow {
+  animation: scrollCueHover 1.2s ease-in-out infinite;
 }
 
 .hero__scroll-text {
   font-family: var(--font-hand);
   font-size: 1.1875rem;
   color: var(--color-ink-soft);
+  margin: 0;
+  line-height: 1;
+  animation: scrollCueBob 1.6s ease-in-out infinite;
 }
 
 .hero__scroll-arrow {
   font-size: 1.25rem;
   color: var(--color-ink-soft);
-  animation: bobarrow 1.6s ease-in-out infinite;
+  line-height: 1;
+  margin-top: -2px;
+  animation: scrollCueBob 1.6s ease-in-out infinite;
 }
 
 /* --- Marquee ------------------------------------------------------------- */
 .marquee-band {
   overflow: hidden;
   background: var(--color-ink);
-  padding: 0.8125rem 0;
+  padding: 0.875rem 0;
   width: 100%;
   position: relative;
   z-index: 62;
+  transform: skewY(-2.5deg);
+  margin-block: -0.35rem;
+}
+
+.marquee-band__inner {
+  overflow: hidden;
+  width: 100%;
 }
 
 .marquee-band__track {
-  display: flex;
+  display: inline-flex;
+  flex-wrap: nowrap;
   width: max-content;
-  animation: marquee 38s linear infinite;
+  animation: marquee 32s linear infinite;
+  will-change: transform;
   font-family: var(--font-mono);
   font-weight: 700;
   font-size: 0.875rem;
@@ -961,8 +1004,9 @@ body.is-ready .hero__doodle--flower {
 }
 
 .marquee-band__text {
-  flex-shrink: 0;
+  flex: 0 0 auto;
   white-space: nowrap;
+  padding-right: 0;
 }
 
 /* --- About --------------------------------------------------------------- */
@@ -1389,7 +1433,20 @@ body.is-ready .hero__doodle--flower {
   color: var(--color-dark-text);
   padding: 0.5625rem 0.9375rem;
   border-radius: 8px;
-  transition: background var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 0.5s var(--ease-smooth),
+    transform 0.5s var(--ease-smooth),
+    background var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.is-visible .skill-chip.is-staggered,
+[data-reveal].is-visible .skill-chip {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .skill-chip:hover {
@@ -1593,34 +1650,36 @@ body.is-ready .hero__doodle--flower {
 /* --- Staggered text reveal on scroll ------------------------------------- */
 .text-fade-in {
   opacity: 0;
-  transform: translateY(1.1rem);
-  filter: blur(4px);
+  transform: translateY(1.35rem) scale(0.985);
+  filter: blur(5px);
   transition:
-    opacity 0.8s var(--ease-smooth),
-    transform 0.8s var(--ease-smooth),
-    filter 0.8s var(--ease-smooth);
-  transition-delay: calc(var(--d, 0) * 90ms + 80ms);
+    opacity 0.9s var(--ease-smooth),
+    transform 0.9s var(--ease-smooth),
+    filter 0.9s var(--ease-smooth);
+  transition-delay: calc(var(--d, 0) * 100ms + 60ms);
 }
 
 .is-visible .text-fade-in,
 .text-fade-in.is-visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
   filter: blur(0);
 }
 
 [data-reveal].is-visible .text-fade-in,
 .timeline__item.is-visible .text-fade-in {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
   filter: blur(0);
 }
 
 /* --- Scroll reveal utility ----------------------------------------------- */
 [data-reveal]:not(.project-card) {
   opacity: 0;
-  transform: translateY(18px);
-  transition: opacity 0.65s var(--ease-smooth), transform 0.65s var(--ease-smooth);
+  transform: translateY(22px);
+  transition:
+    opacity 0.75s var(--ease-smooth),
+    transform 0.75s var(--ease-smooth);
 }
 
 [data-reveal]:not(.project-card).is-visible {
@@ -1629,11 +1688,19 @@ body.is-ready .hero__doodle--flower {
 }
 
 [data-reveal][data-axis="x"]:not(.project-card) {
-  transform: translateX(14px);
+  transform: translateX(18px);
 }
 
 [data-reveal][data-axis="x"]:not(.project-card).is-visible {
   transform: translateX(0);
+}
+
+[data-reveal][data-axis="y-up"]:not(.project-card) {
+  transform: translateY(28px) scale(0.98);
+}
+
+[data-reveal][data-axis="y-up"]:not(.project-card).is-visible {
+  transform: translateY(0) scale(1);
 }
 
 /* --- SVG filters (hidden) ------------------------------------------------ */
@@ -1652,20 +1719,40 @@ body.is-ready .hero__doodle--flower {
     grid-template-columns: 1fr;
   }
 
-  .hero__identity,
+  .hero__identity {
+    order: 2;
+  }
+
   .hero__aside {
-    order: unset;
+    order: 1;
   }
 
   .hero__photo-group {
-    max-width: min(320px, 88vw);
-    padding-bottom: 3.25rem;
+    max-width: min(300px, 78vw);
+    padding-bottom: 3rem;
+    margin-inline: auto;
+  }
+
+  .hero__name-line--accent {
+    margin-left: clamp(0.5rem, 3vw, 1.5rem);
+  }
+
+  .hero__tagline {
+    max-width: none;
   }
 
   .paper-clip--left { left: 24px; }
   .paper-clip--right { right: 24px; }
 
   .binder-rings { gap: 1rem; }
+
+  .about__grid {
+    gap: 2.5rem;
+  }
+
+  .about__copy {
+    max-width: none;
+  }
 }
 
 @media (max-width: 640px) {
@@ -1675,6 +1762,15 @@ body.is-ready .hero__doodle--flower {
 }
 
 @media (max-width: 768px) {
+  .hero {
+    min-height: auto;
+    padding-bottom: 5rem;
+  }
+
+  .scrapbook-page {
+    padding: clamp(1.5rem, 4vw, 2rem) clamp(1.25rem, 4vw, 1.75rem);
+  }
+
   .site-nav__toggle {
     display: flex;
   }
@@ -1727,6 +1823,31 @@ body.is-ready .hero__doodle--flower {
   .marquee-band {
     width: 100%;
     margin-left: 0;
+    transform: skewY(-2deg);
+    padding: 0.75rem 0;
+  }
+
+  .marquee-band__track {
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+  }
+
+  .project-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .skill-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .timeline {
+    padding-left: 1.75rem;
+  }
+
+  .timeline__dot {
+    left: -2.5rem;
+    width: 14px;
+    height: 14px;
   }
 }
 

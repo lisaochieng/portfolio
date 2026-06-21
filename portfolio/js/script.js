@@ -93,6 +93,15 @@
     return true;
   }
 
+  /* --- Stagger child chips inside revealed groups ------------------------ */
+  function staggerSkillChips(parent) {
+    const chips = parent.querySelectorAll('.skill-chip');
+    chips.forEach(function (chip, i) {
+      chip.style.transitionDelay = (i * 45) + 'ms';
+      chip.classList.add('is-staggered');
+    });
+  }
+
   /* --- Scroll reveal (IntersectionObserver) ------------------------------ */
   function initRevealObserver() {
     const revealEls = scroller.querySelectorAll('[data-reveal]');
@@ -101,6 +110,7 @@
     if (prefersReducedMotion || !('IntersectionObserver' in window)) {
       revealEls.forEach(function (el) {
         el.classList.add('is-visible');
+        staggerSkillChips(el);
       });
       scroller.querySelectorAll('.text-fade-in').forEach(function (el) {
         el.classList.add('is-visible');
@@ -116,10 +126,11 @@
           const delay = parseInt(el.getAttribute('data-delay') || '0', 10);
           el.style.transitionDelay = delay + 'ms';
           el.classList.add('is-visible');
+          staggerSkillChips(el);
           observer.unobserve(el);
         });
       },
-      { root: scroller, threshold: 0.1, rootMargin: '0px 0px -4% 0px' }
+      { root: scroller, threshold: 0.08, rootMargin: '0px 0px -3% 0px' }
     );
 
     revealEls.forEach(function (el) {
@@ -135,7 +146,7 @@
           textObserver.unobserve(entry.target);
         });
       },
-      { root: scroller, threshold: 0.15, rootMargin: '0px 0px -5% 0px' }
+      { root: scroller, threshold: 0.12, rootMargin: '0px 0px -4% 0px' }
     );
 
     textEls.forEach(function (el) {
