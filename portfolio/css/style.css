@@ -484,8 +484,8 @@ body.is-ready .hero__doodle--flower {
 .hero__grid {
   position: relative;
   display: grid;
-  grid-template-columns: 1.06fr 0.94fr;
-  gap: clamp(1.5rem, 4vw, 2.875rem);
+  grid-template-columns: 1.05fr minmax(280px, 400px);
+  gap: clamp(2rem, 5vw, 3.5rem);
   align-items: center;
 }
 
@@ -699,39 +699,73 @@ body.is-ready .hero__doodle--flower {
   position: relative;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 1.75rem;
+  align-items: flex-end;
+  gap: 1.25rem;
 }
 
 .hero__photo-group {
   position: relative;
-  width: min(244px, 100%);
+  width: 100%;
+  max-width: 360px;
   margin-inline: auto;
-  padding-top: 2.75rem;
-  z-index: 2;
+  padding-bottom: 2.75rem;
+}
+
+/* Hero portrait — large rounded square, straight and clean */
+.hero-portrait {
+  margin: 0;
+  animation: heroPortraitIn 0.8s var(--ease-smooth) 0.2s both;
+}
+
+@keyframes heroPortraitIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-portrait__frame {
+  aspect-ratio: 1;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #e8e2d8;
+  box-shadow:
+    0 0 0 1px rgba(60, 40, 20, 0.08),
+    0 24px 56px rgba(60, 40, 20, 0.14);
+}
+
+.hero-portrait__img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center 18%;
+  image-orientation: from-image;
+  filter: saturate(1.03) contrast(1.03) brightness(1.02);
 }
 
 .hero__callout {
   position: absolute;
-  top: 0;
+  bottom: 0;
   left: 50%;
-  z-index: 8;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 0.2rem;
   margin: 0;
   padding: 0;
-  opacity: 1;
-  visibility: visible;
-  transform: translateX(-58%) rotate(-8deg);
-  transform-origin: center bottom;
-  animation: calloutBob 5s ease-in-out infinite;
+  transform: translateX(-50%);
   pointer-events: none;
 }
 
 .hero__callout-text {
   font-family: var(--font-hand);
-  font-size: clamp(1.35rem, 3vw, 1.85rem);
+  font-size: clamp(1.15rem, 2.5vw, 1.45rem);
   line-height: 1;
   color: var(--color-accent);
   white-space: nowrap;
@@ -739,16 +773,64 @@ body.is-ready .hero__doodle--flower {
 
 .hero__callout-arrow {
   display: block;
-  width: 42px;
-  height: 52px;
-  margin-top: 0.15rem;
-  margin-left: 0.35rem;
-  filter: url(#pencil);
-  animation: arrowBounce 3.5s ease-in-out infinite;
-  transform-origin: top center;
+  width: 28px;
+  height: 36px;
+  opacity: 0.9;
 }
 
-/* Photo scrap */
+/* Compact index nav */
+.hero-index {
+  align-self: flex-end;
+  width: min(142px, 100%);
+  padding: 0.7rem 0.85rem 0.65rem;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(60, 40, 20, 0.1);
+  border-radius: 10px;
+  box-shadow: 0 10px 28px rgba(60, 40, 20, 0.08);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  animation: heroIndexIn 0.8s var(--ease-smooth) 0.35s both;
+}
+
+@keyframes heroIndexIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-index__label {
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-accent-dark);
+  font-weight: 700;
+  margin: 0 0 0.4rem;
+}
+
+.hero-index__link {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--color-ink);
+  text-decoration: none;
+  line-height: 1.45;
+  transition: color var(--transition-fast);
+}
+
+.hero-index__link:hover,
+.hero-index__link:focus-visible {
+  color: var(--color-accent);
+  outline: none;
+}
+
+/* Photo scrap (about section) */
 .photo-scrap {
   position: relative;
   filter: drop-shadow(0 16px 20px rgba(60, 40, 20, 0.26));
@@ -756,40 +838,11 @@ body.is-ready .hero__doodle--flower {
   visibility: visible;
 }
 
-.photo-scrap--hero {
-  transform: rotate(4deg);
-  animation: heroPhotoIn 0.85s var(--ease-smooth) 0.25s both;
-}
-
-@keyframes heroPhotoIn {
-  from {
-    opacity: 0;
-    transform: rotate(4deg) translateY(18px);
-  }
-  to {
-    opacity: 1;
-    transform: rotate(4deg) translateY(0);
-  }
-}
-
 .photo-scrap__frame {
   position: relative;
   width: 100%;
   min-width: 200px;
   padding: 12px 12px 10px;
-}
-
-.photo-scrap--hero .photo-scrap__frame {
-  width: min(300px, 100%);
-  margin-inline: auto;
-}
-
-.photo-scrap__media {
-  position: relative;
-  overflow: hidden;
-  line-height: 0;
-  background: #e8dfd0;
-  box-shadow: inset 0 0 0 1px rgba(60, 40, 20, 0.1);
 }
 
 .photo-scrap__paper {
@@ -818,23 +871,6 @@ body.is-ready .hero__doodle--flower {
   box-shadow: inset 0 0 0 1px rgba(60, 40, 20, 0.1);
 }
 
-/* Hero portrait — adapts to your image aspect ratio */
-.photo-scrap--hero .photo-scrap__media {
-  width: 100%;
-}
-
-.photo-scrap--hero .photo-scrap__img {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  height: auto;
-  display: block;
-  object-fit: cover;
-  object-position: center 22%;
-  image-orientation: from-image;
-  filter: sepia(0.1) saturate(1.04) brightness(1.02);
-}
-
 .photo-scrap__caption {
   position: relative;
   z-index: 1;
@@ -859,22 +895,7 @@ body.is-ready .hero__doodle--flower {
   z-index: 12;
 }
 
-.sticky-note--hero {
-  opacity: 1;
-  visibility: visible;
-  animation: stickySlide 0.85s var(--ease-smooth) 0.55s both;
-}
-
-.photo-clip {
-  position: absolute;
-  top: -16px;
-  right: 24px;
-  z-index: 7;
-  transform: rotate(13deg);
-  filter: drop-shadow(0 3px 3px rgba(60, 40, 20, 0.34));
-}
-
-/* Sticky note */
+/* Sticky note (about section if used) */
 .sticky-note {
   position: relative;
   align-self: flex-end;
@@ -1658,18 +1679,15 @@ body.is-ready .hero__doodle--flower {
   }
 
   .hero__photo-group {
-    padding-top: 2.25rem;
+    max-width: min(320px, 88vw);
+    padding-bottom: 2.5rem;
   }
 
-  .hero__callout {
-    transform: translateX(-52%) rotate(-6deg);
+  .hero__aside {
+    align-items: center;
   }
 
-  .hero__callout-arrow {
-    margin-left: 0.5rem;
-  }
-
-  .sticky-note {
+  .hero-index {
     align-self: center;
   }
 
@@ -1773,9 +1791,8 @@ body.is-ready .hero__doodle--flower {
     animation: none;
   }
 
-  .photo-scrap--hero,
-  .sticky-note--hero,
-  .hero__callout {
+  .hero-portrait,
+  .hero-index {
     opacity: 1;
     animation: none;
   }

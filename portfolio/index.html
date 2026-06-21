@@ -121,7 +121,7 @@
                 </h1>
 
                 <p class="hero__tagline">
-                  computer science @ Princeton — I build clean, playful, useful software.
+                  computer science @ Princeton. I build clean, useful software.
                   <svg class="hero__heart" width="30" height="28" viewBox="0 0 30 28" fill="none" aria-hidden="true">
                     <path d="M15 25 C 3 17, 2 8, 8 6 C 12.5 4.3, 15 7.5, 15 10.5 C 15 7.5, 17.5 4.3, 22 6 C 28 8, 27 17, 15 25 Z" stroke="#5e5852" stroke-width="1.6" stroke-linejoin="round"></path>
                   </svg>
@@ -140,37 +140,25 @@
 
               <aside class="hero__aside">
                 <div class="hero__photo-group">
-                  <p class="hero__callout" aria-hidden="true">
-                    <span class="hero__callout-text">that's me :)</span>
-                    <svg class="hero__callout-arrow" width="42" height="52" viewBox="0 0 50 54" fill="none" aria-hidden="true">
-                      <path d="M8 2 C 28 4, 38 20, 26 46" stroke="#a8392d" stroke-width="2.2" stroke-linecap="round"></path>
-                      <path d="M17 39 L26 48 L35 41" stroke="#a8392d" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path>
-                    </svg>
-                  </p>
-
-                  <figure class="photo-scrap photo-scrap--hero" data-mouse="8" data-base="rotate(4deg)">
-                    <div class="photo-scrap__frame">
-                      <div class="photo-scrap__media">
-                        <div class="photo-scrap__paper photo-scrap__paper--torn-a" aria-hidden="true"></div>
-                        <img class="photo-scrap__img" src="assets/images/hero-portrait.JPG" alt="Lisa Ochieng portrait" loading="eager">
-                      </div>
-                      <figcaption class="photo-scrap__caption">me, probably debugging</figcaption>
-                    </div>
-                    <div class="masking-tape" aria-hidden="true"></div>
-                    <div class="photo-clip" aria-hidden="true">
-                      <svg width="24" height="50" viewBox="0 0 28 58" fill="none">
-                        <path d="M10 49 L10 13.5 C10 8 18.5 8 18.5 13.5" stroke="#E8E8EA" stroke-width="1" stroke-linecap="round" opacity=".7"></path>
-                      </svg>
+                  <figure class="hero-portrait">
+                    <div class="hero-portrait__frame">
+                      <img class="hero-portrait__img" src="assets/images/hero-portrait.JPG" alt="Lisa Ochieng portrait" loading="eager">
                     </div>
                   </figure>
+                  <p class="hero__callout" aria-hidden="true">
+                    <svg class="hero__callout-arrow" width="28" height="36" viewBox="0 0 28 36" fill="none" aria-hidden="true">
+                      <path d="M14 32 L14 8" stroke="#a8392d" stroke-width="2" stroke-linecap="round"></path>
+                      <path d="M6 16 L14 6 L22 16" stroke="#a8392d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                    <span class="hero__callout-text">that's me :)</span>
+                  </p>
                 </div>
 
-                <nav class="sticky-note sticky-note--hero" data-mouse="12" data-base="rotate(2.5deg)" aria-label="Page index">
-                  <div class="sticky-note__tape" aria-hidden="true"></div>
-                  <p class="sticky-note__label">index</p>
-                  <a href="#about" class="sticky-note__link">01 — about</a>
-                  <a href="#projects" class="sticky-note__link">02 — projects</a>
-                  <a href="#contact" class="sticky-note__link">03 — contact</a>
+                <nav class="hero-index" aria-label="Page index">
+                  <p class="hero-index__label">index</p>
+                  <a href="#about" class="hero-index__link">01 about</a>
+                  <a href="#projects" class="hero-index__link">02 projects</a>
+                  <a href="#contact" class="hero-index__link">03 contact</a>
                 </nav>
               </aside>
             </div>
@@ -178,7 +166,7 @@
         </div>
 
         <div class="hero__scroll-cue" aria-hidden="true">
-          <p class="hero__scroll-text">scroll, it gets better</p>
+          <p class="hero__scroll-text">scroll</p>
           <div class="hero__scroll-arrow">↓</div>
         </div>
       </section>
