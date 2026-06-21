@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lisa Ochieng — Computer Science @ Princeton</title>
+  <meta name="description" content="Lisa Ochieng is a Princeton University Class of 2029 Computer Science student building software across full-stack, AI, and robotics. View projects, experience, and contact.">
+  <meta name="author" content="Lisa Ochieng">
+  <meta property="og:title" content="Lisa Ochieng — Software Engineering Portfolio">
+  <meta property="og:description" content="Princeton CS '29. Projects in fintech, edtech, AI, and robotics — open to software engineering internships.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Caveat:wght@500;600;700&family=Pinyon+Script&family=Archivo:wght@600;700;800;900&family=Hanken+Grotesk:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.cdnfonts.com/css/birds-of-paradise-personal-use" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- SVG filters: torn paper & pencil sketch effects -->
+  <svg class="svg-filters" aria-hidden="true" width="0" height="0">
+    <defs>
+      <filter id="torn-a" x="-8%" y="-8%" width="116%" height="116%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.016 0.02" numOctaves="3" seed="7" result="n"></feTurbulence>
+        <feDisplacementMap in="SourceGraphic" in2="n" scale="13" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap>
+      </filter>
+      <filter id="torn-b" x="-8%" y="-8%" width="116%" height="116%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.018 0.023" numOctaves="3" seed="24" result="n"></feTurbulence>
+        <feDisplacementMap in="SourceGraphic" in2="n" scale="12" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap>
+      </filter>
+      <filter id="torn-c" x="-8%" y="-8%" width="116%" height="116%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.014 0.018" numOctaves="3" seed="41" result="n"></feTurbulence>
+        <feDisplacementMap in="SourceGraphic" in2="n" scale="14" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap>
+      </filter>
+      <filter id="pencil" x="-25%" y="-25%" width="150%" height="150%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="9" result="n"></feTurbulence>
+        <feDisplacementMap in="SourceGraphic" in2="n" scale="1.7" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap>
+      </filter>
+    </defs>
+  </svg>
+
+  <div id="site-root" class="site-root">
+
+    <!-- Scroll progress indicator -->
+    <div id="scroll-prog" class="scroll-progress" role="progressbar" aria-label="Page scroll progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+
+    <!-- ========== HEADER / NAV ========== -->
+    <header class="site-header">
+      <nav class="site-nav" aria-label="Primary">
+        <a href="#hero" class="site-nav__logo">Lisa.</a>
+        <button class="site-nav__toggle" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle navigation menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <div id="nav-menu" class="site-nav__links">
+          <a href="#about" class="site-nav__link">about</a>
+          <a href="#projects" class="site-nav__link">projects</a>
+          <a href="#experience" class="site-nav__link">experience</a>
+          <a href="#skills" class="site-nav__link">skills</a>
+          <a href="assets/resume/lisa-ochieng-resume.pdf" class="site-nav__link site-nav__link--cta" download>résumé</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+
+      <!-- ========== HERO ========== -->
+      <section id="hero" class="hero" aria-labelledby="hero-heading">
+        <div class="hero__doodle hero__doodle--star" data-parallax="0.08" aria-hidden="true">✶</div>
+        <div class="hero__doodle hero__doodle--flower" data-parallax="0.05" aria-hidden="true">✿</div>
+
+        <div class="hero__scrapbook">
+          <!-- Paper clips -->
+          <div class="paper-clip paper-clip--left" aria-hidden="true">
+            <svg width="28" height="58" viewBox="0 0 28 58" fill="none" aria-hidden="true">
+              <path d="M9 51 L9 13 C9 6 19.5 6 19.5 13 L19.5 41 C19.5 47.5 11.5 47.5 11.5 41 L11.5 19 C11.5 14.5 16 14.5 16 19 L16 37" stroke="#9EA0A4" stroke-width="3.4" stroke-linecap="round"></path>
+              <path d="M10 49 L10 13.5 C10 8 18.5 8 18.5 13.5" stroke="#E8E8EA" stroke-width="1" stroke-linecap="round" opacity=".7"></path>
+            </svg>
+          </div>
+          <div class="paper-clip paper-clip--right" aria-hidden="true">
+            <svg width="28" height="58" viewBox="0 0 28 58" fill="none" aria-hidden="true">
+              <path d="M9 51 L9 13 C9 6 19.5 6 19.5 13 L19.5 41 C19.5 47.5 11.5 47.5 11.5 41 L11.5 19 C11.5 14.5 16 14.5 16 19 L16 37" stroke="#9EA0A4" stroke-width="3.4" stroke-linecap="round"></path>
+              <path d="M10 49 L10 13.5 C10 8 18.5 8 18.5 13.5" stroke="#E8E8EA" stroke-width="1" stroke-linecap="round" opacity=".7"></path>
+            </svg>
+          </div>
+
+          <!-- Binder rings -->
+          <div class="binder-rings" aria-hidden="true">
+            <span class="binder-ring"></span>
+            <span class="binder-ring"></span>
+            <span class="binder-ring"></span>
+            <span class="binder-ring"></span>
+            <span class="binder-ring"></span>
+            <span class="binder-ring"></span>
+            <span class="binder-ring"></span>
+            <span class="binder-ring"></span>
+            <span class="binder-ring"></span>
+          </div>
+
+          <article class="scrapbook-page">
+            <div class="scrapbook-page__binding" aria-hidden="true"></div>
+
+            <div class="hero__grid">
+              <div class="hero__identity">
+                <svg class="hero__sketch hero__sketch--star" width="36" height="36" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+                  <path d="M18 3 L21.5 13.5 L32.5 13.8 L23.7 20.4 L27 31 L18 24.3 L9 31 L12.3 20.4 L3.5 13.8 L14.5 13.5 Z" stroke="#5e5852" stroke-width="1.4" stroke-linejoin="round"></path>
+                </svg>
+                <svg class="hero__sketch hero__sketch--smiley" width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+                  <circle cx="20" cy="20" r="16" stroke="#5e5852" stroke-width="1.4"></circle>
+                  <circle cx="14.5" cy="16.5" r="1.5" fill="#5e5852"></circle>
+                  <circle cx="25.5" cy="16.5" r="1.5" fill="#5e5852"></circle>
+                  <path d="M12.5 24 C 16 29.5, 24 29.5, 27.5 24" stroke="#5e5852" stroke-width="1.4" stroke-linecap="round"></path>
+                </svg>
+
+                <p class="hero__eyebrow">portfolio // <span class="hero__year">2026<svg class="hero__year-circle" viewBox="0 0 74 40" fill="none" aria-hidden="true"><path d="M16 9 C 4 14, 5 31, 30 34 C 58 37, 72 27, 67 15 C 62 5, 36 3, 18 7" stroke="#a8392d" stroke-width="1.6" stroke-linecap="round"></path></svg></span></p>
+
+                <h1 id="hero-heading" class="hero__name">
+                  <span class="hero__name-line">Lisa</span>
+                  <span class="hero__name-line hero__name-line--accent">Ochieng</span>
+                </h1>
+
+                <p class="hero__tagline">
+                  computer science @ Princeton — I build clean, playful, useful software.
+                  <svg class="hero__heart" width="30" height="28" viewBox="0 0 30 28" fill="none" aria-hidden="true">
+                    <path d="M15 25 C 3 17, 2 8, 8 6 C 12.5 4.3, 15 7.5, 15 10.5 C 15 7.5, 17.5 4.3, 22 6 C 28 8, 27 17, 15 25 Z" stroke="#5e5852" stroke-width="1.6" stroke-linejoin="round"></path>
+                  </svg>
+                </p>
+
+                <div class="hero__badges">
+                  <span class="badge badge--dashed">Princeton CS '29</span>
+                  <span class="badge badge--solid">Open to SWE Internships</span>
+                </div>
+
+                <div class="hero__actions">
+                  <a href="#projects" class="btn btn--primary">view my work →</a>
+                  <a href="#contact" class="btn btn--outline">say hello</a>
+                </div>
+              </div>
+
+              <aside class="hero__aside">
+                <p class="hero__callout" aria-hidden="true">
+                  that's me :)
+                  <svg class="hero__callout-arrow" width="50" height="54" viewBox="0 0 50 54" fill="none">
+                    <path d="M6 4 C 34 6, 44 22, 30 48" stroke="#a8392d" stroke-width="2.2" stroke-linecap="round"></path>
+                    <path d="M21 41 L30 50 L39 43" stroke="#a8392d" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg>
+                </p>
+
+                <figure class="photo-scrap photo-scrap--hero" data-mouse="15" data-base="rotate(4deg)">
+                  <div class="photo-scrap__frame">
+                    <div class="photo-scrap__paper photo-scrap__paper--torn-a" aria-hidden="true"></div>
+                    <img class="photo-scrap__img" src="assets/images/hero-portrait.png" alt="Lisa Ochieng portrait" width="204" height="244" loading="eager">
+                    <figcaption class="photo-scrap__caption">me, probably debugging</figcaption>
+                  </div>
+                  <div class="masking-tape" aria-hidden="true"></div>
+                  <div class="photo-clip" aria-hidden="true">
+                    <svg width="24" height="50" viewBox="0 0 28 58" fill="none">
+                      <path d="M10 49 L10 13.5 C10 8 18.5 8 18.5 13.5" stroke="#E8E8EA" stroke-width="1" stroke-linecap="round" opacity=".7"></path>
+                    </svg>
+                  </div>
+                </figure>
+
+                <nav class="sticky-note" data-mouse="26" data-base="rotate(2.5deg)" aria-label="Page index">
+                  <div class="sticky-note__tape" aria-hidden="true"></div>
+                  <p class="sticky-note__label">index</p>
+                  <a href="#about" class="sticky-note__link">01 — about</a>
+                  <a href="#projects" class="sticky-note__link">02 — projects</a>
+                  <a href="#contact" class="sticky-note__link">03 — contact</a>
+                </nav>
+              </aside>
+            </div>
+          </article>
+        </div>
+
+        <div class="hero__scroll-cue" aria-hidden="true">
+          <p class="hero__scroll-text">scroll, it gets better</p>
+          <div class="hero__scroll-arrow">↓</div>
+        </div>
+      </section>
+
+      <!-- Marquee band -->
+      <div class="marquee-band" aria-hidden="true">
+        <div class="marquee-band__track">
+          <span>SOFTWARE ENGINEER ✦ FULL-STACK ✦ AI &amp; ROBOTICS ✦ PRINCETON CS '29 ✦ PROBLEM SOLVER ✦ SHIP FAST ✦ SOFTWARE ENGINEER ✦ FULL-STACK ✦ AI &amp; ROBOTICS ✦ PRINCETON CS '29 ✦ PROBLEM SOLVER ✦ SHIP FAST ✦</span>
+        </div>
+      </div>
+
+      <!-- ========== ABOUT ========== -->
+      <section id="about" class="about" aria-labelledby="about-heading">
+        <div class="container">
+          <div class="about__grid">
+            <div class="about__photos" data-reveal>
+              <figure class="about__photo-stack about__photo-stack--one">
+                <div class="photo-scrap__frame">
+                  <div class="photo-scrap__paper photo-scrap__paper--torn-b" aria-hidden="true"></div>
+                  <img class="photo-scrap__img" src="assets/images/about-candid.png" alt="Lisa Ochieng candid photo" width="200" height="230" loading="lazy">
+                </div>
+                <div class="tape-strip tape-strip--one" aria-hidden="true"></div>
+              </figure>
+              <figure class="about__photo-stack about__photo-stack--two">
+                <div class="photo-scrap__frame">
+                  <div class="photo-scrap__paper photo-scrap__paper--torn-c" aria-hidden="true"></div>
+                  <img class="photo-scrap__img" src="assets/images/about-workspace.png" alt="Lisa's workspace and setup" width="180" height="210" loading="lazy">
+                  <figcaption class="photo-scrap__caption">my happy place</figcaption>
+                </div>
+                <div class="tape-strip tape-strip--two" aria-hidden="true"></div>
+              </figure>
+              <span class="about__sparkle" aria-hidden="true">✦</span>
+            </div>
+
+            <div data-reveal data-delay="120">
+              <p class="section-label">// about me</p>
+              <h2 id="about-heading" class="about__heading">hi, I'm Lisa <span class="about__emoji" aria-hidden="true">^_^</span></h2>
+              <p class="about__text">I'm a <strong>computer science</strong> student at <strong>Princeton University</strong> (Class of 2029) who loves turning messy ideas into software people actually use. I care about clean code, thoughtful UX, and shipping — not just shipping perfectly.</p>
+              <p class="about__text">From fintech platforms in Nairobi to agentic AI systems on campus, I build across the stack. When I'm not coding, I'm mentoring teammates, exploring Princeton's CS community, or redesigning my dev setup for the hundredth time.</p>
+              <div class="about__stats">
+                <div class="stat">
+                  <div class="stat__number">5+</div>
+                  <div class="stat__label">projects shipped</div>
+                </div>
+                <div class="stat">
+                  <div class="stat__number">3</div>
+                  <div class="stat__label">languages, fluently</div>
+                </div>
+                <div class="stat">
+                  <div class="stat__number">∞</div>
+                  <div class="stat__label">cups of coffee</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== PROJECTS ========== -->
+      <section id="projects" class="projects" aria-labelledby="projects-heading">
+        <div class="container container--projects">
+          <header class="projects__header" data-reveal>
+            <p class="section-label">// selected work</p>
+            <h2 id="projects-heading" class="section-title">things I've <span class="accent-italic">built</span></h2>
+            <p class="section-subtitle">a few favourites from fintech, edtech, AI, and robotics ↓</p>
+          </header>
+
+          <div class="project-grid">
+            <article class="project-card" data-reveal data-delay="0" data-rest="rotate(-1.5deg)">
+              <div class="project-card__tape" aria-hidden="true"></div>
+              <div class="project-card__body">
+                <img class="project-card__img" src="assets/images/project-fastrent.png" alt="FastRent property rental platform screenshot" width="640" height="360" loading="lazy">
+                <div class="project-card__meta">
+                  <h3 class="project-card__title">FastRent</h3>
+                  <span class="project-card__year">2025</span>
+                </div>
+                <p class="project-card__tagline">property rental marketplace</p>
+                <p class="project-card__desc">Full-stack platform connecting landlords and tenants with verified listings, secure payments, and real-time messaging.</p>
+                <div class="tag-list">
+                  <span class="tag">React</span>
+                  <span class="tag">Node.js</span>
+                  <span class="tag">PostgreSQL</span>
+                </div>
+                <a href="https://github.com/lisaochieng" class="link-arrow" target="_blank" rel="noopener noreferrer">view →</a>
+              </div>
+            </article>
+
+            <article class="project-card" data-reveal data-delay="80" data-rest="rotate(1.2deg)">
+              <div class="project-card__tape project-card__tape--tilt-right" aria-hidden="true"></div>
+              <div class="project-card__body">
+                <img class="project-card__img" src="assets/images/project-somasmart.png" alt="SomaSmart learning platform screenshot" width="640" height="360" loading="lazy">
+                <div class="project-card__meta">
+                  <h3 class="project-card__title">SomaSmart</h3>
+                  <span class="project-card__year">2024</span>
+                </div>
+                <p class="project-card__tagline">adaptive learning for students</p>
+                <p class="project-card__desc">Edtech platform with personalized study paths, progress tracking, and interactive quizzes for secondary school learners.</p>
+                <div class="tag-list">
+                  <span class="tag">Next.js</span>
+                  <span class="tag">Firebase</span>
+                  <span class="tag">TypeScript</span>
+                </div>
+                <a href="https://github.com/lisaochieng" class="link-arrow" target="_blank" rel="noopener noreferrer">view →</a>
+              </div>
+            </article>
+
+            <article class="project-card" data-reveal data-delay="160" data-rest="rotate(-1deg)">
+              <div class="project-card__tape project-card__tape--tilt-left" aria-hidden="true"></div>
+              <div class="project-card__body">
+                <img class="project-card__img" src="assets/images/project-epuka.png" alt="Epuka road safety application screenshot" width="640" height="360" loading="lazy">
+                <div class="project-card__meta">
+                  <h3 class="project-card__title">Epuka</h3>
+                  <span class="project-card__year">2024</span>
+                </div>
+                <p class="project-card__tagline">road safety &amp; incident reporting</p>
+                <p class="project-card__desc">Mobile-first app for reporting road hazards, sharing safety alerts, and building community-driven traffic awareness.</p>
+                <div class="tag-list">
+                  <span class="tag">React Native</span>
+                  <span class="tag">Maps API</span>
+                  <span class="tag">Python</span>
+                </div>
+                <a href="https://github.com/lisaochieng" class="link-arrow" target="_blank" rel="noopener noreferrer">view →</a>
+              </div>
+            </article>
+
+            <article class="project-card" data-reveal data-delay="240" data-rest="rotate(1.5deg)">
+              <div class="project-card__tape project-card__tape--tilt-far-left" aria-hidden="true"></div>
+              <div class="project-card__body">
+                <img class="project-card__img" src="assets/images/project-rag.png" alt="Agentic RAG project interface screenshot" width="640" height="360" loading="lazy">
+                <div class="project-card__meta">
+                  <h3 class="project-card__title">Agentic RAG Project</h3>
+                  <span class="project-card__year">2025</span>
+                </div>
+                <p class="project-card__tagline">retrieval-augmented AI agents</p>
+                <p class="project-card__desc">Multi-agent system that retrieves, reasons over, and cites documents — built for research workflows and technical Q&amp;A.</p>
+                <div class="tag-list">
+                  <span class="tag">Python</span>
+                  <span class="tag">LangChain</span>
+                  <span class="tag">Vector DB</span>
+                </div>
+                <a href="https://github.com/lisaochieng" class="link-arrow" target="_blank" rel="noopener noreferrer">view →</a>
+              </div>
+            </article>
+
+            <article class="project-card" data-reveal data-delay="320" data-rest="rotate(1deg)">
+              <div class="project-card__tape" aria-hidden="true"></div>
+              <div class="project-card__body">
+                <img class="project-card__img" src="assets/images/project-robotics.png" alt="FIRST Global Robotics team and robot" width="640" height="360" loading="lazy">
+                <div class="project-card__meta">
+                  <h3 class="project-card__title">FIRST Global Robotics</h3>
+                  <span class="project-card__year">2023</span>
+                </div>
+                <p class="project-card__tagline">international robotics competition</p>
+                <p class="project-card__desc">Designed and programmed competition robots for FIRST Global, leading software integration, sensor fusion, and autonomous routines.</p>
+                <div class="tag-list">
+                  <span class="tag">C++</span>
+                  <span class="tag">ROS</span>
+                  <span class="tag">Computer Vision</span>
+                </div>
+                <a href="https://github.com/lisaochieng" class="link-arrow" target="_blank" rel="noopener noreferrer">view →</a>
+              </div>
+            </article>
+          </div>
+
+          <div class="projects__cta" data-reveal>
+            <a href="https://github.com/lisaochieng" class="btn btn--github" target="_blank" rel="noopener noreferrer">see everything on github →</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== SKILLS ========== -->
+      <section id="skills" class="skills" aria-labelledby="skills-heading">
+        <div class="container container--medium">
+          <header data-reveal>
+            <p class="section-label section-label--light">// the toolbox</p>
+            <h2 id="skills-heading" class="section-title">skills &amp; <span class="accent-italic">stack</span></h2>
+          </header>
+
+          <div class="skill-grid">
+            <div data-reveal>
+              <h3 class="skill-group__label">⌘ languages</h3>
+              <div class="skill-chips">
+                <span class="skill-chip">Python</span>
+                <span class="skill-chip">TypeScript</span>
+                <span class="skill-chip">Java</span>
+                <span class="skill-chip">C++</span>
+                <span class="skill-chip">SQL</span>
+              </div>
+            </div>
+            <div data-reveal data-delay="100">
+              <h3 class="skill-group__label">◇ frontend</h3>
+              <div class="skill-chips">
+                <span class="skill-chip">React</span>
+                <span class="skill-chip">Next.js</span>
+                <span class="skill-chip">HTML/CSS</span>
+                <span class="skill-chip">Tailwind</span>
+              </div>
+            </div>
+            <div data-reveal>
+              <h3 class="skill-group__label">⚙ backend</h3>
+              <div class="skill-chips">
+                <span class="skill-chip">Node.js</span>
+                <span class="skill-chip">FastAPI</span>
+                <span class="skill-chip">PostgreSQL</span>
+                <span class="skill-chip">Firebase</span>
+              </div>
+            </div>
+            <div data-reveal data-delay="100">
+              <h3 class="skill-group__label">✦ tools</h3>
+              <div class="skill-chips">
+                <span class="skill-chip">Git</span>
+                <span class="skill-chip">Docker</span>
+                <span class="skill-chip">Figma</span>
+                <span class="skill-chip">Linux</span>
+                <span class="skill-chip">AWS</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== EXPERIENCE ========== -->
+      <section id="experience" class="experience" aria-labelledby="experience-heading">
+        <div class="container container--narrow">
+          <header class="experience__header" data-reveal>
+            <p class="section-label">// the journey so far</p>
+            <h2 id="experience-heading" class="section-title">my <span class="accent-italic">path</span></h2>
+          </header>
+
+          <div class="timeline">
+            <article class="timeline__item" data-reveal data-axis="x">
+              <span class="timeline__dot timeline__dot--accent" aria-hidden="true"></span>
+              <p class="timeline__date">SUMMER 2025</p>
+              <h3 class="timeline__title">Software Engineering Intern</h3>
+              <p class="timeline__org">@ Equity Bank</p>
+              <p class="timeline__desc">Built internal tools and customer-facing features for digital banking. Improved API response times and collaborated with cross-functional teams on secure fintech workflows.</p>
+            </article>
+
+            <article class="timeline__item" data-reveal data-delay="80" data-axis="x">
+              <span class="timeline__dot" aria-hidden="true"></span>
+              <p class="timeline__date">2025 — NOW</p>
+              <h3 class="timeline__title">Princeton Activities</h3>
+              <p class="timeline__org">CS community &amp; campus tech</p>
+              <p class="timeline__desc">Active in Princeton's computer science ecosystem — hackathons, peer collaboration, and building projects that serve the campus community. Exploring systems, algorithms, and HCI.</p>
+            </article>
+
+            <article class="timeline__item" data-reveal data-delay="160" data-axis="x">
+              <span class="timeline__dot" aria-hidden="true"></span>
+              <p class="timeline__date">2023 — PRESENT</p>
+              <h3 class="timeline__title">Leadership Experience</h3>
+              <p class="timeline__org">FIRST Global Robotics &amp; team lead roles</p>
+              <p class="timeline__desc">Led software subteams for international robotics competitions. Mentored junior developers, coordinated sprint planning, and represented Kenya on the global FIRST stage.</p>
+            </article>
+
+            <article class="timeline__item" data-reveal data-delay="240" data-axis="x">
+              <span class="timeline__dot timeline__dot--accent" aria-hidden="true"></span>
+              <p class="timeline__date">2025 — 2029</p>
+              <h3 class="timeline__title">Princeton University</h3>
+              <p class="timeline__org">A.B. Computer Science · Class of 2029</p>
+              <p class="timeline__desc">Pursuing a rigorous CS curriculum with focus on software engineering, AI, and systems. Balancing technical depth with design-minded electives.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== CONTACT ========== -->
+      <section id="contact" class="contact" aria-labelledby="contact-heading">
+        <span class="contact__sparkle" aria-hidden="true">✦</span>
+        <div class="contact__inner container">
+          <header data-reveal>
+            <p class="section-label section-label--light">// let's talk</p>
+            <h2 id="contact-heading" class="section-title">let's build<br>something.</h2>
+            <p class="contact__subtitle">internships, collabs, or just to say hi — my inbox is open ♡</p>
+          </header>
+
+          <div class="contact__actions" data-reveal data-delay="120">
+            <a href="mailto:hello@lisaochieng.dev" class="btn btn--light">hello@lisaochieng.dev</a>
+            <a href="assets/resume/lisa-ochieng-resume.pdf" class="btn btn--dark" download>↓ download résumé</a>
+          </div>
+
+          <nav class="contact__social" data-reveal data-delay="220" aria-label="Social links">
+            <a href="https://github.com/lisaochieng" class="contact__social-link" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="https://linkedin.com/in/lisaochieng" class="contact__social-link" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="mailto:hello@lisaochieng.dev" class="contact__social-link">Email</a>
+          </nav>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="site-footer">
+      <span class="site-footer__brand">a wrap. ✦</span>
+      <span class="site-footer__copy">© 2026 Lisa Ochieng · Made with too much coffee</span>
+    </footer>
+
+  </div>
+
+  <script src="js/script.js" defer></script>
+</body>
+</html>
