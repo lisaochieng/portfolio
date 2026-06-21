@@ -17,21 +17,9 @@
   let progressTarget = 0;
   let progressCurrent = 0;
 
-  /* --- Page load polish -------------------------------------------------- */
+  /* --- Page ready (optional polish, no visibility gate) ------------------ */
   function initPageReady() {
-    document.body.classList.remove('is-loading');
     document.body.classList.add('is-ready');
-
-    const heroPhoto = document.querySelector('.photo-scrap--hero');
-    const heroCallout = document.querySelector('.hero__callout');
-    const stickyNote = document.querySelector('.sticky-note--hero');
-
-    [heroPhoto, heroCallout, stickyNote].forEach(function (el, i) {
-      if (!el) return;
-      el.style.transition = 'opacity 0.7s var(--ease-smooth, ease)';
-      el.style.transitionDelay = (0.35 + i * 0.12) + 's';
-      el.style.opacity = '1';
-    });
   }
 
   if (document.readyState === 'loading') {

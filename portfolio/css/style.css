@@ -456,11 +456,12 @@ a {
   border-radius: 4px;
   box-shadow: var(--shadow-paper);
   padding: clamp(2rem, 5vw, 3.375rem) clamp(1.5rem, 5vw, 3.5rem);
-  overflow: hidden;
+  overflow: visible;
 }
 
 .scrapbook-page--hero {
   animation: scrapbookSettle 1s var(--ease-smooth) 0.1s both;
+  overflow: visible;
 }
 
 .scrapbook-page__binding {
@@ -471,13 +472,6 @@ a {
   height: 28px;
   background: linear-gradient(180deg, rgba(60, 40, 20, 0.11), rgba(60, 40, 20, 0));
   pointer-events: none;
-}
-
-body.is-loading .hero__doodle,
-body.is-loading .photo-scrap--hero,
-body.is-loading .sticky-note--hero,
-body.is-loading .hero__callout {
-  opacity: 0;
 }
 
 body.is-ready .hero__doodle {
@@ -715,6 +709,7 @@ body.is-ready .hero__doodle--flower {
   width: min(244px, 100%);
   margin-inline: auto;
   padding-top: 2.75rem;
+  z-index: 2;
 }
 
 .hero__callout {
@@ -727,6 +722,8 @@ body.is-ready .hero__doodle--flower {
   align-items: center;
   margin: 0;
   padding: 0;
+  opacity: 1;
+  visibility: visible;
   transform: translateX(-58%) rotate(-8deg);
   transform-origin: center bottom;
   animation: calloutBob 3.2s ease-in-out infinite;
@@ -755,17 +752,32 @@ body.is-ready .hero__doodle--flower {
 /* Photo scrap */
 .photo-scrap {
   position: relative;
-  filter: drop-shadow(var(--shadow-photo));
+  filter: drop-shadow(0 16px 20px rgba(60, 40, 20, 0.26));
   will-change: transform;
+  opacity: 1;
+  visibility: visible;
 }
 
 .photo-scrap--hero {
   transform: rotate(4deg);
+  animation: heroPhotoIn 0.85s var(--ease-smooth) 0.25s both;
+}
+
+@keyframes heroPhotoIn {
+  from {
+    opacity: 0;
+    transform: rotate(4deg) translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(4deg) translateY(0);
+  }
 }
 
 .photo-scrap__frame {
   position: relative;
   width: 100%;
+  min-width: 200px;
   padding: 12px 12px 10px;
 }
 
@@ -775,11 +787,13 @@ body.is-ready .hero__doodle--flower {
   left: 0;
   right: 0;
   bottom: 2.25rem;
+  z-index: 0;
   background: #f7efdd;
   background-image:
     repeating-linear-gradient(0deg, rgba(150, 120, 70, 0.05) 0 1px, transparent 1px 7px),
     radial-gradient(120% 80% at 25% 10%, rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0) 55%);
   border-radius: 1px;
+  pointer-events: none;
 }
 
 .photo-scrap__paper--torn-a { filter: url(#torn-a); }
@@ -790,6 +804,7 @@ body.is-ready .hero__doodle--flower {
   position: relative;
   z-index: 1;
   width: 100%;
+  min-height: 220px;
   aspect-ratio: 4 / 5;
   overflow: hidden;
   background: #e8dfd0;
@@ -800,6 +815,7 @@ body.is-ready .hero__doodle--flower {
   width: 100%;
   max-width: 220px;
   margin-inline: auto;
+  display: block;
 }
 
 .photo-scrap__img {
@@ -837,6 +853,8 @@ body.is-ready .hero__doodle--flower {
 }
 
 .sticky-note--hero {
+  opacity: 1;
+  visibility: visible;
   animation: stickySlide 0.9s var(--ease-spring) 0.55s both;
 }
 
@@ -1670,6 +1688,13 @@ body.is-ready .hero__doodle--flower {
   }
 
   .marquee-band__track {
+    animation: none;
+  }
+
+  .photo-scrap--hero,
+  .sticky-note--hero,
+  .hero__callout {
+    opacity: 1;
     animation: none;
   }
 }
