@@ -116,8 +116,6 @@
     if (!sheet) return;
     card.classList.remove('is-lifted');
     sheet.style.setProperty('--lift-x', '0deg');
-    sheet.style.setProperty('--lift-y', '0px');
-    sheet.style.setProperty('--lift-z', '0px');
   }
 
   function applyCardLift(card, clientY) {
@@ -125,13 +123,10 @@
     if (!sheet) return;
     const r = card.getBoundingClientRect();
     const py = Math.max(0, Math.min(1, (clientY - r.top) / r.height));
-    const liftY = -(10 + py * 18);
-    const liftX = -(5 + py * 11);
-    const liftZ = 12 + py * 28;
+    /* Pivot from taped top edge — bottom tilts toward viewer, tape stays put */
+    const liftX = 4 + py * 12;
     card.classList.add('is-lifted');
-    sheet.style.setProperty('--lift-y', liftY.toFixed(1) + 'px');
     sheet.style.setProperty('--lift-x', liftX.toFixed(2) + 'deg');
-    sheet.style.setProperty('--lift-z', liftZ.toFixed(1) + 'px');
   }
 
   if (projects) {
