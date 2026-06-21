@@ -937,7 +937,7 @@ body.is-ready .hero__doodle--flower {
 
 .hero__scroll-cue {
   position: absolute;
-  bottom: 1.5rem;
+  bottom: 2.5rem;
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
@@ -980,8 +980,8 @@ body.is-ready .hero__doodle--flower {
   width: 100%;
   position: relative;
   z-index: 62;
-  transform: skewY(-2.5deg);
-  margin-block: -0.35rem;
+  transform: skewY(-1.25deg);
+  margin-block: -0.2rem;
 }
 
 .marquee-band__inner {
@@ -1567,43 +1567,15 @@ body.is-ready .hero__doodle--flower {
   margin: 0.5rem 0 0;
 }
 
-.timeline__roles {
-  list-style: none;
-  margin: 1.25rem 0 0;
-  padding: 0;
+.timeline__subentries {
+  margin-top: 1.75rem;
   display: flex;
   flex-direction: column;
-  gap: 1.125rem;
+  gap: 2.25rem;
 }
 
-.timeline__role {
-  padding: 0;
-}
-
-.timeline__role-title {
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-size: 0.9375rem;
-  color: var(--color-ink);
-  margin: 0;
-}
-
-.timeline__role-meta {
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--color-accent-dark);
-  font-weight: 700;
-  margin: 0.2rem 0 0;
-}
-
-.timeline__role p:last-child {
-  font-size: 0.9rem;
-  line-height: 1.55;
-  color: var(--color-ink-muted);
-  margin: 0.35rem 0 0;
-  max-width: 35rem;
+.timeline__subentry .timeline__title {
+  font-size: clamp(1rem, 2.2vw, 1.25rem);
 }
 
 .timeline__item--grouped {
@@ -1902,7 +1874,7 @@ body.is-ready .hero__doodle--flower {
   .marquee-band {
     width: 100%;
     margin-left: 0;
-    transform: skewY(-2deg);
+    transform: skewY(-1deg);
     padding: 0.75rem 0;
   }
 
