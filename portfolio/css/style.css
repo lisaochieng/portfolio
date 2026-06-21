@@ -937,7 +937,7 @@ body.is-ready .hero__doodle--flower {
 
 .hero__scroll-cue {
   position: absolute;
-  bottom: 0.35rem;
+  bottom: 1.5rem;
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
@@ -1482,7 +1482,29 @@ body.is-ready .hero__doodle--flower {
 .timeline {
   position: relative;
   padding-left: 2.25rem;
-  border-left: 2.5px dashed var(--color-ink);
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 2.5px;
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--color-ink) 0,
+    var(--color-ink) 7px,
+    transparent 7px,
+    transparent 14px
+  );
+  transform: scaleY(0);
+  transform-origin: top center;
+  transition: transform 1.5s var(--ease-smooth);
+}
+
+.timeline.is-line-visible::before {
+  transform: scaleY(1);
 }
 
 .timeline__item {
@@ -1545,60 +1567,47 @@ body.is-ready .hero__doodle--flower {
   margin: 0.5rem 0 0;
 }
 
-/* --- Education ----------------------------------------------------------- */
-.education {
-  position: relative;
-  z-index: 30;
-  padding: clamp(4rem, 8vw, 6rem) 0;
-  background: var(--color-section-experience);
-  overflow: visible;
+.timeline__roles {
+  list-style: none;
+  margin: 1.25rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.125rem;
 }
 
-.education__header {
-  margin-bottom: 2rem;
+.timeline__role {
+  padding: 0;
 }
 
-.education__card {
-  position: relative;
-  padding: 1.75rem 1.75rem 1.75rem 2.25rem;
-  background: var(--color-cream-deep);
-  border: 1.5px solid var(--color-border);
-  border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(60, 40, 20, 0.06);
+.timeline__role-title {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  color: var(--color-ink);
+  margin: 0;
 }
 
-.education__dot {
-  position: absolute;
-  left: -0.65rem;
-  top: 1.85rem;
-  width: 18px;
-  height: 18px;
-  background: var(--color-accent);
-  border: 2.5px solid var(--color-ink);
-  border-radius: 50%;
-}
-
-.education__date {
+.timeline__role-meta {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.1em;
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   color: var(--color-accent-dark);
   font-weight: 700;
-  margin: 0;
+  margin: 0.2rem 0 0;
 }
 
-.education__school {
-  font-family: var(--font-heading);
-  font-weight: 900;
-  font-size: clamp(1.25rem, 2.5vw, 1.625rem);
-  margin: 0.35rem 0 0.125rem;
-}
-
-.education__degree {
-  font-family: var(--font-hand);
-  font-size: clamp(1.125rem, 2.5vw, 1.375rem);
+.timeline__role p:last-child {
+  font-size: 0.9rem;
+  line-height: 1.55;
   color: var(--color-ink-muted);
-  margin: 0;
+  margin: 0.35rem 0 0;
+  max-width: 35rem;
+}
+
+.timeline__item--grouped {
+  margin-bottom: 2.75rem;
 }
 
 /* --- Contact ------------------------------------------------------------- */
@@ -1732,8 +1741,7 @@ body.is-ready .hero__doodle--flower {
 .is-visible .text-fade-in,
 .text-fade-in.is-visible,
 [data-reveal].is-visible .text-fade-in,
-.timeline__item.is-visible .text-fade-in,
-.education__card.is-visible .text-fade-in {
+.timeline__item.is-visible .text-fade-in {
   opacity: 1;
   transform: translateY(0) scale(1);
   filter: blur(0);
@@ -1964,5 +1972,9 @@ body.is-ready .hero__doodle--flower {
     transform: none;
     filter: none;
     transition: none;
+  }
+
+  .timeline::before {
+    transform: scaleY(1);
   }
 }

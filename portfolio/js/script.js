@@ -47,7 +47,7 @@
   }
 
   /* --- Active nav section highlight -------------------------------------- */
-  const sections = ['hero', 'about', 'projects', 'experience', 'education', 'skills', 'contact']
+  const sections = ['hero', 'about', 'projects', 'experience', 'skills', 'contact']
     .map(function (id) { return document.getElementById(id); })
     .filter(Boolean);
 
@@ -166,6 +166,32 @@
   }
 
   initRevealObserver();
+
+  /* --- Timeline line draw on scroll -------------------------------------- */
+  function initTimelineLine() {
+    const timeline = document.querySelector('[data-reveal-line]');
+    if (!timeline) return;
+
+    if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+      timeline.classList.add('is-line-visible');
+      return;
+    }
+
+    const lineObserver = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          timeline.classList.add('is-line-visible');
+          lineObserver.unobserve(timeline);
+        });
+      },
+      { root: null, threshold: 0.1, rootMargin: '0px 0px -5% 0px' }
+    );
+
+    lineObserver.observe(timeline);
+  }
+
+  initTimelineLine();
 
   /* --- Hero pointer parallax --------------------------------------------- */
   let pmx = 0;

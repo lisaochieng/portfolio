@@ -57,9 +57,8 @@
           <a href="#about" class="site-nav__link">about</a>
           <a href="#projects" class="site-nav__link">projects</a>
           <a href="#experience" class="site-nav__link">experience</a>
-          <a href="#education" class="site-nav__link">education</a>
           <a href="#skills" class="site-nav__link">skills</a>
-          <a href="assets/resume/lisa-ochieng-resume.pdf" class="site-nav__link site-nav__link--cta" download>résumé</a>
+          <a href="#contact" class="site-nav__link site-nav__link--cta">contact</a>
         </div>
       </nav>
     </header>
@@ -122,7 +121,7 @@
                 </h1>
 
                 <p class="hero__tagline">
-                  computer science @ Princeton. I build clean, useful software.
+                  B.S.E. Computer Science @ Princeton. I build clean, useful software.
                   <svg class="hero__heart" width="30" height="28" viewBox="0 0 30 28" fill="none" aria-hidden="true">
                     <path d="M15 25 C 3 17, 2 8, 8 6 C 12.5 4.3, 15 7.5, 15 10.5 C 15 7.5, 17.5 4.3, 22 6 C 28 8, 27 17, 15 25 Z" stroke="#5e5852" stroke-width="1.6" stroke-linejoin="round"></path>
                   </svg>
@@ -201,8 +200,8 @@
             <div data-reveal data-delay="120" data-axis="y-up" class="about__copy">
               <p class="section-label text-fade-in" style="--d:0">// about me</p>
               <h2 id="about-heading" class="about__heading text-fade-in" style="--d:1">hi, I'm Lisa <span class="about__emoji" aria-hidden="true">^_^</span></h2>
-              <p class="about__text text-fade-in" style="--d:2">I'm a <strong>computer science</strong> student at <strong>Princeton University</strong> (Class of 2029) who loves turning messy ideas into software people actually use. I care about clean code, thoughtful UX, and shipping — not just shipping perfectly.</p>
-              <p class="about__text text-fade-in" style="--d:3">From hackathon full-stack builds and blockchain voting to robotics firmware and campus web work, I build across the stack. When I'm not coding, I'm mentoring teammates on Princeton Robotics, documenting events, or redesigning my dev setup for the hundredth time.</p>
+              <p class="about__text text-fade-in" style="--d:2">I'm a <strong>Computer Science</strong> student at <strong>Princeton University</strong> (Class of 2029), focused on full-stack development, embedded systems, and web engineering.</p>
+              <p class="about__text text-fade-in" style="--d:3">My work spans React and Python backends, C++ robotics firmware, Solidity smart contracts, and campus HTML/CSS. I've also interned in fintech and led software for international robotics competitions.</p>
               <div class="about__stats text-fade-in" style="--d:4">
                 <div class="stat">
                   <div class="stat__number">1+</div>
@@ -374,21 +373,37 @@
             <h2 id="experience-heading" class="section-title text-fade-in" style="--d:1">my <span class="accent-italic">path</span></h2>
           </header>
 
-          <div class="timeline">
-            <article class="timeline__item" data-reveal data-axis="x">
+          <div class="timeline" data-reveal-line>
+            <article class="timeline__item timeline__item--grouped" data-reveal data-axis="x">
               <span class="timeline__dot timeline__dot--accent" aria-hidden="true"></span>
-              <p class="timeline__date text-fade-in" style="--d:0">NOV 2025 — PRESENT</p>
-              <h3 class="timeline__title text-fade-in" style="--d:1">Student Office Assistant</h3>
-              <p class="timeline__org text-fade-in" style="--d:2">@ Africa World Institute, Princeton University</p>
-              <p class="timeline__desc text-fade-in" style="--d:3">I own the front-end for the institute site — shipping event pages in semantic HTML, building online registration forms, and tightening the CSS so the whole site actually feels like one product. Lots of layout debugging, responsive tweaks, and making sure every page looks intentional.</p>
+              <p class="timeline__date text-fade-in" style="--d:0">2025 — PRESENT</p>
+              <h3 class="timeline__title text-fade-in" style="--d:1">Princeton University CS Student</h3>
+              <p class="timeline__org text-fade-in" style="--d:2">B.S.E. Computer Science · Class of 2029</p>
+              <ul class="timeline__roles">
+                <li class="timeline__role text-fade-in" style="--d:3">
+                  <p class="timeline__role-title">Student Office Assistant · Africa World Institute</p>
+                  <p class="timeline__role-meta">Nov 2025 — Present</p>
+                  <p>Update the institute website with event pages in HTML, build online registration forms, and apply CSS styling for layout consistency across pages.</p>
+                </li>
+                <li class="timeline__role text-fade-in" style="--d:4">
+                  <p class="timeline__role-title">Drone VTOL &amp; Tinker Subteams · Robotics Club</p>
+                  <p class="timeline__role-meta">Ongoing</p>
+                  <p>Develop flight control firmware in C++ on Teensy Arduino, processing PWM signals for yaw, thrust, and roll. Support hardware assembly and embedded systems debugging.</p>
+                </li>
+                <li class="timeline__role text-fade-in" style="--d:5">
+                  <p class="timeline__role-title">High Power Rocketry Team · Princeton Rocketry Club</p>
+                  <p class="timeline__role-meta">Ongoing</p>
+                  <p>Completed a model rocket launch with the team and working toward Tripoli L1 high-power rocketry certification.</p>
+                </li>
+              </ul>
             </article>
 
             <article class="timeline__item" data-reveal data-delay="80" data-axis="x">
               <span class="timeline__dot" aria-hidden="true"></span>
-              <p class="timeline__date text-fade-in" style="--d:0">ONGOING</p>
-              <h3 class="timeline__title text-fade-in" style="--d:1">Drone VTOL &amp; Tinker Subteams</h3>
-              <p class="timeline__org text-fade-in" style="--d:2">@ Princeton University Robotics Club</p>
-              <p class="timeline__desc text-fade-in" style="--d:3">Writing flight control firmware in C++ on a Teensy — reading PWM signals and mapping them to yaw, thrust, and roll in real time. Also deep in embedded bring-up: hardware assembly, electrical debugging, and making the stack reliable enough to actually fly.</p>
+              <p class="timeline__date text-fade-in" style="--d:0">MAY — DEC 2023</p>
+              <h3 class="timeline__title text-fade-in" style="--d:1">Assistant Team Captain</h3>
+              <p class="timeline__org text-fade-in" style="--d:2">@ FIRST Global Robotics Challenge</p>
+              <p class="timeline__desc text-fade-in" style="--d:3">Co-led a 10-person team building a competition robot in Java with Arduino sensor integration. Programmed motor controllers and sensor interfaces through the REV Robotics library and debugged hardware-software integration for international competition.</p>
             </article>
 
             <article class="timeline__item" data-reveal data-delay="160" data-axis="x">
@@ -396,34 +411,9 @@
               <p class="timeline__date text-fade-in" style="--d:0">FEB — AUG 2023</p>
               <h3 class="timeline__title text-fade-in" style="--d:1">Rotational Intern</h3>
               <p class="timeline__org text-fade-in" style="--d:2">@ Equity Bank Limited, Nairobi</p>
-              <p class="timeline__desc text-fade-in" style="--d:3">Branch-floor intern processing 40+ account applications daily — catching data mismatches, running compliance checks, and resolving 30+ mobile banking tickets a day. Picked up how real fintech ops, KYC workflows, and customer-facing systems actually run at scale.</p>
-            </article>
-
-            <article class="timeline__item" data-reveal data-delay="240" data-axis="x">
-              <span class="timeline__dot" aria-hidden="true"></span>
-              <p class="timeline__date text-fade-in" style="--d:0">MAY — DEC 2023</p>
-              <h3 class="timeline__title text-fade-in" style="--d:1">Assistant Team Captain</h3>
-              <p class="timeline__org text-fade-in" style="--d:2">@ FIRST Global Robotics Challenge</p>
-              <p class="timeline__desc text-fade-in" style="--d:3">Co-led a 10-person team building a competition robot in Java with Arduino sensor integration. Programmed motor controllers and sensor interfaces through the REV Robotics library, debugged hardware-software issues live, and represented Kenya in international technical forums.</p>
+              <p class="timeline__desc text-fade-in" style="--d:3">Processed 40+ account applications daily with data verification and compliance checks. Resolved 30+ customer inquiries per day on account management and mobile banking systems.</p>
             </article>
           </div>
-        </div>
-      </section>
-
-      <!-- ========== EDUCATION ========== -->
-      <section id="education" class="education" aria-labelledby="education-heading">
-        <div class="container container--narrow">
-          <header class="education__header" data-reveal data-axis="y-up">
-            <p class="section-label text-fade-in" style="--d:0">// where I study</p>
-            <h2 id="education-heading" class="section-title text-fade-in" style="--d:1">my <span class="accent-italic">education</span></h2>
-          </header>
-
-          <article class="education__card" data-reveal data-axis="y-up">
-            <span class="education__dot" aria-hidden="true"></span>
-            <p class="education__date text-fade-in" style="--d:0">2025 — 2029</p>
-            <h3 class="education__school text-fade-in" style="--d:1">Princeton University</h3>
-            <p class="education__degree text-fade-in" style="--d:2">A.B. in Computer Science · Class of 2029</p>
-          </article>
         </div>
       </section>
 
@@ -439,7 +429,6 @@
 
           <div class="contact__actions" data-reveal data-delay="120">
             <a href="mailto:lizzieochieng@gmail.com" class="btn btn--light">lizzieochieng@gmail.com</a>
-            <a href="assets/resume/lisa-ochieng-resume.pdf" class="btn btn--dark" download>↓ download résumé</a>
           </div>
 
           <nav class="contact__social" data-reveal data-delay="220" aria-label="Social links">
