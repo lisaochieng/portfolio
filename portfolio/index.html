@@ -213,11 +213,11 @@
               <p class="section-label">// about me</p>
               <h2 id="about-heading" class="about__heading">hi, I'm Lisa <span class="about__emoji" aria-hidden="true">^_^</span></h2>
               <p class="about__text">I'm a <strong>computer science</strong> student at <strong>Princeton University</strong> (Class of 2029) who loves turning messy ideas into software people actually use. I care about clean code, thoughtful UX, and shipping — not just shipping perfectly.</p>
-              <p class="about__text">From fintech platforms in Nairobi to agentic AI systems on campus, I build across the stack. When I'm not coding, I'm mentoring teammates, exploring Princeton's CS community, or redesigning my dev setup for the hundredth time.</p>
+              <p class="about__text">From study tools and blockchain voting to local agentic RAG systems, I build across the stack. When I'm not coding, I'm mentoring teammates, exploring Princeton's CS community, or redesigning my dev setup for the hundredth time.</p>
               <div class="about__stats">
                 <div class="stat">
-                  <div class="stat__number">5+</div>
-                  <div class="stat__label">projects shipped</div>
+                  <div class="stat__number">3</div>
+                  <div class="stat__label">flagship projects</div>
                 </div>
                 <div class="stat">
                   <div class="stat__number">3</div>
@@ -239,102 +239,70 @@
           <header class="projects__header" data-reveal>
             <p class="section-label">// selected work</p>
             <h2 id="projects-heading" class="section-title">things I've <span class="accent-italic">built</span></h2>
-            <p class="section-subtitle">a few favourites from fintech, edtech, AI, and robotics ↓</p>
+            <p class="section-subtitle">study tools, blockchain voting, and local AI — my real builds ↓</p>
           </header>
 
           <div class="project-grid">
-            <article class="project-card" data-reveal data-delay="0" data-rest="rotate(-1.5deg)">
+            <article class="project-card" data-reveal data-delay="0" data-tilt="-1.5">
               <div class="project-card__tape" aria-hidden="true"></div>
-              <div class="project-card__body">
-                <img class="project-card__img" src="assets/images/project-fastrent.png" alt="FastRent property rental platform screenshot" width="640" height="360" loading="lazy">
-                <div class="project-card__meta">
-                  <h3 class="project-card__title">FastRent</h3>
-                  <span class="project-card__year">2025</span>
+              <div class="project-card__sheet">
+                <div class="project-card__body">
+                  <img class="project-card__img" src="assets/images/project-lock-in.png" alt="Lock In study session app screenshot" width="640" height="360" loading="lazy">
+                  <div class="project-card__meta">
+                    <h3 class="project-card__title">Lock In</h3>
+                    <span class="project-card__year">2025</span>
+                  </div>
+                  <p class="project-card__tagline">calming study-session web app</p>
+                  <p class="project-card__desc">Pomodoro timer, peaceful study spaces, task tracking, progress streaks, and shared study rooms with YouTube ambience — everything saves in your browser.</p>
+                  <div class="tag-list">
+                    <span class="tag">React</span>
+                    <span class="tag">Vite</span>
+                    <span class="tag">TypeScript</span>
+                  </div>
+                  <a href="https://github.com/lisaochieng/lock-in" class="link-arrow" target="_blank" rel="noopener noreferrer">view →</a>
                 </div>
-                <p class="project-card__tagline">property rental marketplace</p>
-                <p class="project-card__desc">Full-stack platform connecting landlords and tenants with verified listings, secure payments, and real-time messaging.</p>
-                <div class="tag-list">
-                  <span class="tag">React</span>
-                  <span class="tag">Node.js</span>
-                  <span class="tag">PostgreSQL</span>
-                </div>
-                <a href="https://github.com/lisaochieng" class="link-arrow" target="_blank" rel="noopener noreferrer">view →</a>
               </div>
             </article>
 
-            <article class="project-card" data-reveal data-delay="80" data-rest="rotate(1.2deg)">
+            <article class="project-card" data-reveal data-delay="100" data-tilt="1.2">
               <div class="project-card__tape project-card__tape--tilt-right" aria-hidden="true"></div>
-              <div class="project-card__body">
-                <img class="project-card__img" src="assets/images/project-somasmart.png" alt="SomaSmart learning platform screenshot" width="640" height="360" loading="lazy">
-                <div class="project-card__meta">
-                  <h3 class="project-card__title">SomaSmart</h3>
-                  <span class="project-card__year">2024</span>
+              <div class="project-card__sheet">
+                <div class="project-card__body">
+                  <img class="project-card__img" src="assets/images/project-evote.png" alt="E-vote blockchain voting platform screenshot" width="640" height="360" loading="lazy">
+                  <div class="project-card__meta">
+                    <h3 class="project-card__title">E-vote</h3>
+                    <span class="project-card__year">2025</span>
+                  </div>
+                  <p class="project-card__tagline">blockchain voting platform</p>
+                  <p class="project-card__desc">Decentralized elections on Ethereum — immutable vote recording, MetaMask auth, real-time Chart.js results, and admin tools for tamper-proof voting.</p>
+                  <div class="tag-list">
+                    <span class="tag">Solidity</span>
+                    <span class="tag">Node.js</span>
+                    <span class="tag">MongoDB</span>
+                  </div>
+                  <a href="https://github.com/lisaochieng/evote-blockchain" class="link-arrow" target="_blank" rel="noopener noreferrer">view →</a>
                 </div>
-                <p class="project-card__tagline">adaptive learning for students</p>
-                <p class="project-card__desc">Edtech platform with personalized study paths, progress tracking, and interactive quizzes for secondary school learners.</p>
-                <div class="tag-list">
-                  <span class="tag">Next.js</span>
-                  <span class="tag">Firebase</span>
-                  <span class="tag">TypeScript</span>
-                </div>
-                <a href="https://github.com/lisaochieng" class="link-arrow" target="_blank" rel="noopener noreferrer">view →</a>
               </div>
             </article>
 
-            <article class="project-card" data-reveal data-delay="160" data-rest="rotate(-1deg)">
+            <article class="project-card" data-reveal data-delay="200" data-tilt="-1">
               <div class="project-card__tape project-card__tape--tilt-left" aria-hidden="true"></div>
-              <div class="project-card__body">
-                <img class="project-card__img" src="assets/images/project-epuka.png" alt="Epuka road safety application screenshot" width="640" height="360" loading="lazy">
-                <div class="project-card__meta">
-                  <h3 class="project-card__title">Epuka</h3>
-                  <span class="project-card__year">2024</span>
+              <div class="project-card__sheet">
+                <div class="project-card__body">
+                  <img class="project-card__img" src="assets/images/project-rag.png" alt="Agentic RAG document explorer interface" width="640" height="360" loading="lazy">
+                  <div class="project-card__meta">
+                    <h3 class="project-card__title">Agentic RAG</h3>
+                    <span class="project-card__year">2026</span>
+                  </div>
+                  <p class="project-card__tagline">local AI document assistant</p>
+                  <p class="project-card__desc">LangGraph state machine over Qdrant and Ollama — hierarchical PDF indexing with strict context boundaries and a Gradio chat UI.</p>
+                  <div class="tag-list">
+                    <span class="tag">LangGraph</span>
+                    <span class="tag">Qdrant</span>
+                    <span class="tag">Ollama</span>
+                  </div>
+                  <a href="https://github.com/lisaochieng/agentic-rag" class="link-arrow" target="_blank" rel="noopener noreferrer">view →</a>
                 </div>
-                <p class="project-card__tagline">road safety &amp; incident reporting</p>
-                <p class="project-card__desc">Mobile-first app for reporting road hazards, sharing safety alerts, and building community-driven traffic awareness.</p>
-                <div class="tag-list">
-                  <span class="tag">React Native</span>
-                  <span class="tag">Maps API</span>
-                  <span class="tag">Python</span>
-                </div>
-                <a href="https://github.com/lisaochieng" class="link-arrow" target="_blank" rel="noopener noreferrer">view →</a>
-              </div>
-            </article>
-
-            <article class="project-card" data-reveal data-delay="240" data-rest="rotate(1.5deg)">
-              <div class="project-card__tape project-card__tape--tilt-far-left" aria-hidden="true"></div>
-              <div class="project-card__body">
-                <img class="project-card__img" src="assets/images/project-rag.png" alt="Agentic RAG project interface screenshot" width="640" height="360" loading="lazy">
-                <div class="project-card__meta">
-                  <h3 class="project-card__title">Agentic RAG Project</h3>
-                  <span class="project-card__year">2025</span>
-                </div>
-                <p class="project-card__tagline">retrieval-augmented AI agents</p>
-                <p class="project-card__desc">Multi-agent system that retrieves, reasons over, and cites documents — built for research workflows and technical Q&amp;A.</p>
-                <div class="tag-list">
-                  <span class="tag">Python</span>
-                  <span class="tag">LangChain</span>
-                  <span class="tag">Vector DB</span>
-                </div>
-                <a href="https://github.com/lisaochieng" class="link-arrow" target="_blank" rel="noopener noreferrer">view →</a>
-              </div>
-            </article>
-
-            <article class="project-card" data-reveal data-delay="320" data-rest="rotate(1deg)">
-              <div class="project-card__tape" aria-hidden="true"></div>
-              <div class="project-card__body">
-                <img class="project-card__img" src="assets/images/project-robotics.png" alt="FIRST Global Robotics team and robot" width="640" height="360" loading="lazy">
-                <div class="project-card__meta">
-                  <h3 class="project-card__title">FIRST Global Robotics</h3>
-                  <span class="project-card__year">2023</span>
-                </div>
-                <p class="project-card__tagline">international robotics competition</p>
-                <p class="project-card__desc">Designed and programmed competition robots for FIRST Global, leading software integration, sensor fusion, and autonomous routines.</p>
-                <div class="tag-list">
-                  <span class="tag">C++</span>
-                  <span class="tag">ROS</span>
-                  <span class="tag">Computer Vision</span>
-                </div>
-                <a href="https://github.com/lisaochieng" class="link-arrow" target="_blank" rel="noopener noreferrer">view →</a>
               </div>
             </article>
           </div>

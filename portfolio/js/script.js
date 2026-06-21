@@ -1,6 +1,6 @@
 /**
  * Lisa Ochieng Portfolio — interactions
- * Scroll progress, reveal animations, parallax, card tilt, mobile nav.
+ * Scroll progress, reveal animations, parallax, taped-card lift, mobile nav.
  */
 (function () {
   'use strict';
@@ -9,8 +9,12 @@
   if (!scroller) return;
 
   const prog = document.getElementById('scroll-prog');
+  const siteHeader = document.querySelector('.site-header');
   const navToggle = document.querySelector('.site-nav__toggle');
   const navLinks = document.querySelector('.site-nav__links');
+
+  let progressTarget = 0;
+  let progressCurrent = 0;
 
   /* --- Mobile navigation ------------------------------------------------- */
   if (navToggle && navLinks) {
@@ -28,12 +32,24 @@
     });
   }
 
-  /* --- Scroll progress bar ----------------------------------------------- */
-  function updateScrollProgress() {
+  /* --- Scroll progress bar (smoothed) ------------------------------------ */
+  function updateScrollProgressTarget() {
     if (!prog) return;
     const h = scroller.scrollHeight - scroller.clientHeight;
-    const pct = h > 0 ? Math.max(0, Math.min(100, (scroller.scrollTop / h) * 100)) : 0;
-    prog.style.width = pct + '%';
+    progressTarget = h > 0 ? Math.max(0, Math.min(100, (scroller.scrollTop / h) * 100)) : 0;
+    if (siteHeader) {
+      siteHeader.classList.toggle('is-scrolled', scroller.scrollTop > 24);
+    }
+  }
+
+  function tickProgress() {
+    if (!prog) return;
+    progressCurrent += (progressTarget - progressCurrent) * 0.14;
+    if (Math.abs(progressTarget - progressCurrent) < 0.05) {
+      progressCurrent = progressTarget;
+    }
+    prog.style.width = progressCurrent + '%';
+    prog.setAttribute('aria-valuenow', String(Math.round(progressCurrent)));
   }
 
   /* --- Hero pointer parallax --------------------------------------------- */
@@ -59,47 +75,58 @@
     });
   }
 
-  /* --- Project card 3D tilt (event delegation) --------------------------- */
+  /* --- Project cards: taped-top lift toward viewer ----------------------- */
   const projects = document.getElementById('projects');
-  if (projects) {
-    projects.addEventListener(
-      'mousemove',
-      function (e) {
-        const card = e.target.closest && e.target.closest('.project-card');
-        if (!card) return;
-        card.__hover = true;
-        const r = card.getBoundingClientRect();
-        const px = (e.clientX - r.left) / r.width - 0.5;
-        const py = (e.clientY - r.top) / r.height - 0.5;
-        card.style.transition = 'transform 0.1s ease, box-shadow 0.3s ease';
-        card.style.transform =
-          'rotateY(' +
-          (px * 7).toFixed(2) +
-          'deg) rotateX(' +
-          (-py * 7).toFixed(2) +
-          'deg) translateY(-8px) scale(1.025)';
-        card.style.boxShadow = '0 26px 40px rgba(60,40,20,.30)';
-        card.style.zIndex = '6';
-      },
-      { passive: true }
-    );
 
-    projects.addEventListener('mouseout', function (e) {
-      const card = e.target.closest && e.target.closest('.project-card');
-      if (!card) return;
-      if (e.relatedTarget && card.contains(e.relatedTarget)) return;
-      card.__hover = false;
-      card.style.transition = 'transform 0.55s cubic-bezier(.2,.7,.2,1), box-shadow 0.35s ease';
-      card.style.transform = card.getAttribute('data-rest') || 'none';
-      card.style.boxShadow = '0 8px 16px rgba(60,40,20,.16)';
-      card.style.zIndex = '';
+  function resetCardLift(card) {
+    const sheet = card.querySelector('.project-card__sheet');
+    if (!sheet) return;
+    card.classList.remove('is-lifted');
+    sheet.style.setProperty('--lift-x', '0deg');
+    sheet.style.setProperty('--lift-y', '0px');
+    sheet.style.setProperty('--lift-z', '0px');
+  }
+
+  function applyCardLift(card, clientY) {
+    const sheet = card.querySelector('.project-card__sheet');
+    if (!sheet) return;
+    const r = card.getBoundingClientRect();
+    const py = Math.max(0, Math.min(1, (clientY - r.top) / r.height));
+    /* Bottom of card lifts more — pivots from tape at top */
+    const liftY = -(10 + py * 18);
+    const liftX = -(5 + py * 11);
+    const liftZ = 12 + py * 28;
+    card.classList.add('is-lifted');
+    sheet.style.setProperty('--lift-y', liftY.toFixed(1) + 'px');
+    sheet.style.setProperty('--lift-x', liftX.toFixed(2) + 'deg');
+    sheet.style.setProperty('--lift-z', liftZ.toFixed(1) + 'px');
+  }
+
+  if (projects) {
+    projects.querySelectorAll('.project-card').forEach(function (card) {
+      card.addEventListener('mouseenter', function (e) {
+        applyCardLift(card, e.clientY);
+      });
+      card.addEventListener('mousemove', function (e) {
+        applyCardLift(card, e.clientY);
+      }, { passive: true });
+      card.addEventListener('mouseleave', function () {
+        resetCardLift(card);
+      });
+      card.addEventListener('touchstart', function () {
+        applyCardLift(card, card.getBoundingClientRect().top + card.offsetHeight * 0.65);
+      }, { passive: true });
+      card.addEventListener('touchend', function () {
+        resetCardLift(card);
+      });
     });
   }
 
   /* --- Main animation loop ----------------------------------------------- */
   function frame() {
     const vh = scroller.clientHeight;
-    const scrollTop = scroller.scrollTop;
+
+    tickProgress();
 
     /* Scroll reveal */
     const revs = scroller.querySelectorAll('[data-reveal]');
@@ -112,9 +139,6 @@
           const delay = parseInt(el.getAttribute('data-delay') || '0', 10);
           el.style.transitionDelay = delay + 'ms';
           el.classList.add('is-visible');
-        }
-        if (!el.__hover && el.classList.contains('project-card')) {
-          /* project cards manage transform via data-rest + is-visible in CSS */
         }
       }
     }
@@ -166,8 +190,8 @@
     requestAnimationFrame(frame);
   }
 
-  scroller.addEventListener('scroll', updateScrollProgress, { passive: true });
-  window.addEventListener('resize', updateScrollProgress);
-  updateScrollProgress();
+  scroller.addEventListener('scroll', updateScrollProgressTarget, { passive: true });
+  window.addEventListener('resize', updateScrollProgressTarget);
+  updateScrollProgressTarget();
   requestAnimationFrame(frame);
 })();
