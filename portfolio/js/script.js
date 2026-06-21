@@ -189,12 +189,6 @@
       card.addEventListener('mouseleave', function () {
         card.classList.remove('is-lifted');
       });
-      card.addEventListener('focusin', function () {
-        card.classList.add('is-lifted');
-      });
-      card.addEventListener('focusout', function () {
-        card.classList.remove('is-lifted');
-      });
     });
   }
 
