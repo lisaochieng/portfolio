@@ -4,7 +4,7 @@ A clean, deployment-ready personal portfolio with a scrapbook / journal aestheti
 
 ## Live preview
 
-Open `index.html` directly in a browser, or serve the folder locally:
+**Open the inner folder** — the real site is at `portfolio/index.html` inside this directory (not the old bundled export at the repo root).
 
 ```bash
 cd portfolio
