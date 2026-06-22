@@ -18,6 +18,8 @@
   let progressTarget = 0;
   let progressCurrent = 0;
   let frameActive = false;
+  let scrollPending = false;
+  let heroInView = true;
 
   /* --- Page ready -------------------------------------------------------- */
   function initPageReady() {
@@ -78,16 +80,27 @@
     });
   }
 
-  /* --- Scroll progress bar (smoothed) ------------------------------------ */
-  function updateScrollProgressTarget() {
-    if (!prog) return;
-    const h = getScrollHeight() - getClientHeight();
-    progressTarget = h > 0 ? Math.max(0, Math.min(100, (getScrollTop() / h) * 100)) : 0;
-    if (siteHeader) {
-      siteHeader.classList.toggle('is-scrolled', getScrollTop() > 24);
+  function updateScrollMetrics() {
+    if (prog) {
+      const h = getScrollHeight() - getClientHeight();
+      progressTarget = h > 0 ? Math.max(0, Math.min(100, (getScrollTop() / h) * 100)) : 0;
     }
     updateActiveNav();
-    requestFrame();
+  }
+
+  function scheduleScrollWork() {
+    if (scrollPending) return;
+    scrollPending = true;
+    requestAnimationFrame(function () {
+      scrollPending = false;
+      updateScrollMetrics();
+      requestFrame();
+    });
+  }
+
+  /* --- Scroll progress bar (smoothed, transform-based) ------------------- */
+  function updateScrollProgressTarget() {
+    scheduleScrollWork();
   }
 
   function tickProgress() {
@@ -95,14 +108,31 @@
     const delta = progressTarget - progressCurrent;
     if (Math.abs(delta) < 0.05) {
       progressCurrent = progressTarget;
-      prog.style.width = progressCurrent + '%';
+      prog.style.transform = 'scaleX(' + (progressCurrent / 100) + ')';
       prog.setAttribute('aria-valuenow', String(Math.round(progressCurrent)));
+      if (Math.abs(progressCurrent) < 0.05 || Math.abs(progressCurrent - 100) < 0.05) {
+        prog.style.willChange = 'auto';
+      }
       return false;
     }
     progressCurrent += delta * 0.12;
-    prog.style.width = progressCurrent + '%';
+    prog.style.willChange = 'transform';
+    prog.style.transform = 'scaleX(' + (progressCurrent / 100) + ')';
     prog.setAttribute('aria-valuenow', String(Math.round(progressCurrent)));
     return true;
+  }
+
+  /* --- Nav state via hero visibility (initialized after hero ref) ---------- */
+  function initNavHeroObserver(heroEl) {
+    if (!siteHeader || !heroEl || !('IntersectionObserver' in window)) return;
+    const navObserver = new IntersectionObserver(
+      function (entries) {
+        heroInView = entries[0].isIntersecting;
+        siteHeader.classList.toggle('is-scrolled', !heroInView);
+      },
+      { root: null, threshold: 0, rootMargin: '-72px 0px 0px 0px' }
+    );
+    navObserver.observe(heroEl);
   }
 
   /* --- Stagger child chips inside revealed groups ------------------------ */
@@ -114,16 +144,38 @@
     });
   }
 
+  function clearRevealWillChange(el) {
+    function onEnd(e) {
+      if (e.target !== el) return;
+      if (e.propertyName !== 'transform' && e.propertyName !== 'opacity') return;
+      el.style.willChange = 'auto';
+      el.removeEventListener('transitionend', onEnd);
+    }
+    el.addEventListener('transitionend', onEnd);
+  }
+
   /* --- Reveal an element and its text children --------------------------- */
   function revealElement(el) {
-    const delay = parseInt(el.getAttribute('data-delay') || '0', 10);
-    const texts = el.querySelectorAll('.text-fade-in');
+    let delay = parseInt(el.getAttribute('data-delay') || '0', 10);
+
+    if (el.classList.contains('project-card')) {
+      const cards = document.querySelectorAll('.project-card[data-reveal]');
+      for (let i = 0; i < cards.length; i++) {
+        if (cards[i] === el) {
+          delay = i * 80;
+          el.style.setProperty('--reveal-delay', String(delay));
+          break;
+        }
+      }
+    }
 
     setTimeout(function () {
+      el.style.willChange = 'transform, opacity';
       el.classList.add('is-visible');
+      clearRevealWillChange(el);
       staggerSkillChips(el);
 
-      texts.forEach(function (text) {
+      el.querySelectorAll('.text-fade-in').forEach(function (text) {
         text.classList.add('is-visible');
       });
     }, delay);
@@ -204,6 +256,8 @@
   const parallaxEls = document.querySelectorAll('[data-parallax]');
   const mouseEls = document.querySelectorAll('[data-mouse]');
 
+  initNavHeroObserver(hero);
+
   if (hero && !prefersReducedMotion) {
     hero.addEventListener(
       'mousemove',
@@ -241,6 +295,16 @@
     };
   }
 
+  function applyPanTransform(state) {
+    const baseScale = state.isRag ? 1.32 : 1.12;
+    const hoverScale = state.hovered ? 1.03 : 1;
+    const scale = baseScale * hoverScale;
+    const panX = ((50 - state.x) / 50) * (state.isRag ? 12 : 5);
+    const panY = ((50 - state.y) / 50) * (state.isRag ? 4 : 3);
+    state.img.style.transform =
+      'scale(' + scale.toFixed(3) + ') translate3d(' + panX.toFixed(2) + '%, ' + panY.toFixed(2) + '%, 0)';
+  }
+
   function tickProjectPans() {
     if (!projectPanStates.length || !projectsVisible || prefersReducedMotion) return false;
 
@@ -271,8 +335,7 @@
         moving = true;
       }
 
-      state.img.style.objectPosition =
-        state.x.toFixed(2) + '% ' + state.y.toFixed(2) + '%';
+      applyPanTransform(state);
     }
 
     return moving || projectPanStates.some(function (s) { return !s.hovered; });
@@ -323,11 +386,13 @@
       };
 
       projectPanStates.push(state);
-      img.style.objectPosition = start.x.toFixed(2) + '% ' + start.y.toFixed(2) + '%';
+      applyPanTransform(state);
 
       if (canHover) {
         wrap.addEventListener('mouseenter', function () {
           state.hovered = true;
+          state.img.style.willChange = 'transform';
+          requestFrame();
         });
 
         wrap.addEventListener('mousemove', function (e) {
@@ -339,6 +404,7 @@
 
         wrap.addEventListener('mouseleave', function () {
           state.hovered = false;
+          state.img.style.willChange = 'auto';
           requestFrame();
         });
       }
@@ -372,40 +438,42 @@
     if (!prefersReducedMotion) {
       const vh = getClientHeight();
 
-      for (let i = 0; i < parallaxEls.length; i++) {
-        const el = parallaxEls[i];
-        if (el.__cur === undefined) el.__cur = 0;
-        const r = el.getBoundingClientRect();
-        if (r.bottom < -80 || r.top > vh + 80) continue;
-        const sp = parseFloat(el.getAttribute('data-parallax')) || 0.1;
-        const target = -(r.top + r.height / 2 - vh / 2) * sp;
-        const prev = el.__cur;
-        el.__cur += (target - el.__cur) * 0.06;
-        if (Math.abs(el.__cur - prev) > 0.05) {
-          el.style.transform = 'translate3d(0,' + el.__cur.toFixed(2) + 'px,0)';
-          keepRunning = true;
+      if (heroInView) {
+        for (let i = 0; i < parallaxEls.length; i++) {
+          const el = parallaxEls[i];
+          if (el.__cur === undefined) el.__cur = 0;
+          const r = el.getBoundingClientRect();
+          if (r.bottom < -80 || r.top > vh + 80) continue;
+          const sp = parseFloat(el.getAttribute('data-parallax')) || 0.1;
+          const target = -(r.top + r.height / 2 - vh / 2) * sp;
+          const prev = el.__cur;
+          el.__cur += (target - el.__cur) * 0.06;
+          if (Math.abs(el.__cur - prev) > 0.05) {
+            el.style.transform = 'translate3d(0,' + el.__cur.toFixed(2) + 'px,0)';
+            keepRunning = true;
+          }
         }
-      }
 
-      if (parallaxActive || Math.abs(tpx - pmx) > 0.002 || Math.abs(tpy - pmy) > 0.002) {
-        pmx += (tpx - pmx) * 0.05;
-        pmy += (tpy - pmy) * 0.05;
-        for (let i = 0; i < mouseEls.length; i++) {
-          const el = mouseEls[i];
-          const depth = parseFloat(el.getAttribute('data-mouse')) || 10;
-          const base = el.getAttribute('data-base') || '';
-          el.style.transform =
-            base +
-            ' translate3d(' +
-            (pmx * depth).toFixed(2) +
-            'px,' +
-            (pmy * depth).toFixed(2) +
-            'px,0)';
-        }
-        if (Math.abs(tpx - pmx) > 0.002 || Math.abs(tpy - pmy) > 0.002) {
-          keepRunning = true;
-        } else {
-          parallaxActive = false;
+        if (parallaxActive || Math.abs(tpx - pmx) > 0.002 || Math.abs(tpy - pmy) > 0.002) {
+          pmx += (tpx - pmx) * 0.05;
+          pmy += (tpy - pmy) * 0.05;
+          for (let i = 0; i < mouseEls.length; i++) {
+            const el = mouseEls[i];
+            const depth = parseFloat(el.getAttribute('data-mouse')) || 10;
+            const base = el.getAttribute('data-base') || '';
+            el.style.transform =
+              base +
+              ' translate3d(' +
+              (pmx * depth).toFixed(2) +
+              'px,' +
+              (pmy * depth).toFixed(2) +
+              'px,0)';
+          }
+          if (Math.abs(tpx - pmx) > 0.002 || Math.abs(tpy - pmy) > 0.002) {
+            keepRunning = true;
+          } else {
+            parallaxActive = false;
+          }
         }
       }
 

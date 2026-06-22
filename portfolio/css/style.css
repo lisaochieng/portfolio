@@ -48,10 +48,15 @@
 
   --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
   --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-spring: cubic-bezier(0.34, 1.15, 0.64, 1);
-  --transition-fast: 0.2s var(--ease-smooth);
-  --transition-base: 0.32s var(--ease-smooth);
-  --transition-slow: 0.55s var(--ease-smooth);
+  --dur-fast: 220ms;
+  --dur-med: 600ms;
+  --dur-reveal: 650ms;
+  --transition-fast: var(--dur-fast) var(--ease-out-expo);
+  --transition-base: 320ms var(--ease-out-expo);
+  --transition-slow: 550ms var(--ease-out-expo);
+  --transition-reveal: var(--dur-reveal) var(--ease-out-expo);
 }
 
 /* --- Reset & base -------------------------------------------------------- */
@@ -120,8 +125,8 @@ a {
 }
 
 @keyframes heroRise {
-  from { transform: translateY(20px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+  from { opacity: 0; transform: translate3d(0, 16px, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
 }
 
 @keyframes scrapbookSettle {
@@ -215,10 +220,12 @@ a {
   top: 0;
   left: 0;
   height: 4px;
-  width: 0%;
+  width: 100%;
   background: var(--color-accent);
   z-index: 120;
-  transition: width 0.1s linear;
+  transform: scaleX(0);
+  transform-origin: left center;
+  will-change: transform;
 }
 
 /* --- Header & navigation ------------------------------------------------- */
@@ -231,6 +238,7 @@ a {
 }
 
 .site-nav {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -240,13 +248,32 @@ a {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1.5px solid rgba(26, 26, 26, 0.85);
-  transition: background var(--transition-base), box-shadow var(--transition-base), padding var(--transition-base);
+  transition:
+    background var(--dur-med) var(--ease-out-expo),
+    padding var(--dur-fast) var(--ease-out-expo),
+    border-color var(--dur-med) var(--ease-out-expo);
+}
+
+.site-nav::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  box-shadow: 0 6px 24px rgba(60, 40, 20, 0.08);
+  opacity: 0;
+  transition: opacity var(--dur-med) var(--ease-out-expo);
+  pointer-events: none;
+  z-index: -1;
 }
 
 .site-header.is-scrolled .site-nav {
-  background: rgba(243, 236, 224, 0.95);
-  box-shadow: 0 6px 24px rgba(60, 40, 20, 0.08);
+  background: rgba(243, 236, 224, 0.94);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   padding-block: 0.75rem;
+}
+
+.site-header.is-scrolled .site-nav::after {
+  opacity: 1;
 }
 
 .site-nav__logo {
@@ -275,7 +302,15 @@ a {
   text-decoration: none;
   padding: 0.45rem 0.8rem;
   border-radius: 5px;
-  transition: background var(--transition-base), transform var(--transition-base), color var(--transition-base);
+  transition:
+    background var(--transition-fast),
+    transform var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.site-nav__link:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
 }
 
 .site-nav__link.is-active {
@@ -286,7 +321,6 @@ a {
 .site-nav__link:hover,
 .site-nav__link:focus-visible {
   background: rgba(197, 138, 130, 0.2);
-  outline: none;
 }
 
 .site-nav__link:nth-child(even):hover,
@@ -568,7 +602,7 @@ body.is-ready .hero__doodle--flower {
   font-weight: 500;
   font-size: clamp(3.5rem, 10vw, 5.875rem);
   color: var(--color-ink);
-  animation: heroRise 0.9s var(--ease-out) both;
+  animation: heroRise 0.85s var(--ease-out-expo) both;
 }
 
 .hero__name-line--accent {
@@ -585,7 +619,7 @@ body.is-ready .hero__doodle--flower {
   color: var(--color-ink);
   margin: 1rem 0 0;
   max-width: 27rem;
-  animation: heroRise 0.8s var(--ease-out) both;
+  animation: heroRise 0.75s var(--ease-out-expo) both;
   animation-delay: 0.14s;
 }
 
@@ -602,7 +636,7 @@ body.is-ready .hero__doodle--flower {
   gap: 0.625rem;
   flex-wrap: wrap;
   margin-top: 1.5rem;
-  animation: heroRise 0.8s var(--ease-out) both;
+  animation: heroRise 0.75s var(--ease-out-expo) both;
   animation-delay: 0.24s;
 }
 
@@ -636,7 +670,7 @@ body.is-ready .hero__doodle--flower {
   gap: 0.75rem;
   flex-wrap: wrap;
   margin-top: 1.75rem;
-  animation: heroRise 0.8s var(--ease-out) both;
+  animation: heroRise 0.75s var(--ease-out-expo) both;
   animation-delay: 0.34s;
 }
 
@@ -650,15 +684,14 @@ body.is-ready .hero__doodle--flower {
   padding: 0.8rem 1.375rem;
   border-radius: 999px;
   border: 1.5px solid transparent;
-  transition: transform var(--transition-base), background var(--transition-base), box-shadow var(--transition-base);
+  transition: transform var(--transition-fast), background var(--transition-fast);
   cursor: pointer;
   display: inline-block;
 }
 
-.btn:hover,
 .btn:focus-visible {
-  outline: none;
-  box-shadow: 0 6px 18px rgba(60, 40, 20, 0.1);
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
 }
 
 .btn--primary {
@@ -737,17 +770,28 @@ body.is-ready .hero__doodle--flower {
 /* Hero portrait — large rounded square, straight and clean */
 .hero-portrait {
   margin: 0;
-  animation: heroPortraitIn 0.8s var(--ease-smooth) 0.2s both;
+  animation: heroPortraitIn 0.8s var(--ease-out-expo) 0.2s both;
+}
+
+@keyframes heroRise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
 }
 
 @keyframes heroPortraitIn {
   from {
     opacity: 0;
-    transform: translateY(16px);
+    transform: translate3d(0, 16px, 0);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translate3d(0, 0, 0);
   }
 }
 
@@ -786,6 +830,13 @@ body.is-ready .hero__doodle--flower {
   object-position: center bottom;
   image-orientation: from-image;
   filter: brightness(1.04) saturate(1.06) contrast(1.02) sepia(0.14);
+  transition: transform var(--transition-fast);
+  transform: scale(1);
+}
+
+.hero-portrait:hover .hero-portrait__img,
+.hero-portrait:focus-within .hero-portrait__img {
+  transform: scale(1.03);
 }
 
 .hero__callout {
@@ -1019,13 +1070,19 @@ body.is-ready .hero__doodle--flower {
   flex-wrap: nowrap;
   width: max-content;
   animation: marquee 32s linear infinite;
-  will-change: transform;
   font-family: var(--font-mono);
   font-weight: 700;
   font-size: 0.875rem;
   letter-spacing: 0.18em;
   color: var(--color-cream);
   text-transform: uppercase;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+}
+
+.marquee-band:hover .marquee-band__track,
+.marquee-band:focus-within .marquee-band__track {
+  animation-play-state: paused;
 }
 
 .marquee-band__text {
@@ -1165,12 +1222,11 @@ body.is-ready .hero__doodle--flower {
   background: var(--color-cream-deep);
   border: 1px solid var(--color-border);
   border-radius: 10px;
-  transition: transform var(--transition-base), box-shadow var(--transition-base);
+  transition: transform var(--transition-fast);
 }
 
 .stat:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(60, 40, 20, 0.07);
+  transform: translateY(-4px);
 }
 
 .stat__number {
@@ -1224,20 +1280,29 @@ body.is-ready .hero__doodle--flower {
   position: relative;
 }
 
-.project-card:not(:has(.text-fade-in)) {
+.project-card[data-reveal] {
   opacity: 0;
-  transform: translateY(18px);
-  transition: opacity 0.65s var(--ease-smooth), transform 0.65s var(--ease-smooth);
+  transform: translate3d(0, 16px, 0);
+  transition:
+    opacity var(--transition-reveal),
+    transform var(--transition-reveal);
+  transition-delay: calc(var(--reveal-delay, 0) * 1ms);
 }
 
-.project-card:not(:has(.text-fade-in)).is-visible {
+.project-card[data-reveal].is-visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: translate3d(0, 0, 0);
 }
 
-.project-card:has(.text-fade-in) {
+.project-card:not([data-reveal]):not(:has(.text-fade-in)) {
+  opacity: 0;
+  transform: translate3d(0, 16px, 0);
+  transition: opacity var(--transition-reveal), transform var(--transition-reveal);
+}
+
+.project-card:not([data-reveal]):not(:has(.text-fade-in)).is-visible {
   opacity: 1;
-  transform: none;
+  transform: translate3d(0, 0, 0);
 }
 
 .project-card.is-lifted {
@@ -1249,7 +1314,7 @@ body.is-ready .hero__doodle--flower {
   padding-top: 12px;
   --card-rotate: -1.5deg;
   transform: rotate(var(--card-rotate));
-  transition: transform 0.45s var(--ease-smooth);
+  transition: transform var(--transition-fast);
 }
 
 .project-card[data-tilt="-1.5"] .project-card__lift { --card-rotate: -1.5deg; }
@@ -1257,7 +1322,31 @@ body.is-ready .hero__doodle--flower {
 .project-card[data-tilt="-1"] .project-card__lift { --card-rotate: -1deg; }
 
 .project-card.is-lifted .project-card__lift {
-  transform: rotate(var(--card-rotate)) translateY(-3px);
+  transform: rotate(var(--card-rotate)) translate3d(0, -4px, 0);
+}
+
+.project-card__sheet {
+  position: relative;
+  z-index: 1;
+  background: var(--color-paper-warm);
+  border: 1.5px solid var(--color-border-card);
+  border-radius: 2px;
+  box-shadow: var(--shadow-card);
+}
+
+.project-card__sheet::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: 0 14px 28px rgba(60, 40, 20, 0.14);
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+  pointer-events: none;
+}
+
+.project-card.is-lifted .project-card__sheet::after {
+  opacity: 1;
 }
 
 .project-card__tape {
@@ -1282,22 +1371,6 @@ body.is-ready .hero__doodle--flower {
 
 .project-card__tape--tilt-right { transform: translateX(-50%) rotate(5deg); }
 .project-card__tape--tilt-left { transform: translateX(-50%) rotate(3deg); }
-
-.project-card__sheet {
-  position: relative;
-  z-index: 1;
-  background: var(--color-paper-warm);
-  border: 1.5px solid var(--color-border-card);
-  border-radius: 2px;
-  box-shadow: var(--shadow-card);
-  transition: box-shadow 0.45s var(--ease-smooth);
-}
-
-.project-card.is-lifted .project-card__sheet {
-  box-shadow:
-    0 3px 6px rgba(60, 40, 20, 0.06),
-    0 14px 28px rgba(60, 40, 20, 0.14);
-}
 
 .project-card__body {
   position: relative;
@@ -1343,14 +1416,16 @@ body.is-ready .hero__doodle--flower {
   object-fit: cover;
   object-position: center center;
   filter: sepia(0.12) saturate(1.05) brightness(1.02);
-  transition: filter 0.35s var(--ease-smooth);
-  will-change: object-position;
+  transition: filter var(--transition-fast);
+  transform: scale(1.12) translate3d(0, 0, 0);
+  transform-origin: center center;
+  backface-visibility: hidden;
 }
 
 .project-card__img--rag {
-  object-fit: cover;
   object-position: 72% 42%;
   filter: contrast(1.08) brightness(1.06) saturate(1.03);
+  transform: scale(1.32) translate3d(0, 0, 0);
 }
 
 .project-card.is-lifted .project-card__img {
@@ -1424,14 +1499,19 @@ body.is-ready .hero__doodle--flower {
   border-bottom: 2px solid var(--color-accent);
   padding: 0.35rem 0 0.3rem;
   margin-top: 0.125rem;
-  transition: color var(--transition-fast), border-color var(--transition-fast);
+  transition: color var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
 }
 
 .link-arrow:hover,
 .link-arrow:focus-visible {
   color: var(--color-accent);
   border-bottom-color: var(--color-accent-dark);
-  outline: none;
+  transform: translate3d(3px, 0, 0);
+}
+
+.link-arrow:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
 }
 
 .project-card .link-arrow {
@@ -1498,10 +1578,10 @@ body.is-ready .hero__doodle--flower {
   padding: 0.5625rem 0.9375rem;
   border-radius: 8px;
   opacity: 0;
-  transform: translateY(10px);
+  transform: translate3d(0, 10px, 0);
   transition:
-    opacity 0.5s var(--ease-smooth),
-    transform 0.5s var(--ease-smooth),
+    opacity var(--transition-reveal),
+    transform var(--transition-reveal),
     background var(--transition-fast),
     border-color var(--transition-fast),
     color var(--transition-fast);
@@ -1510,7 +1590,7 @@ body.is-ready .hero__doodle--flower {
 .is-visible .skill-chip.is-staggered,
 [data-reveal].is-visible .skill-chip {
   opacity: 1;
-  transform: translateY(0);
+  transform: translate3d(0, 0, 0);
 }
 
 .skill-chip:hover,
@@ -1519,7 +1599,12 @@ body.is-ready .hero__doodle--flower {
   background: var(--color-accent);
   border-color: var(--color-accent);
   color: #fff;
-  transform: translateY(-2px);
+  transform: translate3d(0, -4px, 0);
+}
+
+.skill-chip:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
 }
 
 /* --- Experience ---------------------------------------------------------- */
@@ -1756,14 +1841,11 @@ body.is-ready .hero__doodle--flower {
 /* --- Staggered text reveal on scroll ------------------------------------- */
 .text-fade-in {
   opacity: 0;
-  transform: translateY(2rem) scale(0.96);
-  filter: blur(8px);
+  transform: translate3d(0, 16px, 0);
   transition:
-    opacity 1s var(--ease-smooth),
-    transform 1s var(--ease-smooth),
-    filter 1s var(--ease-smooth);
-  transition-delay: calc(var(--d, 0) * 110ms);
-  will-change: opacity, transform, filter;
+    opacity var(--transition-reveal),
+    transform var(--transition-reveal);
+  transition-delay: calc(var(--d, 0) * 80ms);
 }
 
 .is-visible .text-fade-in,
@@ -1771,22 +1853,21 @@ body.is-ready .hero__doodle--flower {
 [data-reveal].is-visible .text-fade-in,
 .timeline__item.is-visible .text-fade-in {
   opacity: 1;
-  transform: translateY(0) scale(1);
-  filter: blur(0);
+  transform: translate3d(0, 0, 0);
 }
 
 /* --- Scroll reveal utility ----------------------------------------------- */
 [data-reveal]:not(.project-card):not(:has(.text-fade-in)) {
   opacity: 0;
-  transform: translateY(22px);
+  transform: translate3d(0, 16px, 0);
   transition:
-    opacity 0.75s var(--ease-smooth),
-    transform 0.75s var(--ease-smooth);
+    opacity var(--transition-reveal),
+    transform var(--transition-reveal);
 }
 
 [data-reveal]:not(.project-card):not(:has(.text-fade-in)).is-visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: translate3d(0, 0, 0);
 }
 
 [data-reveal]:has(.text-fade-in):not(.project-card) {
@@ -1795,19 +1876,19 @@ body.is-ready .hero__doodle--flower {
 }
 
 [data-reveal][data-axis="x"]:not(.project-card):not(:has(.text-fade-in)) {
-  transform: translateX(18px);
+  transform: translate3d(18px, 0, 0);
 }
 
 [data-reveal][data-axis="x"]:not(.project-card):not(:has(.text-fade-in)).is-visible {
-  transform: translateX(0);
+  transform: translate3d(0, 0, 0);
 }
 
 [data-reveal][data-axis="y-up"]:not(.project-card):not(:has(.text-fade-in)) {
-  transform: translateY(28px) scale(0.98);
+  transform: translate3d(0, 16px, 0);
 }
 
 [data-reveal][data-axis="y-up"]:not(.project-card):not(:has(.text-fade-in)).is-visible {
-  transform: translateY(0) scale(1);
+  transform: translate3d(0, 0, 0);
 }
 
 /* --- SVG filters (hidden) ------------------------------------------------ */
@@ -1990,12 +2071,20 @@ body.is-ready .hero__doodle--flower {
     animation: none;
   }
 
-  .hero-portrait {
-    opacity: 1;
+  .hero-portrait,
+  .hero__name-line,
+  .hero__tagline,
+  .hero__badges,
+  .hero__actions {
     animation: none;
+    opacity: 1;
+    transform: none;
   }
 
-  .text-fade-in {
+  .text-fade-in,
+  [data-reveal],
+  .project-card[data-reveal],
+  .skill-chip {
     opacity: 1;
     transform: none;
     filter: none;
@@ -2004,5 +2093,10 @@ body.is-ready .hero__doodle--flower {
 
   .timeline::before {
     transform: scaleY(1);
+  }
+
+  .scroll-progress {
+    transform: scaleX(1);
+    will-change: auto;
   }
 }
