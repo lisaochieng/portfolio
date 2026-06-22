@@ -1619,12 +1619,12 @@ body.is-ready .hero__doodle--flower {
 }
 
 .contact__subtitle {
-  font-family: var(--font-body);
-  font-size: clamp(1rem, 2vw, 1.125rem);
-  line-height: 1.6;
-  margin: 1rem 0 2rem;
-  color: rgba(255, 255, 255, 0.88);
-  max-width: 28rem;
+  font-family: var(--font-hand);
+  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+  line-height: 1.45;
+  margin: 1.125rem 0 2rem;
+  color: rgba(255, 255, 255, 0.92);
+  max-width: 32rem;
   margin-inline: auto;
 }
 
