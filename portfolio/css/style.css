@@ -868,8 +868,21 @@ body.is-ready .hero__doodle--flower {
   display: block;
 }
 
-.photo-scrap__img-wrap .photo-scrap__img--workspace {
-  object-position: center 12%;
+.photo-scrap__img-wrap .photo-scrap__img--workspace,
+.photo-scrap__img-wrap .photo-scrap__img--robot {
+  object-fit: cover;
+  object-position: center center;
+}
+
+/* Robot is landscape — zoom out inside portrait frame */
+.photo-scrap__img-wrap--robot {
+  aspect-ratio: 200 / 230;
+}
+
+.photo-scrap__img-wrap--robot .photo-scrap__img--robot {
+  object-fit: contain;
+  object-position: center center;
+  background: #e8dfd0;
 }
 
 .photo-scrap__caption {
