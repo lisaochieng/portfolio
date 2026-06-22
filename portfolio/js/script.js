@@ -224,10 +224,71 @@
     });
   }
 
-  /* --- Project cards: subtle taped hinge lift ----------------------------- */
+  /* --- Project cards: lift + smooth screenshot pan ------------------------ */
   const projects = document.getElementById('projects');
+  const projectPanStates = [];
+  let projectsVisible = false;
+
+  function autoPanPosition(state, now) {
+    const duration = state.isRag ? 20000 : 17000;
+    const minX = state.isRag ? 0 : 10;
+    const maxX = state.isRag ? 100 : 90;
+    const phase = ((now + state.phaseOffset) % duration) / duration;
+    const wave = 0.5 - 0.5 * Math.cos(phase * Math.PI * 2);
+    return {
+      x: minX + wave * (maxX - minX),
+      y: state.defaultY
+    };
+  }
+
+  function tickProjectPans() {
+    if (!projectPanStates.length || !projectsVisible || prefersReducedMotion) return false;
+
+    const now = performance.now();
+    let moving = false;
+    const ease = 0.09;
+
+    for (let i = 0; i < projectPanStates.length; i++) {
+      const state = projectPanStates[i];
+      let tx;
+      let ty;
+
+      if (state.hovered) {
+        tx = state.mouseX;
+        ty = state.mouseY;
+      } else {
+        const auto = autoPanPosition(state, now);
+        tx = auto.x;
+        ty = auto.y;
+      }
+
+      const dx = tx - state.x;
+      const dy = ty - state.y;
+      state.x += dx * ease;
+      state.y += dy * ease;
+
+      if (Math.abs(dx) > 0.025 || Math.abs(dy) > 0.025) {
+        moving = true;
+      }
+
+      state.img.style.objectPosition =
+        state.x.toFixed(2) + '% ' + state.y.toFixed(2) + '%';
+    }
+
+    return moving || projectPanStates.some(function (s) { return !s.hovered; });
+  }
 
   if (projects && !prefersReducedMotion) {
+    const canHover = window.matchMedia('(hover: hover)').matches;
+    const panObserver = new IntersectionObserver(
+      function (entries) {
+        projectsVisible = entries[0].isIntersecting;
+        if (projectsVisible) requestFrame();
+      },
+      { threshold: 0.12, rootMargin: '40px 0px' }
+    );
+    panObserver.observe(projects);
+
     projects.querySelectorAll('.project-card').forEach(function (card) {
       card.addEventListener('mouseenter', function () {
         card.classList.add('is-lifted');
@@ -236,6 +297,54 @@
         card.classList.remove('is-lifted');
       });
     });
+
+    projects.querySelectorAll('.project-card__img-wrap').forEach(function (wrap, index) {
+      const img = wrap.querySelector('.project-card__img');
+      if (!img) return;
+
+      const isRag = img.classList.contains('project-card__img--rag');
+      const defaultX = isRag ? 72 : 50;
+      const defaultY = isRag ? 42 : 50;
+      const start = autoPanPosition(
+        { isRag: isRag, defaultY: defaultY, phaseOffset: index * 3800 },
+        performance.now()
+      );
+      const state = {
+        img: img,
+        isRag: isRag,
+        x: start.x,
+        y: start.y,
+        mouseX: defaultX,
+        mouseY: defaultY,
+        defaultX: defaultX,
+        defaultY: defaultY,
+        phaseOffset: index * 3800,
+        hovered: false
+      };
+
+      projectPanStates.push(state);
+      img.style.objectPosition = start.x.toFixed(2) + '% ' + start.y.toFixed(2) + '%';
+
+      if (canHover) {
+        wrap.addEventListener('mouseenter', function () {
+          state.hovered = true;
+        });
+
+        wrap.addEventListener('mousemove', function (e) {
+          const rect = wrap.getBoundingClientRect();
+          state.mouseX = ((e.clientX - rect.left) / rect.width) * 100;
+          state.mouseY = ((e.clientY - rect.top) / rect.height) * 100;
+          requestFrame();
+        });
+
+        wrap.addEventListener('mouseleave', function () {
+          state.hovered = false;
+          requestFrame();
+        });
+      }
+    });
+
+    requestFrame();
   }
 
   /* --- Smooth anchor scroll ---------------------------------------------- */
@@ -298,6 +407,10 @@
         } else {
           parallaxActive = false;
         }
+      }
+
+      if (tickProjectPans()) {
+        keepRunning = true;
       }
     }
 
