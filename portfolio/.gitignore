@@ -21,3 +21,8 @@ npm-debug.log*
 tmp/
 temp/
 .cache/
+
+# Personal photos (keep local only — not pushed to GitHub)
+assets/images/hero-portrait.JPG
+assets/images/about-candid.png
+assets/images/about-workspace.png
