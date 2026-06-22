@@ -5,6 +5,6 @@ Personal and project assets used by the portfolio site. These files are included
 | File | Section |
 |------|---------|
 | `hero-portrait.JPG` | Hero |
-| `about-candid.png` | About |
-| `about-workspace.png` | About |
+| `about-candid.JPG` | About |
+| `about-workspace.JPG` | About (robotics) |
 | `project-*.png` | Projects |

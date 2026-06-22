@@ -1058,11 +1058,17 @@ body.is-ready .hero__doodle--flower {
 .about__photo-stack .photo-scrap__img {
   width: min(200px, 42vw);
   aspect-ratio: 200 / 230;
+  object-fit: cover;
+  object-position: center center;
 }
 
 .about__photo-stack--two .photo-scrap__img {
   width: min(180px, 38vw);
   aspect-ratio: 180 / 210;
+}
+
+.about__photo-stack--two .photo-scrap__img--workspace {
+  object-position: center 15%;
 }
 
 .about__photo-stack .photo-scrap__caption {
