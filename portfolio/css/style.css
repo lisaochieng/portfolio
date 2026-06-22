@@ -1325,8 +1325,22 @@ body.is-ready .hero__doodle--flower {
   transition: filter var(--transition-base);
 }
 
+.project-card__img--rag {
+  height: 200px;
+  object-fit: contain;
+  object-position: center center;
+  background: #2a2420;
+  filter: brightness(1.35) contrast(1.2) saturate(1.1);
+  padding: 6px;
+  border-radius: 2px;
+}
+
 .project-card.is-lifted .project-card__img {
   filter: sepia(0.08) saturate(1.08) brightness(1.04);
+}
+
+.project-card.is-lifted .project-card__img--rag {
+  filter: brightness(1.4) contrast(1.22) saturate(1.12);
 }
 
 .project-card__meta {
