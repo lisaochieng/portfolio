@@ -783,7 +783,7 @@ body.is-ready .hero__doodle--flower {
   height: 100%;
   display: block;
   object-fit: cover;
-  object-position: center 20%;
+  object-position: center bottom;
   image-orientation: from-image;
   filter: brightness(1.04) saturate(1.06) contrast(1.02) sepia(0.14);
 }
