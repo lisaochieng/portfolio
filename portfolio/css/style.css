@@ -756,7 +756,7 @@ body.is-ready .hero__doodle--flower {
   aspect-ratio: 1;
   border-radius: 18px;
   overflow: hidden;
-  background: var(--color-paper-warm);
+  background: #f0e4d2;
   box-shadow:
     0 0 0 1px rgba(60, 40, 20, 0.08),
     0 24px 56px rgba(60, 40, 20, 0.14);
@@ -769,11 +769,11 @@ body.is-ready .hero__doodle--flower {
   border-radius: inherit;
   background: linear-gradient(
     165deg,
-    rgba(255, 242, 220, 0.28) 0%,
-    rgba(245, 232, 210, 0.1) 48%,
-    rgba(235, 218, 190, 0.22) 100%
+    rgba(255, 236, 210, 0.32) 0%,
+    rgba(245, 225, 198, 0.12) 48%,
+    rgba(230, 210, 180, 0.26) 100%
   );
-  box-shadow: inset 0 0 40px rgba(255, 245, 228, 0.35);
+  box-shadow: inset 0 0 40px rgba(255, 238, 215, 0.4);
   pointer-events: none;
   z-index: 1;
 }
@@ -783,9 +783,9 @@ body.is-ready .hero__doodle--flower {
   height: 100%;
   display: block;
   object-fit: cover;
-  object-position: center 12%;
+  object-position: center 18%;
   image-orientation: from-image;
-  filter: brightness(1.04) saturate(1.05) contrast(1.02) sepia(0.12);
+  filter: brightness(1.04) saturate(1.06) contrast(1.02) sepia(0.14);
 }
 
 .hero__callout {
