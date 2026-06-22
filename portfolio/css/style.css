@@ -860,6 +860,18 @@ body.is-ready .hero__doodle--flower {
   box-shadow: inset 0 0 0 1px rgba(60, 40, 20, 0.1);
 }
 
+.photo-scrap__img-wrap .photo-scrap__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+}
+
+.photo-scrap__img-wrap .photo-scrap__img--workspace {
+  object-position: center 12%;
+}
+
 .photo-scrap__caption {
   position: relative;
   z-index: 1;
@@ -1055,20 +1067,13 @@ body.is-ready .hero__doodle--flower {
   padding-bottom: 36px;
 }
 
-.about__photo-stack .photo-scrap__img {
+.about__photo-stack .photo-scrap__img-wrap {
   width: min(200px, 42vw);
-  aspect-ratio: 200 / 230;
-  object-fit: cover;
-  object-position: center center;
 }
 
-.about__photo-stack--two .photo-scrap__img {
+.about__photo-stack--two .photo-scrap__img-wrap {
   width: min(180px, 38vw);
   aspect-ratio: 180 / 210;
-}
-
-.about__photo-stack--two .photo-scrap__img--workspace {
-  object-position: center 15%;
 }
 
 .about__photo-stack .photo-scrap__caption {
