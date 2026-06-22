@@ -22,7 +22,7 @@ portfolio/
 ├── js/
 │   └── script.js       # Scroll, reveal, parallax, interactions
 ├── assets/
-│   ├── images/         # Project screenshots (personal photos: see images/README.md)
+│   ├── images/         # Personal photos & project screenshots
 │   ├── icons/          # Optional icon assets
 │   └── resume/         # Add lisa-ochieng-resume.pdf here
 ├── README.md
@@ -49,7 +49,7 @@ All asset paths are relative. No build step required.
 | Skills | `index.html` → `#skills` | Skill chips per category |
 | Experience | `index.html` → `#experience` | Timeline entries |
 | Contact | `index.html` → `#contact` | Email, GitHub, LinkedIn URLs |
-| Personal photos | `assets/images/` | Add `hero-portrait.JPG`, `about-candid.png`, `about-workspace.png` locally (gitignored) |
+| Photos | `assets/images/` | Hero portrait and about photos |
 | Colors & fonts | `css/style.css` → `:root` | CSS custom properties |
 
 ## Design features preserved
