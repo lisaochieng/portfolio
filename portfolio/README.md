@@ -1,10 +1,10 @@
 # Lisa Ochieng — Portfolio
 
-A clean, deployment-ready personal portfolio with a scrapbook / journal aesthetic. Built from a reverse-engineered Claude Design export into readable HTML, CSS, and JavaScript.
+A clean, deployment-ready personal portfolio with a scrapbook / journal aesthetic. Built with HTML, CSS, and JavaScript.
 
 ## Live preview
 
-Open `index.html` directly in a browser, or serve the folder locally:
+**Open the inner folder** — the real site is at `portfolio/index.html` inside this directory.
 
 ```bash
 cd portfolio
@@ -22,7 +22,7 @@ portfolio/
 ├── js/
 │   └── script.js       # Scroll, reveal, parallax, interactions
 ├── assets/
-│   ├── images/         # Portfolio photos & project screenshots
+│   ├── images/         # Personal photos & project screenshots
 │   ├── icons/          # Optional icon assets
 │   └── resume/         # Add lisa-ochieng-resume.pdf here
 ├── README.md
@@ -49,7 +49,7 @@ All asset paths are relative. No build step required.
 | Skills | `index.html` → `#skills` | Skill chips per category |
 | Experience | `index.html` → `#experience` | Timeline entries |
 | Contact | `index.html` → `#contact` | Email, GitHub, LinkedIn URLs |
-| Résumé | `assets/resume/` | Add `lisa-ochieng-resume.pdf` |
+| Photos | `assets/images/` | Hero portrait and about photos |
 | Colors & fonts | `css/style.css` → `:root` | CSS custom properties |
 
 ## Design features preserved
