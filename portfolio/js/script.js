@@ -168,18 +168,7 @@
 
   /* --- Reveal an element and its text children --------------------------- */
   function revealElement(el) {
-    let delay = parseInt(el.getAttribute('data-delay') || '0', 10);
-
-    if (el.classList.contains('project-card')) {
-      const cards = document.querySelectorAll('.project-card[data-reveal]');
-      for (let i = 0; i < cards.length; i++) {
-        if (cards[i] === el) {
-          delay = i * 80;
-          el.style.setProperty('--reveal-delay', String(delay));
-          break;
-        }
-      }
-    }
+    const delay = parseInt(el.getAttribute('data-delay') || '0', 10);
 
     setTimeout(function () {
       el.style.willChange = 'transform, opacity';
@@ -205,7 +194,7 @@
 
   /* --- Scroll reveal (IntersectionObserver — viewport root) -------------- */
   function initRevealObserver() {
-    const revealEls = document.querySelectorAll('[data-reveal]');
+    const revealEls = document.querySelectorAll('[data-reveal]:not(.project-card)');
     if (!revealEls.length) return;
 
     if (prefersReducedMotion || !('IntersectionObserver' in window)) {
@@ -221,7 +210,7 @@
           observer.unobserve(entry.target);
         });
       },
-      { root: null, threshold: 0.15, rootMargin: '0px 0px -8% 0px' }
+      { root: scroller, threshold: 0.15, rootMargin: '0px 0px -8% 0px' }
     );
 
     revealEls.forEach(function (el) {
@@ -230,6 +219,99 @@
   }
 
   initRevealObserver();
+
+  /* --- Contact: reveal all CTAs when section enters view ----------------- */
+  function initContactReveal() {
+    const contact = document.getElementById('contact');
+    if (!contact) return;
+
+    const contactRevealEls = contact.querySelectorAll('[data-reveal]');
+    if (!contactRevealEls.length) return;
+
+    if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+      revealAll(contactRevealEls);
+      return;
+    }
+
+    const contactObserver = new IntersectionObserver(
+      function (entries) {
+        if (!entries[0].isIntersecting) return;
+        contactRevealEls.forEach(function (el) {
+          revealElement(el);
+        });
+        contactObserver.disconnect();
+      },
+      { root: scroller, threshold: 0.05, rootMargin: '0px 0px 0px 0px' }
+    );
+
+    contactObserver.observe(contact);
+  }
+
+  initContactReveal();
+
+  /* --- Project cards: alternating horizontal scroll reveal ----------------- */
+  function initProjectCardScrollAnimation() {
+    const cards = document.querySelectorAll('.project-card');
+    console.log('Project cards found:', cards.length);
+
+    if (!cards.length) return;
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      cards.forEach(function (card) {
+        card.classList.remove('card-hidden-left', 'card-hidden-right');
+        card.classList.add('card-visible');
+        card.querySelectorAll('.text-fade-in').forEach(function (text) {
+          text.classList.add('is-visible');
+        });
+      });
+      return;
+    }
+
+    if (!('IntersectionObserver' in window)) {
+      cards.forEach(function (card) {
+        card.classList.remove('card-hidden-left', 'card-hidden-right');
+        card.classList.add('card-visible');
+        card.querySelectorAll('.text-fade-in').forEach(function (text) {
+          text.classList.add('is-visible');
+        });
+      });
+      return;
+    }
+
+    cards.forEach(function (card, index) {
+      if (index % 2 === 0) {
+        card.classList.add('card-hidden-left');
+      } else {
+        card.classList.add('card-hidden-right');
+      }
+    });
+
+    const cardObserver = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          const card = entry.target;
+          card.classList.remove('card-hidden-left', 'card-hidden-right');
+          card.classList.add('card-visible');
+          card.querySelectorAll('.text-fade-in').forEach(function (text) {
+            text.classList.add('is-visible');
+          });
+          cardObserver.unobserve(card);
+        });
+      },
+      { root: scroller, threshold: 0.1, rootMargin: '0px 0px -5% 0px' }
+    );
+
+    cards.forEach(function (card) {
+      cardObserver.observe(card);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initProjectCardScrollAnimation);
+  } else {
+    initProjectCardScrollAnimation();
+  }
 
   /* --- Timeline line draw on scroll -------------------------------------- */
   function initTimelineLine() {
@@ -318,7 +400,7 @@
   }
 
   function tickProjectPans() {
-    if (!projectPanStates.length || !projectsVisible || prefersReducedMotion || !canHover()) return false;
+    if (!projectPanStates.length || !projectsVisible || prefersReducedMotion) return false;
 
     const now = performance.now();
     let moving = false;
@@ -353,14 +435,14 @@
     return moving || projectPanStates.some(function (s) { return !s.hovered; });
   }
 
-  if (projects && !prefersReducedMotion && canHover()) {
+  if (projects && !prefersReducedMotion) {
     const canHoverDevice = canHover();
     const panObserver = new IntersectionObserver(
       function (entries) {
         projectsVisible = entries[0].isIntersecting;
         if (projectsVisible) requestFrame();
       },
-      { threshold: 0.12, rootMargin: '40px 0px' }
+      { root: scroller, threshold: 0.12, rootMargin: '40px 0px' }
     );
     panObserver.observe(projects);
 
@@ -449,6 +531,12 @@
   function frame() {
     let keepRunning = tickProgress();
 
+    if (!prefersReducedMotion) {
+      if (tickProjectPans()) {
+        keepRunning = true;
+      }
+    }
+
     if (!prefersReducedMotion && !isMobileViewport()) {
       const vh = getClientHeight();
 
@@ -489,10 +577,6 @@
             parallaxActive = false;
           }
         }
-      }
-
-      if (tickProjectPans()) {
-        keepRunning = true;
       }
     }
 
