@@ -21,3 +21,6 @@ npm-debug.log*
 tmp/
 temp/
 .cache/
+
+# Dependencies
+node_modules/
