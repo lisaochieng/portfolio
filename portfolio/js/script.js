@@ -14,6 +14,16 @@
   const navLinks = document.querySelector('.site-nav__links');
   const navAnchors = document.querySelectorAll('.site-nav__link[href^="#"]');
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const mobileMedia = window.matchMedia('(max-width: 767px)');
+  const hoverMedia = window.matchMedia('(hover: hover)');
+
+  function isMobileViewport() {
+    return mobileMedia.matches;
+  }
+
+  function canHover() {
+    return hoverMedia.matches;
+  }
 
   let progressTarget = 0;
   let progressCurrent = 0;
@@ -38,12 +48,14 @@
       const expanded = navToggle.getAttribute('aria-expanded') === 'true';
       navToggle.setAttribute('aria-expanded', String(!expanded));
       navLinks.classList.toggle('is-open', !expanded);
+      document.body.classList.toggle('nav-open', !expanded);
     });
 
     navLinks.querySelectorAll('a').forEach(function (link) {
       link.addEventListener('click', function () {
         navToggle.setAttribute('aria-expanded', 'false');
         navLinks.classList.remove('is-open');
+        document.body.classList.remove('nav-open');
       });
     });
   }
@@ -258,7 +270,7 @@
 
   initNavHeroObserver(hero);
 
-  if (hero && !prefersReducedMotion) {
+  if (hero && !prefersReducedMotion && canHover() && !isMobileViewport()) {
     hero.addEventListener(
       'mousemove',
       function (e) {
@@ -306,7 +318,7 @@
   }
 
   function tickProjectPans() {
-    if (!projectPanStates.length || !projectsVisible || prefersReducedMotion) return false;
+    if (!projectPanStates.length || !projectsVisible || prefersReducedMotion || !canHover()) return false;
 
     const now = performance.now();
     let moving = false;
@@ -341,8 +353,8 @@
     return moving || projectPanStates.some(function (s) { return !s.hovered; });
   }
 
-  if (projects && !prefersReducedMotion) {
-    const canHover = window.matchMedia('(hover: hover)').matches;
+  if (projects && !prefersReducedMotion && canHover()) {
+    const canHoverDevice = canHover();
     const panObserver = new IntersectionObserver(
       function (entries) {
         projectsVisible = entries[0].isIntersecting;
@@ -352,14 +364,16 @@
     );
     panObserver.observe(projects);
 
-    projects.querySelectorAll('.project-card').forEach(function (card) {
-      card.addEventListener('mouseenter', function () {
-        card.classList.add('is-lifted');
+    if (canHoverDevice) {
+      projects.querySelectorAll('.project-card').forEach(function (card) {
+        card.addEventListener('mouseenter', function () {
+          card.classList.add('is-lifted');
+        });
+        card.addEventListener('mouseleave', function () {
+          card.classList.remove('is-lifted');
+        });
       });
-      card.addEventListener('mouseleave', function () {
-        card.classList.remove('is-lifted');
-      });
-    });
+    }
 
     projects.querySelectorAll('.project-card__img-wrap').forEach(function (wrap, index) {
       const img = wrap.querySelector('.project-card__img');
@@ -388,7 +402,7 @@
       projectPanStates.push(state);
       applyPanTransform(state);
 
-      if (canHover) {
+      if (canHoverDevice) {
         wrap.addEventListener('mouseenter', function () {
           state.hovered = true;
           state.img.style.willChange = 'transform';
@@ -435,7 +449,7 @@
   function frame() {
     let keepRunning = tickProgress();
 
-    if (!prefersReducedMotion) {
+    if (!prefersReducedMotion && !isMobileViewport()) {
       const vh = getClientHeight();
 
       if (heroInView) {
